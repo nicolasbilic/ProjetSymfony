@@ -14,11 +14,9 @@ class Address
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Assert\Type('integer')]
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Assert\Type('integer')]
     private ?int $id_address = null;
 
     #[ORM\Column]

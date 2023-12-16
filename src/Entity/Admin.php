@@ -15,7 +15,6 @@ class Admin
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Assert\Type('integer')]
     private ?int $id_admin = null;
 
     #[ORM\Column(length: 255)]
