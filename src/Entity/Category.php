@@ -34,8 +34,6 @@ class Category
 
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'parent')]
     private Collection $subcategory;
-    // #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'subcategory')]
-    // private ?self $subcategory = null;
 
     public function __construct()
     {
