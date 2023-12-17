@@ -14,9 +14,6 @@ class Tva
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column]
     private ?int $id_tva = null;
 
     #[ORM\Column]
@@ -28,11 +25,6 @@ class Tva
     public function __construct()
     {
         $this->products = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getIdTva(): ?int

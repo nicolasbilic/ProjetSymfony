@@ -16,9 +16,6 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column]
     private ?int $id_order = null;
 
     #[ORM\Column]
@@ -57,11 +54,6 @@ class Order
     public function __construct()
     {
         $this->order_line = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getIdOrder(): ?int
