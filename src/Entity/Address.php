@@ -14,9 +14,6 @@ class Address
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column]
     private ?int $id_address = null;
 
     #[ORM\Column]
@@ -83,11 +80,6 @@ class Address
         $this->customers = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->invoice_address = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getIdAddress(): ?int

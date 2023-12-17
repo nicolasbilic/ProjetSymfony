@@ -11,15 +11,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 class Role
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column]
     private ?int $id_role = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
+    #[Assert\Type(type: 'string', message: 'Le champ doit être une chaîne de caractères')]
+    #[Assert\Unique(message: 'Ce status existe déjà')]
     private ?string $label = null;
 
     #[ORM\OneToMany(mappedBy: 'role', targetEntity: Admin::class)]
@@ -30,10 +31,6 @@ class Role
         $this->admins = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getIdRole(): ?int
     {

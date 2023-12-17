@@ -11,15 +11,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: OrderStateRepository::class)]
 class OrderState
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column]
     private ?int $id_order_state = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
+    #[Assert\Type(type: 'string', message: 'Le champ doit être une chaîne de caractères')]
+    #[Assert\Unique(message: 'Ce status existe déjà')]
     private ?string $label = null;
 
     #[ORM\OneToMany(mappedBy: 'order_state', targetEntity: Order::class)]
@@ -28,11 +29,6 @@ class OrderState
     public function __construct()
     {
         $this->orders = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getIdOrderState(): ?int
