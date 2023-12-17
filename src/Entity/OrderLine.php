@@ -9,11 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: OrderLineRepository::class)]
 class OrderLine
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column]
     private ?int $id_order_line = null;
 
@@ -39,10 +37,6 @@ class OrderLine
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $order_customer = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getIdOrderLine(): ?int
     {

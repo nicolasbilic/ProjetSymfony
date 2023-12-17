@@ -14,24 +14,30 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column]
     private ?int $id_product = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
+    #[Assert\Type(type: 'string', message: 'Le champ doit être une chaîne de caractères')]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
+    #[Assert\Type(type: 'float', message: 'Le champ doit être un nombre avec décimales')]
     private ?float $price = null;
 
     #[ORM\Column(length: 500, nullable: true)]
+    #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
+    #[Assert\Type(type: 'string', message: 'Le champ doit être une chaîne de caractères')]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: 'float', message: 'Le champ doit être un nombre avec décimales')]
     private ?float $discount = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
+    #[Assert\Type(type: 'integer', message: 'Le champ doit être un nombre entier')]
     private ?int $stock = null;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: BasketLine::class, orphanRemoval: true)]
@@ -48,11 +54,6 @@ class Product
     public function __construct()
     {
         $this->basketLines = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getIdProduct(): ?int
