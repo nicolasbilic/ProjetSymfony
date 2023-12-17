@@ -15,7 +15,7 @@ class OrderState
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_order_state = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
@@ -31,14 +31,14 @@ class OrderState
         $this->orders = new ArrayCollection();
     }
 
-    public function getIdOrderState(): ?int
+    public function getId(): ?int
     {
-        return $this->id_order_state;
+        return $this->id;
     }
 
-    public function setIdOrderState(int $id_order_state): static
+    public function setId(int $id): static
     {
-        $this->id_order_state = $id_order_state;
+        $this->id = $id;
 
         return $this;
     }

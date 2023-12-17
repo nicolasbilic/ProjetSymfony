@@ -13,7 +13,7 @@ class OrderLine
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_order_line = null;
+    private ?int $id = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
@@ -34,18 +34,18 @@ class OrderLine
     private ?float $total = null;
 
     #[ORM\ManyToOne(inversedBy: 'order_line')]
-    #[ORM\JoinColumn(name: 'id_order', referencedColumnName: 'id_order', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Order $order_customer = null;
 
 
-    public function getIdOrderLine(): ?int
+    public function getId(): ?int
     {
-        return $this->id_order_line;
+        return $this->id;
     }
 
-    public function setIdOrderLine(int $id_order_line): static
+    public function setIdOrderLine(int $id): static
     {
-        $this->id_order_line = $id_order_line;
+        $this->id = $id;
 
         return $this;
     }

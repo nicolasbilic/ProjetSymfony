@@ -13,7 +13,7 @@ class BasketLine
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_basket_line = null;
+    private ?int $id = null;
 
     #[ORM\Column]
     #[Assert\NotBlank]
@@ -21,21 +21,21 @@ class BasketLine
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'basket_line')]
-    #[ORM\JoinColumn(name: 'id_basket', referencedColumnName: 'id_basket', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Basket $basket = null;
 
     #[ORM\ManyToOne(inversedBy: 'basketLines')]
-    #[ORM\JoinColumn(name: 'id_product', referencedColumnName: 'id_product', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
 
-    public function getIdBasketLine(): ?int
+    public function getId(): ?int
     {
-        return $this->id_basket_line;
+        return $this->id;
     }
 
-    public function setIdBasketLine(int $id_basket_line): static
+    public function setId(int $id): static
     {
-        $this->id_basket_line = $id_basket_line;
+        $this->id = $id;
 
         return $this;
     }

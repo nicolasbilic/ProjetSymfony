@@ -14,7 +14,7 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_product = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
@@ -44,11 +44,11 @@ class Product
     private Collection $basketLines;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(name: 'id_category', referencedColumnName: 'id_category', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(name: 'id_tva', referencedColumnName: 'id_tva', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Tva $tva = null;
 
     public function __construct()
@@ -56,14 +56,14 @@ class Product
         $this->basketLines = new ArrayCollection();
     }
 
-    public function getIdProduct(): ?int
+    public function getId(): ?int
     {
-        return $this->id_product;
+        return $this->id;
     }
 
-    public function setIdProduct(int $id_product): static
+    public function setId(int $id): static
     {
-        $this->id_product = $id_product;
+        $this->id = $id;
 
         return $this;
     }

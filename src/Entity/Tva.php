@@ -14,7 +14,7 @@ class Tva
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_tva = null;
+    private ?int $id = null;
 
     #[ORM\Column]
     private ?float $value = null;
@@ -27,14 +27,14 @@ class Tva
         $this->products = new ArrayCollection();
     }
 
-    public function getIdTva(): ?int
+    public function getId(): ?int
     {
-        return $this->id_tva;
+        return $this->id;
     }
 
-    public function setIdTva(int $id_tva): static
+    public function setId(int $id): static
     {
-        $this->id_tva = $id_tva;
+        $this->id = $id;
 
         return $this;
     }

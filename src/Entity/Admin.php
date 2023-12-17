@@ -12,7 +12,7 @@ class Admin
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_admin = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez rentrer un mot de passe.')]
@@ -75,18 +75,18 @@ class Admin
     private ?string $mail = null;
 
     #[ORM\ManyToOne(inversedBy: 'admins')]
-    #[ORM\JoinColumn(name: 'id_role', referencedColumnName: 'id_role', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Role $role = null;
 
 
-    public function getIdAdmin(): ?int
+    public function getId(): ?int
     {
-        return $this->id_admin;
+        return $this->id;
     }
 
-    public function setIdAdmin(int $id_admin): static
+    public function setId(int $id): static
     {
-        $this->id_admin = $id_admin;
+        $this->id = $id;
 
         return $this;
     }

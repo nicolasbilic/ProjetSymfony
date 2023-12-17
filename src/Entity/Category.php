@@ -15,7 +15,7 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_category = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: 'Veuillez rentrer un nom de catégorie.')]
@@ -43,7 +43,7 @@ class Category
     private Collection $products;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'subcategory')]
-    #[ORM\JoinColumn(name: 'id_category', referencedColumnName: 'id_category', nullable: true)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Category $parent = null;
 
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'parent')]
@@ -55,14 +55,14 @@ class Category
         $this->subcategory = new ArrayCollection();
     }
 
-    public function getIdCategory(): ?int
+    public function getId(): ?int
     {
-        return $this->id_category;
+        return $this->id;
     }
 
-    public function setIdCategory(int $id_category): static
+    public function setId(int $id): static
     {
-        $this->id_category = $id_category;
+        $this->id = $id;
 
         return $this;
     }

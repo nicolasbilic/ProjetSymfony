@@ -15,7 +15,7 @@ class Role
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_role = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
@@ -32,14 +32,14 @@ class Role
     }
 
 
-    public function getIdRole(): ?int
+    public function getId(): ?int
     {
-        return $this->id_role;
+        return $this->id;
     }
 
-    public function setIdRole(int $id_role): static
+    public function setId(int $id): static
     {
-        $this->id_role = $id_role;
+        $this->id = $id;
 
         return $this;
     }

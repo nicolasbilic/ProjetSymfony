@@ -15,13 +15,13 @@ class Basket
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_basket = null;
+    private ?int $id = null;
 
     #[ORM\OneToOne(mappedBy: 'basket', cascade: ['persist', 'remove'])]
     private ?Order $order_customer = null;
 
     #[ORM\ManyToOne(inversedBy: 'basket')]
-    #[ORM\JoinColumn(name: 'id_customer', referencedColumnName: 'id_customer', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Customer $customer = null;
 
     #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketLine::class)]
@@ -33,14 +33,14 @@ class Basket
     }
 
 
-    public function getIdBasket(): ?int
+    public function getId(): ?int
     {
-        return $this->id_basket;
+        return $this->id;
     }
 
-    public function setIdBasket(int $id_basket): static
+    public function setId(int $id): static
     {
-        $this->id_basket = $id_basket;
+        $this->id = $id;
 
         return $this;
     }

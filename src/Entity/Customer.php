@@ -15,7 +15,7 @@ class Customer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_customer = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez rentrer un email.')]
@@ -77,14 +77,14 @@ class Customer
     private ?string $firstname = null;
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
-    #[ORM\JoinColumn(name: 'id_address', referencedColumnName: 'id_address', nullable: true)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Address $address = null;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Order::class)]
     private Collection $order_customer;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Basket::class)]
-    #[ORM\JoinColumn(name: 'id_basket', referencedColumnName: 'id_basket', nullable: true)]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $basket;
 
     public function __construct()
@@ -93,14 +93,14 @@ class Customer
         $this->basket = new ArrayCollection();
     }
 
-    public function getIdCustomer(): ?int
+    public function getId(): ?int
     {
-        return $this->id_customer;
+        return $this->id;
     }
 
-    public function setIdCustomer(int $id_customer): static
+    public function setId(int $id): static
     {
-        $this->id_customer = $id_customer;
+        $this->id = $id;
 
         return $this;
     }

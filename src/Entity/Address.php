@@ -14,7 +14,7 @@ class Address
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_address = null;
+    private ?int $id = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Veuillez rentrer un numéro de rue.')]
@@ -82,14 +82,14 @@ class Address
         $this->invoice_address = new ArrayCollection();
     }
 
-    public function getIdAddress(): ?int
+    public function getId(): ?int
     {
-        return $this->id_address;
+        return $this->id;
     }
 
-    public function setIdAddress(int $id_address): static
+    public function setIdAddress(int $id): static
     {
-        $this->id_address = $id_address;
+        $this->id = $id;
 
         return $this;
     }

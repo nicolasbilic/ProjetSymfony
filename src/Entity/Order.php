@@ -16,7 +16,7 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_order = null;
+    private ?int $id = null;
 
     #[ORM\Column]
     private ?float $total = null;
@@ -29,26 +29,26 @@ class Order
     private ?float $shipping_price = null;
 
     #[ORM\ManyToOne(inversedBy: 'order_customer')]
-    #[ORM\JoinColumn(name: 'id_customer', referencedColumnName: 'id_customer', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Customer $customer = null;
 
     #[ORM\OneToMany(mappedBy: 'order_customer', targetEntity: OrderLine::class, orphanRemoval: true)]
     private Collection $order_line;
 
     #[ORM\OneToOne(inversedBy: 'order_customer', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(name: 'id_basket', referencedColumnName: 'id_basket', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Basket $basket = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
-    #[ORM\JoinColumn(name: 'id_order_state', referencedColumnName: 'id_order_state', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?OrderState $order_state = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
-    #[ORM\JoinColumn(name: 'id_address', referencedColumnName: 'id_address', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Address $shipping_address = null;
 
     #[ORM\ManyToOne(inversedBy: 'invoice_address')]
-    #[ORM\JoinColumn(name: 'id_address', referencedColumnName: 'id_address', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Address $invoice_address = null;
 
     public function __construct()
@@ -56,14 +56,14 @@ class Order
         $this->order_line = new ArrayCollection();
     }
 
-    public function getIdOrder(): ?int
+    public function getId(): ?int
     {
-        return $this->id_order;
+        return $this->id;
     }
 
-    public function setIdOrder(int $id_order): static
+    public function setId(int $id): static
     {
-        $this->id_order = $id_order;
+        $this->id = $id;
 
         return $this;
     }
