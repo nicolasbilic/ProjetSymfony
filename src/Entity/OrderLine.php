@@ -34,7 +34,7 @@ class OrderLine
     private ?float $total = null;
 
     #[ORM\ManyToOne(inversedBy: 'order_line')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_order', referencedColumnName: 'id_order', nullable: false)]
     private ?Order $order_customer = null;
 
 

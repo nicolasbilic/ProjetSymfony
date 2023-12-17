@@ -21,7 +21,7 @@ class Basket
     private ?Order $order_customer = null;
 
     #[ORM\ManyToOne(inversedBy: 'basket')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_customer', referencedColumnName: 'id_customer', nullable: false)]
     private ?Customer $customer = null;
 
     #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketLine::class)]

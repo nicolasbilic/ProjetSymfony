@@ -77,12 +77,14 @@ class Customer
     private ?string $firstname = null;
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
+    #[ORM\JoinColumn(name: 'id_address', referencedColumnName: 'id_address', nullable: true)]
     private ?Address $address = null;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Order::class)]
     private Collection $order_customer;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Basket::class)]
+    #[ORM\JoinColumn(name: 'id_basket', referencedColumnName: 'id_basket', nullable: true)]
     private Collection $basket;
 
     public function __construct()

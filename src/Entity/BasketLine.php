@@ -21,11 +21,11 @@ class BasketLine
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'basket_line')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_basket', referencedColumnName: 'id_basket', nullable: false)]
     private ?Basket $basket = null;
 
     #[ORM\ManyToOne(inversedBy: 'basketLines')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_product', referencedColumnName: 'id_product', nullable: false)]
     private ?Product $product = null;
 
     public function getIdBasketLine(): ?int

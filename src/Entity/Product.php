@@ -44,11 +44,11 @@ class Product
     private Collection $basketLines;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_category', referencedColumnName: 'id_category', nullable: false)]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_tva', referencedColumnName: 'id_tva', nullable: false)]
     private ?Tva $tva = null;
 
     public function __construct()

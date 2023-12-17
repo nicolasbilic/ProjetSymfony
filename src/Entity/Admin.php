@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
 class Admin
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -76,7 +75,7 @@ class Admin
     private ?string $mail = null;
 
     #[ORM\ManyToOne(inversedBy: 'admins')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_role', referencedColumnName: 'id_role', nullable: false)]
     private ?Role $role = null;
 
 

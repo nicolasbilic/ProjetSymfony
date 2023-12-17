@@ -29,26 +29,26 @@ class Order
     private ?float $shipping_price = null;
 
     #[ORM\ManyToOne(inversedBy: 'order_customer')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_customer', referencedColumnName: 'id_customer', nullable: false)]
     private ?Customer $customer = null;
 
     #[ORM\OneToMany(mappedBy: 'order_customer', targetEntity: OrderLine::class, orphanRemoval: true)]
     private Collection $order_line;
 
     #[ORM\OneToOne(inversedBy: 'order_customer', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_basket', referencedColumnName: 'id_basket', nullable: false)]
     private ?Basket $basket = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_order_state', referencedColumnName: 'id_order_state', nullable: false)]
     private ?OrderState $order_state = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_address', referencedColumnName: 'id_address', nullable: false)]
     private ?Address $shipping_address = null;
 
     #[ORM\ManyToOne(inversedBy: 'invoice_address')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'id_address', referencedColumnName: 'id_address', nullable: false)]
     private ?Address $invoice_address = null;
 
     public function __construct()
