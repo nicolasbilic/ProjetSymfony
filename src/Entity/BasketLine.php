@@ -18,6 +18,8 @@ class BasketLine
     private ?int $id_basket_line = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'basket_line')]

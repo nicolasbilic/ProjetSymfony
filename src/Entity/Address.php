@@ -20,36 +20,52 @@ class Address
     private ?int $id_address = null;
 
     #[ORM\Column]
-    #[Assert\Type('integer')]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un numéro de rue.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un numéro de rue.')]
+    #[Assert\Type('integer', message: 'Veuillez rentrer un nombre.')]
     private ?int $number = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer une rue.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer une rue.')]
     #[Assert\Type('string')]
-    #[Assert\NotBlank]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(max: 255)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9\s\'’-]+$/u',
+        message: 'Le nom de rue ne peut contenir que des lettres, chiffres, tirets ou apostrophes.'
+    )]
     private ?string $street = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
     #[Assert\Length(max: 255)]
     #[Assert\Regex(
-        pattern: '/^[a-zA-Z0-9\s]+$/',
-        message: 'Le complément d\'adresse ne doit contenir que des lettres ou des chiffres.'
+        pattern: '/^[a-zA-Z0-9\s\'’-]+$/u',
+        message: 'Le complément d\'adresse ne peut contenir que des lettres, chiffres, tirets ou apostrophes.'
     )]
     private ?string $additional = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer une ville.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer une ville.')]
     #[Assert\Type('string')]
-    #[Assert\NotBlank]
+    #[Assert\NoSuspiciousCharacters]
     #[Assert\Length(max: 50)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s\'’-]+$/u',
+        message: 'La ville ne peut contenir que des lettres, tirets ou apostrophes.'
+    )]
     private ?string $city = null;
 
     #[ORM\Column]
-    #[Assert\Type('integer')]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un code postal.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un code postal.')]
+    #[Assert\Type('integer', message: 'Veuillez rentrer un nombre.')]
     #[Assert\Regex(
         pattern: '/^\d{5}$/',
-        message: 'Le code postal doit être un nombre à 5 chiffres.'
+        message: 'Le code postal doit comporter exactement 5 chiffres.'
     )]
     private ?int $zip_code = null;
 

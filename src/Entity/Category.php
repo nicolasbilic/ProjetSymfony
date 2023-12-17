@@ -20,9 +20,25 @@ class Category
     private ?int $id_category = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un nom de catégorie.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un nom de catégorie.')]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(max: 50)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9\s\'’-]+$/u',
+        message: 'Le nom de catégorie ne peut contenir que des lettres, chiffres, tirets ou apostrophes.'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 500, nullable: true)]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(max: 500)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9\s\'’-]+$/u',
+        message: 'La description de la catégorie ne peut contenir que des lettres, chiffres, tirets ou apostrophes.'
+    )]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
@@ -34,8 +50,6 @@ class Category
 
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'parent')]
     private Collection $subcategory;
-    // #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'subcategory')]
-    // private ?self $subcategory = null;
 
     public function __construct()
     {

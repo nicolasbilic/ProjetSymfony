@@ -20,15 +20,62 @@ class Customer
     private ?int $id_customer = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un email.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un email.')]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
+    #[Assert\Unique('Cette adresse email est déjà utilisée')]
+    #[Assert\NoSuspiciousCharacters]
     private ?string $mail = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un mot de passe.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un mot de passe.')]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(
+        min: 8,
+        minMessage: 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
+        message: 'Le mot de passe requiert au moins une majuscule, une minuscule, un chiffre et un caractère spécial',
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un Nom.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un Nom.')]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Votre nom doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Votre nom doit contenir au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùæúûüųūÿýżźñçÞčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u",
+        message: 'Votre nom doit être constitué exclusivement de caractères alphabétiques.'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un Prénom.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un Prénom.')]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Votre prénom doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Votre prénom doit contenir au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùæúûüųūÿýżźñçÞčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u",
+        message: 'Votre prénom doit être constitué exclusivement de caractères alphabétiques.'
+    )]
     private ?string $firstname = null;
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
