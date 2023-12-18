@@ -28,10 +28,6 @@ class Order
     #[ORM\Column]
     private ?float $shipping_price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'order_customer')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Customer $customer = null;
-
     #[ORM\OneToMany(mappedBy: 'order_customer', targetEntity: OrderLine::class, orphanRemoval: true)]
     private Collection $order_line;
 
@@ -50,6 +46,10 @@ class Order
     #[ORM\ManyToOne(inversedBy: 'invoice_address')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Address $invoice_address = null;
+
+    #[ORM\ManyToOne(inversedBy: 'order_customer')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customer $customer = null;
 
     public function __construct()
     {
@@ -100,18 +100,6 @@ class Order
     public function setShippingPrice(float $shipping_price): static
     {
         $this->shipping_price = $shipping_price;
-
-        return $this;
-    }
-
-    public function getCustomer(): ?Customer
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?Customer $customer): static
-    {
-        $this->customer = $customer;
 
         return $this;
     }
@@ -190,6 +178,18 @@ class Order
     public function setInvoiceAddress(?Address $invoice_address): static
     {
         $this->invoice_address = $invoice_address;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): static
+    {
+        $this->customer = $customer;
 
         return $this;
     }

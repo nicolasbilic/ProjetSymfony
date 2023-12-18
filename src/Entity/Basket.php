@@ -20,12 +20,12 @@ class Basket
     #[ORM\OneToOne(mappedBy: 'basket', cascade: ['persist', 'remove'])]
     private ?Order $order_customer = null;
 
+    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketLine::class)]
+    private Collection $basket_line;
+
     #[ORM\ManyToOne(inversedBy: 'basket')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Customer $customer = null;
-
-    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketLine::class)]
-    private Collection $basket_line;
 
     public function __construct()
     {
@@ -62,18 +62,6 @@ class Basket
         return $this;
     }
 
-    public function getCustomer(): ?Customer
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?Customer $customer): static
-    {
-        $this->customer = $customer;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, BasketLine>
      */
@@ -100,6 +88,18 @@ class Basket
                 $basketLine->setBasket(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): static
+    {
+        $this->customer = $customer;
 
         return $this;
     }
