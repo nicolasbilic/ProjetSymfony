@@ -1,7 +1,19 @@
-{# templates/base.html.twig #}
-<!DOCTYPE html>
-<html>
-  <body>
-    <header></header>
-  </body>
-</html>
+{# templates/partials/header.html.twig #}
+<link rel="stylesheet" href="{{ asset('css/header.css') }}" />
+<header>
+  <img
+    class="headerBanner"
+    src="/images/headerBanner.jpg"
+    alt="Bannière du header"
+  />
+  <nav>
+    <ul class="headerList">
+      <li><a href="#">ACCUEIL</a></li>
+      <li><a href="#">SOINS</a></li>
+      <li><a href="#">ARMEMENTS</a></li>
+      <li><a href="#">VÊTEMENTS</a></li>
+      <li><a href="#">CONTACT</a></li>
+      <li><a href="#">CONNEXION</a></li>
+    </ul>
+  </nav>
+</header>
