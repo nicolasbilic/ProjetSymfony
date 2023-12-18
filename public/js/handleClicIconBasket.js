@@ -2,6 +2,7 @@ export default function handleClicIconBasket() {
   const basketIcon = document.querySelector(".iconBasket");
   const basketBody = document.querySelector("#basket");
   const basketHeader = document.querySelector(".basketHeader");
+  const basketH1 = document.querySelector(".basketHeader h1");
   const basketItem = document.querySelectorAll(".basketItem");
   const counter = document.querySelector("#count");
   const price = document.querySelector("#price");
@@ -20,6 +21,7 @@ export default function handleClicIconBasket() {
       basketBody.style.border = "1px solid #9E9E9E";
       basketBody.style.borderRight = "none";
       //Apply basket header style
+      basketH1.style.visibility = "visible";
       basketHeader.style.borderBottom = "1px solid #186F37";
       //Display all items
       basketItem.forEach((item) => {
@@ -39,6 +41,8 @@ export default function handleClicIconBasket() {
       basketBody.style.backgroundColor = "transparent";
       basketBody.style.border = "none";
       //Apply basket header style
+      basketH1.style.transition = "visibility 1s";
+      basketH1.style.visibility = "hidden";
       basketHeader.style.borderBottom = "none";
       basketItem.forEach((item) => {
         item.style.transition = "visibility 1s";
