@@ -15,6 +15,9 @@ h1 {
 nav {
     font-size: 24px;
     font-weight: bold;
+    position:relative;
+    border-top: 1px solid #9E9E9E;
+    border-bottom: 1px solid #9E9E9E;
 }
 
 p {
