@@ -1,0 +1,7 @@
+{# templates/index.html.twig #} {% include 'partials/head.html.twig' %}
+
+{{ render(controller("App\\Controller\\HeaderController::renderHeader")) }}
+
+<!-- Contenu spécifique de la page -->
+
+{{ render(controller("App\\Controller\\FooterController::renderFooter")) }}
