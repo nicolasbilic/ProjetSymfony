@@ -66,20 +66,20 @@ class Address
     )]
     private ?int $zip_code = null;
 
-    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Customer::class)]
-    private Collection $customers;
-
     #[ORM\OneToMany(mappedBy: 'shipping_address', targetEntity: Order::class)]
     private Collection $orders;
 
     #[ORM\OneToMany(mappedBy: 'invoice_address', targetEntity: Order::class)]
     private Collection $invoice_address;
 
+    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Customer::class)]
+    private Collection $customers;
+
     public function __construct()
     {
-        $this->customers = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->invoice_address = new ArrayCollection();
+        $this->customers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,36 +155,6 @@ class Address
     }
 
     /**
-     * @return Collection<int, Customer>
-     */
-    public function getCustomers(): Collection
-    {
-        return $this->customers;
-    }
-
-    public function addCustomer(Customer $customer): static
-    {
-        if (!$this->customers->contains($customer)) {
-            $this->customers->add($customer);
-            $customer->setAddress($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCustomer(Customer $customer): static
-    {
-        if ($this->customers->removeElement($customer)) {
-            // set the owning side to null (unless already changed)
-            if ($customer->getAddress() === $this) {
-                $customer->setAddress(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Order>
      */
     public function getOrders(): Collection
@@ -238,6 +208,36 @@ class Address
             // set the owning side to null (unless already changed)
             if ($invoiceAddress->getInvoiceAddress() === $this) {
                 $invoiceAddress->setInvoiceAddress(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Customer>
+     */
+    public function getCustomers(): Collection
+    {
+        return $this->customers;
+    }
+
+    public function addCustomer(Customer $customer): static
+    {
+        if (!$this->customers->contains($customer)) {
+            $this->customers->add($customer);
+            $customer->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCustomer(Customer $customer): static
+    {
+        if ($this->customers->removeElement($customer)) {
+            // set the owning side to null (unless already changed)
+            if ($customer->getAddress() === $this) {
+                $customer->setAddress(null);
             }
         }
 

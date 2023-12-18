@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class='error'>
+            {{ error.messageKey|trans(error.messageData,  'security') }}
+        </div>
+    {% endif %}
+    <form action={{ path('app_login') }} method='post'>
+        <label for='username'>Username</label>
+        <input type='text' id='username' name='_username' value="{{ username }}">
+
+        <label for='email'>Email</label>
+        <input type='text' id='email' name='_email'>
+
+        <label for'password'>Mot de passe</label>
+        <input type='password' id='password' name='_password'>
+
+        {# redirection vers une route valide #}
+        <input type='hidden' name'_target_path' value='/'>
+        <input type='hidden' name='_csrf_token' value="{{ csrf_token('authenticate') }}">
+
+        <button type='submit'>login</button>
+
+    </form>
+{% endblock %}
