@@ -15,7 +15,7 @@ class AdminController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['username' => '$lastUsername', 'error' => $error]);
+        return $this->render('security/login.html.twig', ['username' => $lastUsername, 'error' => $error]);
     }
 
     #[Route(path: '/admin/logout', name: 'app_admin_logout')]
