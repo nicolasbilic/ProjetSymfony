@@ -1,0 +1,27 @@
+h2 {
+    color: #186F37;
+}
+body{
+    margin: 5%;
+    
+}   
+p{
+    color: White;
+}
+.container{
+   display: flex;
+    justify-content: center;
+   gap: 2%;
+   background-color: black;
+   border-radius: 2%;
+   margin: 0px;
+   
+
+}
+
+.form-floating input{
+    background-color: #0a2536;
+}
+option {
+    background-color: #0a2536;
+}
