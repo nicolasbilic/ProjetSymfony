@@ -4,17 +4,36 @@ namespace App\Entity;
 
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
-class Admin
+#[ORM\Table(name: '`admin`')]
+class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'Veuillez rentrer un email.')]
+    #[Assert\NotNull(message: 'Veuillez rentrer un email.')]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
+    #[Assert\Unique('Cette adresse email est déjà utilisée')]
+    #[Assert\NoSuspiciousCharacters]
+    private ?string $email = null;
+
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
     #[Assert\NotBlank(message: 'Veuillez rentrer un mot de passe.')]
     #[Assert\NotNull(message: 'Veuillez rentrer un mot de passe.')]
     #[Assert\Type('string')]
@@ -64,34 +83,56 @@ class Admin
     )]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Veuillez rentrer un email.')]
-    #[Assert\NotNull(message: 'Veuillez rentrer un email.')]
-    #[Assert\Email(
-        message: 'The email {{ value }} is not a valid email.',
-    )]
-    #[Assert\Unique('Cette adresse email est déjà utilisée')]
-    #[Assert\NoSuspiciousCharacters]
-    private ?string $mail = null;
-
-    #[ORM\ManyToOne(inversedBy: 'admins')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Role $role = null;
-
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): static
+    public function getEmail(): ?string
     {
-        $this->id = $id;
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -101,6 +142,15 @@ class Admin
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getName(): ?string
@@ -123,30 +173,6 @@ class Admin
     public function setFirstname(string $firstname): static
     {
         $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): static
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
-
-    public function setRole(?Role $role): static
-    {
-        $this->role = $role;
 
         return $this;
     }
