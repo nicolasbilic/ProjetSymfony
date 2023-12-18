@@ -5,7 +5,11 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
+        #app_user_provider:
+            #entity:
+                #class: App\Entity\Admin
+                #property: email
+        app_admin_provider:
             entity:
                 class: App\Entity\Admin
                 property: email
@@ -14,10 +18,18 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            lazy: true
-            provider: app_user_provider
-
+        #admin_area:  # Premier firewall pour l'administration
+            #provider: app_user_provider
+            # Autres configurations spécifiques à l'administration
+        customer_area:  # Deuxième firewall pour les utilisateurs/customer
+            provider: app_admin_provider
+            # Ajout de la directive form_login pour le firewall customer_area
+            form_login:
+                username_parameter: '_username'
+                login_path: app_admin_login
+                check_path: app_admin_login
+            logout:
+                path: app_admin_logout
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 

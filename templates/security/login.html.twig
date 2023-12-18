@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!!{% endblock %}
+
+{% block main %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_admin_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    <div class="container">
+        <h1>Formulaire de connexion</h1>
+        <form action={{ path('app_admin_login') }} method='post'>
+            <label for='username'>Adresse email</label>
+            <input type='email' id='username' name='_username' placeholder="exemple@zombie.fr" value="{{ username }}">
+            <label for='password'>Mot de passe</label>
+            <input type='password' id='password' name='_password' placeholder="********">
+            {# redirection vers une route valide #}
+            <input type='hidden' name'_target_path' value='/'>
+            <input type='hidden' name='_csrf_token' value="{{ csrf_token('authenticate') }}">
+            <button type='submit'>Se connecter</button>
+
+        </form>
+    </div>
+{% endblock %}
