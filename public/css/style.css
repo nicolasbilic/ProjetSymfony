@@ -6,7 +6,7 @@ body {
     background-size: contain; 
     font-family: 'DM Sans', sans-serif;
     color: White;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -31,8 +31,11 @@ p {
 
 .darkGreen {
     color: #186F37;
+    margin:0;
 }
 
 .lightGreen {
     color: #679B33;
+    margin: 0;
 }
+
