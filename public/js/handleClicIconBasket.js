@@ -10,7 +10,7 @@ export default function handleClicIconBasket() {
 
   let basketOpen = false;
 
-  basketIcon.addEventListener("click", () => {
+  basketHeader.addEventListener("click", () => {
     if (!basketOpen) {
       basketOpen = true;
       //Apply basketBody style
