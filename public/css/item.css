@@ -1,0 +1,19 @@
+body{
+    padding: 2%;
+}
+
+h2{
+    color: #186F37;
+}
+
+p{
+    color: white
+}
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
