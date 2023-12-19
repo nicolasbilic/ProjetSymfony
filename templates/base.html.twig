@@ -6,9 +6,13 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
+    {% if app.request.uri == 'https://127.0.0.1:8000/' %}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+    {% endif %}
     <link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
+    {% if app.request.uri == 'https://127.0.0.1:8000/list-products' %}
     <link rel="stylesheet" href="{{ asset('css/listProducts.css') }}" />
+    {% endif %}
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
     <link
       rel="icon"
