@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketController extends AbstractController
 {
 
-    public function displayBasket()
+    public function displayBasket(SessionInterface $session)
     {
+        $user = $this->getUser();
+
         return $this->render(
             'basket.html.twig',
             [
@@ -27,6 +30,7 @@ class BasketController extends AbstractController
                     ],
                 ],
                 "totalePrice" => 388,
+                'user' => $user,
             ]
         );
     }

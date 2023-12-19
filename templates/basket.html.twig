@@ -1,3 +1,4 @@
+{% if app.user %}
 <div class="basketHeader">
   <img class="iconBasket" src="/images/iconbasketwhite.png" alt="Logo panier" />
   <h1 class="darkGreen">VOTRE PANIER</h1>
@@ -20,3 +21,13 @@
 <div id="price">TOTAL : {{ totalePrice }}€</div>
 <button class="basketSubmit">PAYER</button>
 <script type="module" src="{{ asset('/js/handleClicIconBasket.js') }}"></script>
+{% else %}
+<div class="basketHeader">
+  <a href="/login"
+    ><img
+      class="iconBasket"
+      src="/images/iconbasketwhite.png"
+      alt="Logo panier"
+  /></a>
+</div>
+{% endif %}

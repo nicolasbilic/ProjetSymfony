@@ -17,11 +17,12 @@
     <div class="categoriesContainer">
       {% for product in data.allProducts %}
       <div class="cardContainer">
-        <img
-          class="hover"
-          src="/images/products/{{ product.picture }}"
-          alt="{{ product.title }}"
-        />
+        <a href="/product">
+          <img
+            class="hover"
+            src="/images/products/{{ product.picture }}"
+            alt="{{ product.title }}"
+        /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.title }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
