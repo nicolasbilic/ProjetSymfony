@@ -1,26 +1,79 @@
-h2 {
-    color: #186F37;
-}
-body{
-    margin: 5%;
-    
-}   
-p{
-    color: White;
-}
-.container{
-   display: flex;
-    justify-content: center;
-   gap: 2%;
-   background-color: black;
-   border-radius: 2%;
-   margin: 0px;
-   
 
+#contact {
+    width:100%;
+    margin-top: 40px;
+    color:white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form-control,.form-select, .form-floating input {
+.sectionContainer{
+    width:70%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #9E9E9E;
+    display: flex;
+}
+
+.contactPicture {
+    width:50%;
+    object-fit: cover;
+    border-right: 1px solid #9E9E9E;
+}
+
+.sectionRight {
+    width: 50%;
+    min-height: 100%;
+}
+
+.containerCoordinates {
+    width:100%;
+    padding: 15px;
+}
+
+.formContactContainer {
+    width:100%;
+    padding: 15px;
+}
+
+.formContactBody {
+    margin-top: 20px;
+}
+
+.formContactBody input, .formContactBody select, .formContactBody textarea {
+    background-color: #0A2536;
+    border: 1px solid #186F37;
+    color: grey;
+    margin-bottom: 20px;
+}
+.formContactBody input:focus, .formContactBody select:focus, .formContactBody textarea:focus  {
+    background-color: #0A2536;
+    color:grey;
+}
+.formContactBody input::placeholder, .formContactBody textarea::placeholder {
+    color: grey;
+}
+
+.inputsFullName {
+    display: flex;
+    justify-content: space-between;
+}
+.inputsFullName input{
+    width: 48%;
+}
+
+.formContactBody option {
     background-color: #0a2536;
-    color: white;
 }
 
+
+.contactButton {
+    width:100%;
+    height: 40px;
+    background-color: #0A2536;
+    color:white;
+    border:1px solid #186F37;
+    border-radius: 5px;
+}

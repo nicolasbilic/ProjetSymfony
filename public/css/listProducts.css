@@ -1,25 +1,20 @@
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.slideshowContainer {
-    width:70%;
+.banner {
+    width:100%;
+    height: 393px;
     margin-top: 40px;
-    position:relative;
+    display: flex;
+    justify-content: center;
 }
 
-
-.slideshowContainer img {
-    opacity:0;
-    width: 100%;
-    position: absolute;
-    border-radius: 10px;
-
+.bannerPicture {
+    width: 70%; /* Assurez-vous que l'image occupe toute la largeur du conteneur */
+    height: auto; /* Ajustez la hauteur si nécessaire */
+    object-fit: cover;
+    object-position: 0 -250px;
+    border-radius:10px;
 }
 
-#aboutUs, #bestSale, #newItems {
+#details, #categories, #allProducts {
     width:100%;
     margin-top: 40px;
     color:white;
@@ -28,17 +23,27 @@ main {
     align-items: center;
 }
 
-#aboutUs p {
-    margin-top:20px;
-}
-
 .sectionContainer {
+    position: relative;
     width:70%;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
     border: 1px solid #9E9E9E;
+}
+
+#details .sectionContainer p {
+    margin-top: 40px;
+    width: 70%;
+}
+
+.detailsPicture {
+    position: absolute;
+    top:0;
+    right:0;
+    height: 100%;
+    border-radius: 0 10px 10px 0px;
 }
 
 .bestSaleGallery {
@@ -51,6 +56,7 @@ main {
 }
 
 .cardContainer {
+    margin-top: 40px;
     width:20%;
     max-height: 330px;
     text-align: center;
@@ -58,7 +64,7 @@ main {
     border: 1px solid #9E9E9E;
     margin-left: 80px;
     margin-bottom: 40px;
-
+    cursor: pointer;
 }
 .cardContainer img{
     width:100%;
@@ -74,10 +80,16 @@ main {
     transition: transform 1s;
 }
 
+.cardTextCat {
+    padding-top: 26px;
+    padding-bottom: 26px;
+    background-color: black;
+    border-top: 1px solid #9E9E9E;
+}
+
 .cardText:hover {
     transform: translateY(-65px);
 }
-
 .buyButton {
     width:75%;
     height: 40px;
@@ -87,8 +99,12 @@ main {
     border:1px solid #679B33;
     border-radius: 20px;
 }
+.categoriesContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 
-.newItemsAll {
-    width:100%;
-    text-align: right;
+.hover:hover {
+    transform: scale(1.1);
 }
