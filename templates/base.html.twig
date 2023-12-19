@@ -14,6 +14,8 @@
     {% if app.request.uri == 'https://127.0.0.1:8000/list-products' or
     app.request.uri == 'https://127.0.0.1:8000/products'%}
     <link rel="stylesheet" href="{{ asset('css/listProducts.css') }}" />
+    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/product'%}
+    <link rel="stylesheet" href="{{ asset('css/productUser.css') }}" />
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/contact' %}
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}" />
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/login' or

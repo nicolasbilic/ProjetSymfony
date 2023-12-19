@@ -6,8 +6,8 @@
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ data.h1Details | upper }}</h1>
     <p>{{ data.details | raw | nl2br }}</p>
-    <img class="detailsPicture" src="/images/{{ data.detailsPicture }}" "Image
-    Détails">
+    <img class="detailsPicture" src="/images/products/{{ data.detailsPicture }}"
+    "Image Détails">
   </div>
 </section>
 
@@ -23,7 +23,7 @@
           alt="{{ product.title }}"
         />
         <div class="cardText">
-          <p class="cardName lightGreen">{{ product.title | upper }}</p>
+          <p class="cardName lightGreen">{{ product.title }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
           <button class="buyButton">Acheter</button>
         </div>
