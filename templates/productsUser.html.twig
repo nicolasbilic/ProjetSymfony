@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %} {% block main %}
+<div class="banner">
+  <img class="bannerPicture" src="/images/{{ data.picture }}" alt="" />
+</div>
+<section id="details">
+  <div class="sectionContainer">
+    <h1 class="darkGreen">{{ data.h1Details | upper }}</h1>
+    <p>{{ data.details | raw | nl2br }}</p>
+    <img class="detailsPicture" src="/images/{{ data.detailsPicture }}" "Image
+    Détails">
+  </div>
+</section>
+
+<section id="allProducts">
+  <div class="sectionContainer">
+    <h1 class="darkGreen">{{ data.h1AllProducts | upper }}</h1>
+    <div class="categoriesContainer">
+      {% for product in data.allProducts %}
+      <div class="cardContainer">
+        <img
+          src="/images/products/{{ product.picture }}"
+          alt="{{ product.title }}"
+        />
+        <div class="cardText">
+          <p class="cardName lightGreen">{{ product.title | upper }}</p>
+          <p class="cardName lightGreen">{{ product.price }} €</p>
+          <button class="buyButton">Acheter</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
