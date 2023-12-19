@@ -8,21 +8,21 @@
             {{ error.messageKey|trans(error.messageData,  'security') }}
         </div>
     {% endif %}
-    <form action={{ path('app_login') }} method='post'>
-        <label for='username'>Username</label>
-        <input type='text' id='username' name='_username' value="{{ username }}">
+    <div class="container">
+        <h1>Formulaire de connexion</h1>
+        <form action={{ path('app_login') }} method='post'>
+            <label for='username'>Adresse email</label>
+            <input type='email' id='username' name='_username' placeholder="exemple@zombie.fr" value="{{ username }}">
 
-        <label for='email'>Email</label>
-        <input type='text' id='email' name='_email'>
+            <label for'password'>Mot de passe</label>
+            <input type='password' id='password' name='_password' placeholder="********">
 
-        <label for'password'>Mot de passe</label>
-        <input type='password' id='password' name='_password'>
+            {# redirection vers une route valide #}
+            <input type='hidden' name'_target_path' value='/'>
+            <input type='hidden' name='_csrf_token' value="{{ csrf_token('authenticate') }}">
 
-        {# redirection vers une route valide #}
-        <input type='hidden' name'_target_path' value='/'>
-        <input type='hidden' name='_csrf_token' value="{{ csrf_token('authenticate') }}">
+            <button type='submit'>Se connecter</button>
 
-        <button type='submit'>login</button>
-
-    </form>
+        </form>
+    </div>
 {% endblock %}
