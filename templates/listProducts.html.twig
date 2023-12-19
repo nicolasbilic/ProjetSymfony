@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %} {% block main %}
+<div class="banner">
+  <img
+    class="bannerPicture"
+    src="/images/list_products/{{ data.picture }}"
+    alt=""
+  />
+</div>
+<section id="details">
+  <div class="sectionContainer">
+    <h1 class="darkGreen">{{ data.h1Details }}</h1>
+    <p>{{ data.details | raw | nl2br }}</p>
+    <img class="detailsPicture" src="/images/{{ data.detailsPicture }}" "Image
+    Détails">
+  </div>
+</section>
+
+<section id="categories">
+  <div class="sectionContainer">
+    <h1 class="darkGreen">{{ data.h1Categories }}</h1>
+    <div class="categoriesContainer">
+      {% for category in data.categories %}
+      <div class="cardContainer">
+        <img
+          src="/images/products/{{ category.picture }}"
+          alt="{{ category.title }}"
+        />
+        <div class="cardText">
+          <p class="cardName lightGreen">{{ category.title }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
