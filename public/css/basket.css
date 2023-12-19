@@ -1,0 +1,127 @@
+#basket {
+    position: absolute;
+    z-index: 10;
+    top:-1px;
+    right:-300px;
+    width:367px;
+    border-right: none; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.basketHeader {
+    height: 68px;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.iconBasket {
+    width: 54px;
+    height: 48px;
+    cursor:pointer;
+}
+
+.basketHeader h1 {
+    font-size: 38px;
+    font-weight: bold;
+    margin-right: 10px;
+    visibility: hidden;
+}
+
+.basketItem {
+    width:98%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom:1px solid #9E9E9E;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    visibility: hidden;
+}
+
+#basket .basketItem img {
+    width: 10%;
+    object-fit: contain;
+}
+
+.basketItemP {
+    width: 60%;
+    color:white;
+    font-size: 18px;
+    margin:0;
+    padding-left:10px;
+}
+
+#count {
+    width:25%;
+    height:35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#count .button {
+    width:33%;
+    height: 100%;
+    background-color: #0A2536;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#count .displayer {
+    width:33%;
+    height: 100%;
+    background-color: white;
+    border: none;
+    display: flex;
+    cursor:default;
+}
+
+#count .buttonLeft {
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+}
+
+#count .buttonRight {
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+}
+
+.countP {
+    padding: 0;
+    margin:0;
+    min-height:100%;
+    min-width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-top: -5px;
+}
+
+#price {
+    color: white;
+    width:98%;
+    font-size: 34px;
+    text-align: right;
+    border-bottom:1px solid #9E9E9E;
+    visibility: hidden;
+}
+
+.basketSubmit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 95%;
+    background-color: #0A2536;
+    border: none;
+    color:white;
+    border-radius: 5px;
+    visibility: hidden;
+}
