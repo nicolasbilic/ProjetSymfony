@@ -8,7 +8,7 @@
 </div>
 <section id="details">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1Details }}</h1>
+    <h1 class="darkGreen">{{ data.h1Details | upper }}</h1>
     <p>{{ data.details | raw | nl2br }}</p>
     <img class="detailsPicture" src="/images/{{ data.detailsPicture }}" "Image
     Détails">
@@ -17,16 +17,37 @@
 
 <section id="categories">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1Categories }}</h1>
+    <h1 class="darkGreen">{{ data.h1Categories | upper }}</h1>
     <div class="categoriesContainer">
       {% for category in data.categories %}
-      <div class="cardContainer">
+      <div class="cardContainer hover">
         <img
           src="/images/products/{{ category.picture }}"
           alt="{{ category.title }}"
         />
+        <div class="cardTextCat">
+          <p class="cardName lightGreen">{{ category.title | upper }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="allProducts">
+  <div class="sectionContainer">
+    <h1 class="darkGreen">{{ data.h1AllProducts | upper }}</h1>
+    <div class="categoriesContainer">
+      {% for product in data.allProducts %}
+      <div class="cardContainer">
+        <img
+          src="/images/products/{{ product.picture }}"
+          alt="{{ product.title }}"
+        />
         <div class="cardText">
-          <p class="cardName lightGreen">{{ category.title }}</p>
+          <p class="cardName lightGreen">{{ product.title | upper }}</p>
+          <p class="cardName lightGreen">{{ product.price }} €</p>
+          <button class="buyButton">Acheter</button>
         </div>
       </div>
       {% endfor %}

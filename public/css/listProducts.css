@@ -14,7 +14,7 @@
     border-radius:10px;
 }
 
-#details, #categories {
+#details, #categories, #allProducts {
     width:100%;
     margin-top: 40px;
     color:white;
@@ -56,6 +56,7 @@
 }
 
 .cardContainer {
+    margin-top: 40px;
     width:20%;
     max-height: 330px;
     text-align: center;
@@ -63,7 +64,7 @@
     border: 1px solid #9E9E9E;
     margin-left: 80px;
     margin-bottom: 40px;
-
+    cursor: pointer;
 }
 .cardContainer img{
     width:100%;
@@ -79,6 +80,31 @@
     transition: transform 1s;
 }
 
+.cardTextCat {
+    padding-top: 26px;
+    padding-bottom: 26px;
+    background-color: black;
+    border-top: 1px solid #9E9E9E;
+}
+
+.cardText:hover {
+    transform: translateY(-65px);
+}
+.buyButton {
+    width:75%;
+    height: 40px;
+    margin-top: 10px;
+    background-color: #0A2536;
+    color:white;
+    border:1px solid #679B33;
+    border-radius: 20px;
+}
 .categoriesContainer {
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.hover:hover {
+    transform: scale(1.1);
 }
