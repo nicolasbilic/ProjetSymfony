@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
+use App\Entity\Basket;
+use App\Entity\Customer;
+use Doctrine\ORM\EntityManagerInterface;
+
+
 
 class ProductsUserController extends AbstractController
 {
@@ -17,12 +22,25 @@ class ProductsUserController extends AbstractController
     }
 
     #[Route('/products', name: 'app_products')]
-    public function listProduct(): Response
+    public function listProduct(EntityManagerInterface $em, Customer $customer): Response
     {
+        $customer = $this->getUser();
+        // $vamecherchermonpanier = [];
+
+        $vamecherchermonpanier = $this->$customer->getBasket();
+        if (!$vamecherchermonpanier) {
+            $basket = new Basket();
+            $basket->setCustomer($customer);
+            $em->persist($basket);
+            $em->flush();
+        }
+
+
         $jsonData = $this->getJsonData('src/data/productsUserData.json');
         $data = json_decode($jsonData, true);
         return $this->render('productsUser.html.twig', [
             'data' => $data,
+            '_dump' => $customer,
         ]);
     }
 
