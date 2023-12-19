@@ -45,7 +45,7 @@ class IndexController extends AbstractController
             if ($file !== "." && $file !== "..") {
                 // Check if the file is a jpg
                 if (pathinfo($file, PATHINFO_EXTENSION) === 'jpg') {
-                    // Store the file in the array
+                    //Store the file in the array
                     $jpgFiles[] = $file;
                 }
             }
@@ -56,7 +56,7 @@ class IndexController extends AbstractController
         return $jpgFiles;
     }
 
-    // Fonction pour récupérer les données depuis un fichier JSON
+    //Method to get the data's Json
     private function getJsonData(string $path): string
     {
         $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
