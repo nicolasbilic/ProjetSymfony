@@ -1,0 +1,75 @@
+{
+    "picture" : "banner1.jpg",
+    "h1Details" : "Une pelle ? Une batte ? On a ce qu'il vous faut !",
+    "details" : "💀 Affrontez l'apocalypse avec notre arsenal d'armes :\n\nExplorez notre collection d'armement de destruction massive, comprenant des épées tranchantes, des fusils d'assaut redoutables, et même des tronçonneuses dévastatrices. Choisissez votre arme avec discernement pour déchiqueter les hordes de zombies qui se dressent sur votre chemin.\n\nRelevez le défi, combattez les zombies avec férocité, et survivez avec style. Necro Defense Store - là où les survivants s'arment pour rester les derniers debout ! 🔥🔪", 
+    "detailsPicture" : "weaponPictureDetails.jpg",
+    "h1Categories": "nos catégories :",
+    "categories": [
+      {
+        "title": "Armes à distances",
+        "picture": "arbalette.png"
+      },
+      {
+        "title": "Armes de mélée",
+        "picture": "hache.png"
+      },
+      {
+        "title": "Munitions & éxplosifs",
+        "picture": "aimo.png"
+      }
+    ],
+    "h1AllProducts": "tous nos produits :",
+    "allProducts": [
+      {
+        "title": "Armes à distances",
+        "picture": "arbalette.png",
+        "price": 249.90
+      },
+      {
+        "title": "Armes de mélée",
+        "picture": "hache.png",
+        "price": 194
+      },
+      {
+        "title": "Armes à distances",
+        "picture": "arbalette.png",
+        "price": 249.90
+      },
+      {
+        "title": "Armes de mélée",
+        "picture": "hache.png",
+        "price": 194
+      },
+      {
+        "title": "Armes à distances",
+        "picture": "arbalette.png",
+        "price": 249.90
+      },
+      {
+        "title": "Armes de mélée",
+        "picture": "hache.png",
+        "price": 194
+      },
+      {
+        "title": "Armes à distances",
+        "picture": "arbalette.png",
+        "price": 249.90
+      },
+      {
+        "title": "Armes de mélée",
+        "picture": "hache.png",
+        "price": 194
+      },
+      {
+        "title": "Armes à distances",
+        "picture": "arbalette.png",
+        "price": 249.90
+      },
+      {
+        "title": "Armes de mélée",
+        "picture": "hache.png",
+        "price": 194
+      }
+    ]
+  }
+  

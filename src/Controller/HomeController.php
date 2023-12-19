@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class IndexController extends AbstractController
+class HomeController extends AbstractController
 {
     private $slides;
     private $kernel;
@@ -22,10 +22,10 @@ class IndexController extends AbstractController
     {
         $this->getSlides();
         //Get index data from Json
-        $jsonData = $this->getJsonData('src/data/indexData.json');
+        $jsonData = $this->getJsonData('src/data/homeData.json');
         $data = json_decode($jsonData, true);
 
-        return $this->render('index.html.twig', [
+        return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'data' => $data,
         ]);
@@ -45,7 +45,7 @@ class IndexController extends AbstractController
             if ($file !== "." && $file !== "..") {
                 // Check if the file is a jpg
                 if (pathinfo($file, PATHINFO_EXTENSION) === 'jpg') {
-                    // Store the file in the array
+                    //Store the file in the array
                     $jpgFiles[] = $file;
                 }
             }
@@ -56,7 +56,7 @@ class IndexController extends AbstractController
         return $jpgFiles;
     }
 
-    // Fonction pour récupérer les données depuis un fichier JSON
+    //Method to get the data's Json
     private function getJsonData(string $path): string
     {
         $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
