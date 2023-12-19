@@ -1,0 +1,77 @@
+
+
+body {
+ color: white;     
+}
+
+#header{
+    height:80px;
+    background:#000000;
+    width: 100%;
+    
+   
+   }
+
+h2 {
+    color: white;  
+    font-size: 34px;
+    margin-left: 40px;
+    padding-top: 20px;
+}
+
+h3 {
+    color: black;
+    font-size: 36px;
+    margin-left: 80px;
+    padding-top: 50px;
+}
+    
+
+#containercote {
+   margin-left: 0;
+   padding-left: 0;
+    height:900px ;
+    width: 270px;
+    background:#0A2536;  
+}
+
+.boite{
+    display: flex;
+}
+
+.boite2{
+    display: flex;
+    padding-top: 180px;
+    padding-left: 100px;
+}
+
+
+
+.button2{
+        border: none;
+        color: white;
+        padding: 50px 34px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+}
+
+.ajoutcategorie{
+    padding-top: 50px;
+    margin-left: 550px;
+
+}
+
+
+
+
+.table{
+    margin-left : 80px;
+    margin-top: 50px;
+}
+
+
+
