@@ -16,7 +16,7 @@ class ListProductsController extends AbstractController
         $this->kernel = $kernel;
     }
 
-    #[Route('/list-products', name: 'app_list_products')]
+    #[Route('/list-products', name: 'app_list_products_user')]
     public function listProduct(): Response
     {
         $jsonData = $this->getJsonData('src/data/listProductsData.json');

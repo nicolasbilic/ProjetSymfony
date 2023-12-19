@@ -21,13 +21,15 @@
     <div class="categoriesContainer">
       {% for category in data.categories %}
       <div class="cardContainer hover">
-        <img
-          src="/images/products/{{ category.picture }}"
-          alt="{{ category.title }}"
-        />
-        <div class="cardTextCat">
-          <p class="cardName lightGreen">{{ category.title | upper }}</p>
-        </div>
+        <a href="/products"
+          ><img
+            src="/images/products/{{ category.picture }}"
+            alt="{{ category.title }}"
+          />
+          <div class="cardTextCat">
+            <p class="cardName lightGreen">{{ category.title | upper }}</p>
+          </div>
+        </a>
       </div>
       {% endfor %}
     </div>
@@ -41,6 +43,7 @@
       {% for product in data.allProducts %}
       <div class="cardContainer">
         <img
+          class="hover"
           src="/images/products/{{ product.picture }}"
           alt="{{ product.title }}"
         />

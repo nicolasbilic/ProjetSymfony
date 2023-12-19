@@ -36,6 +36,7 @@ main {
     width:70%;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
+    padding-right: 100px;
     box-sizing: border-box;
     border-radius: 10px;
     border: 1px solid #9E9E9E;
@@ -52,7 +53,7 @@ main {
 
 .cardContainer {
     width:20%;
-    max-height: 330px;
+    max-height: 310px;
     text-align: center;
     overflow: hidden;
     border: 1px solid #9E9E9E;
@@ -67,7 +68,8 @@ main {
     background-size: contain; 
 }
 .cardText {
-    padding-top: 13px;
+    z-index: 2;
+    padding-top: 10px;
     height:200px;
     background-color: black;
     border-top: 1px solid #9E9E9E;
