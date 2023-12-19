@@ -1,0 +1,68 @@
+{
+    "aboutUs": [
+      {
+        "title": "a propos de necro defense store",
+        "description": "Bienvenue à Necro Defense Store, l'ultime repaire pour les survivants intrépides dans un monde infesté de zombies ! Préparez-vous à affronter l'apocalypse avec notre arsenal de matériel de survie, d'armes dévastatrices, de vêtements résistants et de soins indispensables.\n\n💀 Équipez-vous comme un pro de l'apocalypse :\nPlongez dans notre collection de matériel de survie conçue pour les âmes audacieuses. Des trousses de premiers soins pour soigner les blessures aux équipements spécialisés pour repousser les morts-vivants, nous avons tout ce dont vous avez besoin pour rester en vie.\n\n🔫 Armement de Destruction Massive :\nExplorez notre arsenal impressionnant avec des armes de tous types, du corps à corps au longue portée. Des machettes dévastatrices aux fusils à pompe puissants, choisissez votre arme avec sagesse pour écraser les hordes de zombies qui se dressent sur votre chemin.\n\nRelevez le défi, écrasez les zombies, et survivez avec style. Necro Defense Store - où les survivants se procurent l'équipement pour rester les derniers debout !"
+      }
+    ],
+    "bestSale": [
+        {
+            "title": "nos meilleurs vente :"
+        }
+    ],
+    "bestSaleItems": [
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        },
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        },
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        }
+    ],
+    "newItemsText":[
+        {
+            "title":"nos nouveautés :"
+        }
+    ],
+    "newItems": [
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        },
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        },
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        },
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        },
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        },
+        {
+            "name":"Kit de survie minimum",
+            "picture":"kit_survie.png",
+            "price":69.90
+        }
+    ]
+  }
+  

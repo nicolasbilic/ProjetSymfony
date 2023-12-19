@@ -6,6 +6,7 @@ body {
     background-size: contain; 
     font-family: 'DM Sans', sans-serif;
     color: White;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -15,6 +16,9 @@ h1 {
 nav {
     font-size: 24px;
     font-weight: bold;
+    position:relative;
+    border-top: 1px solid #9E9E9E;
+    border-bottom: 1px solid #9E9E9E;
 }
 
 p {
@@ -27,8 +31,11 @@ p {
 
 .darkGreen {
     color: #186F37;
+    margin:0;
 }
 
 .lightGreen {
     color: #679B33;
+    margin: 0;
 }
+

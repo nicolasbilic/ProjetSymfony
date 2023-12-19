@@ -21,6 +21,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     list-style: none;
+    padding-left: 0px;
 }
 
 .headerList a {
