@@ -19,9 +19,8 @@ p{
 
 }
 
-.form-floating input{
+.form-control,.form-select, .form-floating input {
     background-color: #0a2536;
+    color: white;
 }
-option {
-    background-color: #0a2536;
-}
+
