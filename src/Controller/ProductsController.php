@@ -5,31 +5,21 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\KernelInterface;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
+use Symfony\Component\HttpFoundation\Request;
 
+#[Route('admin/products/')]
 class ProductsController extends AbstractController
 {
-    private $kernel;
-
-    public function __construct(KernelInterface $kernel)
+    #[Route('list', name: 'app_list_products')]
+    public function list(ProductRepository $productRepo, Request $request): Response
     {
-        $this->kernel = $kernel;
-    }
+        $products = $productRepo->findAll();
 
-    #[Route('/products', name: 'app_products')]
-    public function listProduct(): Response
-    {
-        $jsonData = $this->getJsonData('src/data/productsData.json');
-        $data = json_decode($jsonData, true);
-        return $this->render('products.html.twig', [
-            'data' => $data,
+        return $this->render('products/list.html.twig', [
+            'title' => 'Liste des produits',
+            'products' => $products,
         ]);
-    }
-
-    //Method to get the data's Json
-    private function getJsonData(string $path): string
-    {
-        $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
-        return file_get_contents($jsonFilePath);
     }
 }
