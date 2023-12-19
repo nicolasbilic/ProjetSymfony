@@ -141,6 +141,7 @@ class Category
         return $this->subcategory;
     }
 
+
     public function addSubcategory(Category $child): self
     {
         if (!$this->subcategory->contains($child)) {

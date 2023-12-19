@@ -4,10 +4,10 @@ nav administration
 {% endblock %}
 {% block main %}
 {{title}}
-{% for item in products %}
-{{item.category.name}} {{item.name}} {{item.price}} {{item.discount}} {{item.description}} {{item.stock}} {{item.tva.value}}
+{% for item in categories %}
+{{item.name}} {{item.description}}
 {% else %}
-Aucune produit existant
+Aucune catégorie existante
 {% endfor %}
 {% endblock %}
 {% block footer %}
