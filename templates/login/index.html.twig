@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block main %}
+<section id="login">
+    <div class="sectionContainer">
+    {% if error %}
+        <div class='error'>
+            {{ error.messageKey|trans(error.messageData,  'security') }}
+        </div>
+    {% endif %}
+        <h1 class="darkGreen">{{ "connexion" | upper }}</h1>
+        <form action={{ path('app_login') }} method='post'>
+            <label for='username'>Adresse email</label><br/>
+            <input type='email' id='username' class="form-control" name='_username' placeholder="exemple@zombie.fr" value="{{ username }}">
+            <label for='password'>Mot de passe</label><br/>
+            <input type='password' id='password' class="form-control" name='_password' placeholder="********">
+            <br/>
+            {# redirection vers une route valide #}
+            <input type='hidden' name='_target_path' value='/'>
+            <input type='hidden' name='_csrf_token' value="{{ csrf_token('authenticate') }}">
+            <button type='submit' class="loginButton">Se connecter</button>
+
+        </form>
+    </div>
+</section>
+{% endblock %}

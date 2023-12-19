@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %} {% block main %}
 <div class="banner">
-  <img
-    class="bannerPicture"
-    src="/images/list_products/{{ data.picture }}"
-    alt=""
-  />
+  <img class="bannerPicture" src="/images/{{ data.picture }}" alt="" />
 </div>
 <section id="details">
   <div class="sectionContainer">
@@ -12,27 +8,6 @@
     <p>{{ data.details | raw | nl2br }}</p>
     <img class="detailsPicture" src="/images/{{ data.detailsPicture }}" "Image
     Détails">
-  </div>
-</section>
-
-<section id="categories">
-  <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1Categories | upper }}</h1>
-    <div class="categoriesContainer">
-      {% for category in data.categories %}
-      <div class="cardContainer hover">
-        <a href="/products"
-          ><img
-            src="/images/products/{{ category.picture }}"
-            alt="{{ category.title }}"
-          />
-          <div class="cardTextCat">
-            <p class="cardName lightGreen">{{ category.title | upper }}</p>
-          </div>
-        </a>
-      </div>
-      {% endfor %}
-    </div>
   </div>
 </section>
 

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Formulaire d'inscription</h1>
+
+        {# Affichage des erreurs du formulaire #}
+        {% if form_errors(form) %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in form_errors(form) %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {{ form_start(form) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.password) }}
+            {# <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"> #}
+            <button type="submit">S'inscrire</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

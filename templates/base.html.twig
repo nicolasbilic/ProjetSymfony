@@ -6,14 +6,19 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
-    {% if app.request.uri == 'https://127.0.0.1:8000/' %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/' or app.request.uri ==
+    'https://127.0.0.1:8000/accueil' %}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
     {% endif %}
     <link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
-    {% if app.request.uri == 'https://127.0.0.1:8000/list-products' %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/list-products' or
+    app.request.uri == 'https://127.0.0.1:8000/products'%}
     <link rel="stylesheet" href="{{ asset('css/listProducts.css') }}" />
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/contact' %}
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}" />
+    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/login' or
+    app.request.uri == 'https://127.0.0.1:8000/admin' %}
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
     {% endif %}
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
     <link
@@ -50,7 +55,7 @@
           <li><a href="/list-products">ARMEMENTS</a></li>
           <li><a href="/list-products">VÊTEMENTS</a></li>
           <li><a href="/contact">CONTACT</a></li>
-          <li><a href="#">CONNEXION</a></li>
+          <li><a href="/login">CONNEXION</a></li>
         </ul>
         <section id="basket">
           {% block basket %}

@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class IndexController extends AbstractController
+class HomeController extends AbstractController
 {
     private $slides;
     private $kernel;
@@ -22,10 +22,10 @@ class IndexController extends AbstractController
     {
         $this->getSlides();
         //Get index data from Json
-        $jsonData = $this->getJsonData('src/data/indexData.json');
+        $jsonData = $this->getJsonData('src/data/homeData.json');
         $data = json_decode($jsonData, true);
 
-        return $this->render('index.html.twig', [
+        return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'data' => $data,
         ]);

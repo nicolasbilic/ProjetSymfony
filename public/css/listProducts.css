@@ -28,6 +28,7 @@
     width:70%;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
+    padding-right: 100px;
     box-sizing: border-box;
     border-radius: 10px;
     border: 1px solid #9E9E9E;
@@ -58,22 +59,33 @@
 .cardContainer {
     margin-top: 40px;
     width:20%;
-    max-height: 330px;
+    max-height: 310px;
     text-align: center;
     overflow: hidden;
     border: 1px solid #9E9E9E;
     margin-left: 80px;
     margin-bottom: 40px;
     cursor: pointer;
+    transition: transform 0.5s;
+
 }
+
+.cardContainer a {
+    text-decoration: none;
+}
+
 .cardContainer img{
     width:100%;
     object-fit: contain;
     background-image: url('/images/card_background.jpg');
     background-size: contain; 
+    transition: transform 0.5s;
+
 }
 .cardText {
-    padding-top: 13px;
+    z-index: 2;
+
+    padding-top: 10px;
     height:200px;
     background-color: black;
     border-top: 1px solid #9E9E9E;
