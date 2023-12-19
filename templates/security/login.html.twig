@@ -11,7 +11,7 @@
         <div class="mb-3">
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_admin_logout') }}">Logout</a>
         </div>
-    {% endif %}
+   {% else %}
     <div class="container">
         <h1>Formulaire de connexion</h1>
         <form action={{ path('app_admin_login') }} method='post'>
@@ -26,4 +26,5 @@
 
         </form>
     </div>
+    {% endif %}
 {% endblock %}

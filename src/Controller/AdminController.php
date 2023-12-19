@@ -9,6 +9,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminController extends AbstractController
 {
+    #[Route(path: '/admin', name: 'app_admin')]
+    public function connect(): void
+    {
+        // //si session
+        // return new RedirectResponse($this->urlGenerator->generate('app_admin_dashboard'));
+        // // else
+        // return new RedirectResponse($this->urlGenerator->generate('app_admin_login'));
+    }
+
+
     #[Route(path: '/admin/login', name: 'app_admin_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
