@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
     <link
       rel="icon"
@@ -43,9 +45,19 @@
           <li><a href="#">CONTACT</a></li>
           <li><a href="#">CONNEXION</a></li>
         </ul>
+        <section id="basket">
+          {% block basket %}
+          {{
+            render(
+              controller("App\\Controller\\BasketController::displayBasket")
+            )
+          }}
+          {% endblock %}
+        </section>
       </nav>
       {% endblock %}
     </header>
+
     <main>{% block main %} {% endblock %}</main>
     <footer>
       {% block footer %}
