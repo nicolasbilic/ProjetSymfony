@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="{{ asset('css/listProducts.css') }}" />
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/contact' %}
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}" />
-    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/login' %}
+    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/login' or
+    app.request.uri == 'https://127.0.0.1:8000/admin' %}
     <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
     {% endif %}
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
