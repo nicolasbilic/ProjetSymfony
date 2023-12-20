@@ -21,7 +21,7 @@ class ProductsUserController extends AbstractController
     {
         $jsonData = $this->getJsonData('src/data/productsUserData.json');
         $data = json_decode($jsonData, true);
-        return $this->render('productsUser.html.twig', [
+        return $this->render('productUser/productsUser.html.twig', [
             'data' => $data,
         ]);
     }
