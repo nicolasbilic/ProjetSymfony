@@ -4,32 +4,43 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\KernelInterface;
+use App\Repository\CategoryRepository;
 
 class ProductsUserController extends AbstractController
 {
-    private $kernel;
+    private $categoryRepo;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(CategoryRepository $categoryRepo)
     {
-        $this->kernel = $kernel;
+        $this->categoryRepo = $categoryRepo;
     }
 
     #[Route('/products', name: 'app_products')]
-    public function listProduct(): Response
+    public function displayListProducts(Request $request): Response
     {
-        $jsonData = $this->getJsonData('src/data/productsUserData.json');
-        $data = json_decode($jsonData, true);
+        //Get the subcategory id from the query
+        $subcategoryId = $request->query->get('category');
+        $subcategory = $this->getSubcategory($subcategoryId);
+        $products = $this->getSubcategoryProducts($subcategoryId);
+
         return $this->render('productUser/productsUser.html.twig', [
-            'data' => $data,
+            'subcategory' => $subcategory,
+            'products' => $products,
         ]);
     }
 
-    //Method to get the data's Json
-    private function getJsonData(string $path): string
+    private function getSubCategory($subcategoryId)
     {
-        $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
-        return file_get_contents($jsonFilePath);
+        return $this->categoryRepo->findBy(['id' => $subcategoryId]);
+    }
+
+    private function getSubcategoryProducts($subcategoryId)
+    {
+        $products = [];
+        $categoryProducts = $this->categoryRepo->find($subcategoryId)->getProducts();
+        $products = array_merge($products, $categoryProducts->toArray());
+        return $products;
     }
 }

@@ -4,32 +4,56 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\KernelInterface;
+use App\Repository\CategoryRepository;
 
 class ListProductsController extends AbstractController
 {
-    private $kernel;
+    private $categoryRepo;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(CategoryRepository $categoryRepo)
     {
-        $this->kernel = $kernel;
+        $this->categoryRepo = $categoryRepo;
     }
 
     #[Route('/list-products', name: 'app_list_products_user')]
-    public function listProduct(): Response
+    public function listProduct(Request $request): Response
     {
-        $jsonData = $this->getJsonData('src/data/listProductsData.json');
-        $data = json_decode($jsonData, true);
+        //Get the main category (heal / weapon / close) from the query
+        $categoryName = $request->query->get('category');
+        //Get the category and subCategory data from the bdd
+        $category = $this->getCategory($categoryName);
+        $subCategories = $this->getSubCategory($categoryName);
+        //Get all products from subCategory
+        $allProducts = $this->getAllProducts($subCategories);
+
         return $this->render('productUser/listProducts.html.twig', [
-            'data' => $data,
+            'selectedCategory' => $category,
+            'subCategories' => $subCategories,
+            'allProducts' => $allProducts,
         ]);
     }
 
-    //Method to get the data's Json
-    private function getJsonData(string $path): string
+    private function getCategory($categoryName)
     {
-        $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
-        return file_get_contents($jsonFilePath);
+        return $this->categoryRepo->findOneBy(['name' => $categoryName]);
+    }
+
+    private function getSubCategory($categoryName)
+    {
+        $parentId = $this->getCategory($categoryName)->getId();
+        return $this->categoryRepo->findBy(['parent' => $parentId]);
+    }
+
+    private function getAllProducts($subCategories)
+    {
+        $products = [];
+        foreach ($subCategories as $subCategory) {
+            $categoryId = $subCategory->getId();
+            $categoryProducts = $this->categoryRepo->find($categoryId)->getProducts();
+            $products = array_merge($products, $categoryProducts->toArray());
+        }
+        return $products;
     }
 }

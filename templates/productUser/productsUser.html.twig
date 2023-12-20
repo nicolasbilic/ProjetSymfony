@@ -1,30 +1,38 @@
 {% extends 'base.html.twig' %} {% block main %}
 <div class="banner">
-  <img class="bannerPicture" src="/images/{{ data.picture }}" alt="" />
+  <img
+    class="bannerPicture"
+    src="/images/{{ subcategory.0.bannerPicture }}"
+    alt=""
+  />
 </div>
 <section id="details">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1Details | upper }}</h1>
-    <p>{{ data.details | raw | nl2br }}</p>
-    <img class="detailsPicture" src="/images/products/{{ data.detailsPicture }}"
-    "Image Détails">
+    <h1 class="darkGreen">{{ subcategory.0.name | upper }}</h1>
+    <p>{{ subcategory.0.description | raw | nl2br }}</p>
+    <img class="detailsPicture" src="/images/products/{{ subcategory.0.picture
+
+
+
+
+    }}" "Image Détails">
   </div>
 </section>
 
 <section id="allProducts">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1AllProducts | upper }}</h1>
+    <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
     <div class="categoriesContainer">
-      {% for product in data.allProducts %}
+      {% for product in products %}
       <div class="cardContainer">
-        <a href="/product">
+        <a href="/product/?idProduct={{ product.id }}">
           <img
             class="hover"
-            src="/images/products/{{ product.picture }}"
-            alt="{{ product.title }}"
+            src="/images/products/hache.png"
+            alt="{{ product.name }}"
         /></a>
         <div class="cardText">
-          <p class="cardName lightGreen">{{ product.title }}</p>
+          <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
           <button class="buyButton">Acheter</button>
         </div>
