@@ -13,7 +13,7 @@ class BasketController extends AbstractController
         $user = $this->getUser();
 
         return $this->render(
-            'basket.html.twig',
+            'basketUser/basket.html.twig',
             [
                 'productList' => [
                     [
