@@ -45,30 +45,9 @@
     {% block body %}
     <header>
       {% block header %}
-      <img
-        class="headerBanner"
-        src="/images/headerBanner.jpg"
-        alt="Bannière du header"
-      />
-      <nav>
-        <ul class="headerList">
-          <li><a href="/">ACCUEIL</a></li>
-          <li><a href="/list-products">SOINS</a></li>
-          <li><a href="/list-products">ARMEMENTS</a></li>
-          <li><a href="/list-products">VÊTEMENTS</a></li>
-          <li><a href="/contact">CONTACT</a></li>
-          <li><a href="/login">CONNEXION</a></li>
-        </ul>
-        <section id="basket">
-          {% block basket %}
-          {{
-            render(
-              controller("App\\Controller\\BasketController::displayBasket")
-            )
-          }}
-          {% endblock %}
-        </section>
-      </nav>
+      {{
+        render(controller("App\\Controller\\HeaderController::displayHeader"))
+      }}
       {% endblock %}
     </header>
 
