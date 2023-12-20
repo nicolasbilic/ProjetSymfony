@@ -35,6 +35,9 @@ class ProductsController extends AbstractController
         if ($form->isSubmitted()) {
             $em->persist($product);
             $em->flush();
+            // $file = $form['file']->getData();
+            // $fileName = 'idduproduit+datetimenow';
+            // $file->move('images', $fileName);
             return $this->redirectToRoute('app_list_products');
         }
 
