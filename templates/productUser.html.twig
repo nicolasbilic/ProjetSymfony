@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %} {% block main %}
+<section id="product">
+  <div class="sectionContainer">
+    <h1 class="darkGreen">{{ data.title | upper }}</h1>
+    <div class="pictureContainer">
+      <img class="productPicture" src="/images/products/{{ data.picture }}"
+      "Image Détails">
+      <div>
+        <p class="productDetails">{{ data.details | raw | nl2br }}</p>
+        <div class="priceContainer">
+          <button class="buyButton hover">Acheter</button>
+          <h1 class="productPrice">179.00€</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

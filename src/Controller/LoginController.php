@@ -16,13 +16,12 @@ class LoginController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         //Récupérer le nom de l'utilisateur s'il existe
         $username = $authenticationUtils->getLastUsername();
-
+        // Si la connexion est réussie, ajouter une variable à la session
         return $this->render('login/index.html.twig', [
             'title' => 'Se connecter',
             'username' => $username,
             'error' => $error,
         ]);
-
 
         // public function login(Request $request, UserPasswordHasherInterface $passwordHasher)
         /* {
