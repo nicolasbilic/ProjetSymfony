@@ -11,9 +11,9 @@
         </div>
     {% endif %}
         <h1 class="darkGreen">{{ "connexion" | upper }}</h1>
-        <form action={{ path('app_login') }} method='post'>
+        <form action={{ path('app_login') }} method='post' autocomplete="off">
             <label for='username'>Adresse email</label><br/>
-            <input type='email' id='username' class="form-control" name='_username' placeholder="exemple@zombie.fr" value="{{ username }}">
+            <input type='email' id='username' class="form-control" name='_username' placeholder="exemple@zombie.fr" value="{{ username }}" autocomplete="off">
             <label for='password'>Mot de passe</label><br/>
             <input type='password' id='password' class="form-control" name='_password' placeholder="********">
             <br/>
