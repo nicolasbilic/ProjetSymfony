@@ -40,25 +40,15 @@ class RegisterController extends AbstractController
         /* $errors = $form->getErrors(true, false);
         dump($errors); */
         if ($form->isSubmitted() && $form->isValid()) {
-            // dump($request->request->all());
+            //Get user password
+            $userPassword = $form->get('password')->getData();
+            //Hash the password
             $hashPassword = $this->hasher->hashPassword(
                 $customer,
-                'password'
+                $userPassword
             );
-
-            // Nicolas09!
+            //Set the hashpassword in customer object
             $customer->setPassword($hashPassword);
-
-            // Récupérer le mot de passe saisi dans le formulaire
-            /* $plainPassword = $form->get('password')->getData();
-
-            // Hacher le mot de passe saisi
-            $hashedPassword = $this->hasher->hashPassword($customer, $plainPassword);
-
-            // Définir le mot de passe haché pour l'utilisateur
-            $customer->setPassword($hashedPassword); */
-
-
             $this->entityManager->persist($customer);
             $this->entityManager->flush();
 
