@@ -30,14 +30,23 @@ class CategoryController extends AbstractController
     {
         $category = new Category();
         $form = $this->createForm(CategoryFormType::class, $category);
-
+        $targetDirectory = 'img/categories/';
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Banner picture
+            $bannerFile = $form['bannerPicture']->getData();
+            $bannerName = $bannerFile->getClientOriginalName();
+            $bannerFile->move($targetDirectory, $bannerName);
+            $category->setBannerPicture($targetDirectory . $bannerName);
+            // Main picture
+            $picture = $form['mainPicture']->getData();
+            $pictureName = $picture->getClientOriginalName();
+            $picture->move($targetDirectory, $pictureName);
+            $category->setPicture($targetDirectory . $pictureName);
             $em->persist($category);
             $em->flush();
             return $this->redirectToRoute('app_list_categories');
         }
-
         return $this->render('categories/new.html.twig', [
             'title' => 'Création d\'une catégorie',
             'form' => $form,
@@ -55,9 +64,19 @@ class CategoryController extends AbstractController
         }
 
         $form = $this->createForm(CategoryFormType::class, $category);
-
+        $targetDirectory = 'img/categories/';
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Banner picture
+            $bannerFile = $form['bannerPicture']->getData();
+            $bannerName = $bannerFile->getClientOriginalName();
+            $bannerFile->move($targetDirectory, $bannerName);
+            $category->setBannerPicture($targetDirectory . $bannerName);
+            // Main picture
+            $picture = $form['mainPicture']->getData();
+            $pictureName = $picture->getClientOriginalName();
+            $picture->move($targetDirectory, $pictureName);
+            $category->setPicture($targetDirectory . $pictureName);
             $em->persist($category);
             $em->flush();
             return $this->redirectToRoute('app_list_categories');

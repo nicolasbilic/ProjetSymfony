@@ -10,10 +10,12 @@ use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ProductFormType;
+use App\Form\PictureFormType;
 
 #[Route('admin/products/')]
 class ProductsController extends AbstractController
 {
+
     #[Route('list', name: 'app_list_products')]
     public function list(ProductRepository $productRepo, Request $request): Response
     {
@@ -26,21 +28,22 @@ class ProductsController extends AbstractController
     }
 
     #[Route('new', name: 'app_new_product')]
-    public function new(EntityManagerInterface $em, Request $request): Response
+    public function new(EntityManagerInterface $em, Request $request, ProductRepository $productRepository): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductFormType::class, $product);
-
+        $targetDirectory = 'img/products/';
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        // creer variable path
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form['file']->getData();
+            $fileName = $file->getClientOriginalName();
+            $file->move($targetDirectory, $fileName);
+            $product->setPicture($targetDirectory . $fileName);
             $em->persist($product);
             $em->flush();
-            // $file = $form['file']->getData();
-            // $fileName = 'idduproduit+datetimenow';
-            // $file->move('images', $fileName);
             return $this->redirectToRoute('app_list_products');
         }
-
         return $this->render('products/new.html.twig', [
             'title' => 'Création d\'un produit',
             'form' => $form,
@@ -57,13 +60,17 @@ class ProductsController extends AbstractController
             return $this->redirectToRoute('app_list_products');
         }
 
+        $targetDirectory = 'img/products/';
         $form = $this->createForm(ProductFormType::class, $product);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form['file']->getData();
+            $fileName = $file->getClientOriginalName();
+            $file->move($targetDirectory, $fileName);
+            $product->setPicture($targetDirectory . $fileName);
             $em->persist($product);
             $em->flush();
-            return $this->redirectToRoute('app_list_products');
         }
         return $this->render('products/new.html.twig', [
             'title' => 'Mise à jour d\'un produit',

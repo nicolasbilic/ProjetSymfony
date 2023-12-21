@@ -49,6 +49,19 @@ class Category
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'parent')]
     private Collection $subcategory;
 
+    #[ORM\Column(length: 50)]
+    private ?string $bannerPicture = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $picture = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(max: 50)]
+    private ?string $title = null;
+
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -160,6 +173,66 @@ class Category
                 $child->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set the value of title
+     *
+     * @return  self
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of bannerPicture
+     */
+    public function getBannerPicture()
+    {
+        return $this->bannerPicture;
+    }
+
+    /**
+     * Set the value of bannerPicture
+     *
+     * @return  self
+     */
+    public function setBannerPicture($bannerPicture)
+    {
+        $this->bannerPicture = $bannerPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of picture
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set the value of picture
+     *
+     * @return  self
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
 
         return $this;
     }

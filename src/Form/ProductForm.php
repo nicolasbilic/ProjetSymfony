@@ -10,11 +10,13 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Category;
 use App\Entity\Tva;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ProductFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $today = new \DateTime();
 
         $builder
             ->add('category', EntityType::class, [
@@ -33,12 +35,31 @@ class ProductFormType extends AbstractType
                     return $tva->getValue() . '%';
                 }
             ])
-            ->add('file', FileType::class, [
-                'mapped' => false, // This tells Symfony not to try to map this field to an entity property
-                'required' => false, // Set this to true if the file field is mandatory
-            ])
             ->add('stock', null, [
                 'data' => 1, // Remplacez 1 par la valeur par défaut que vous souhaitez
+            ])
+            ->add('dateAdd', DateType::class, [
+                'data' => $today,
+                'label' => false,
+                'attr' => [
+                    'style' => 'display:none;', // Ajoutez ceci pour masquer le champ date dans le formulaire
+                ]
+            ])
+            ->add('file', FileType::class, [
+                'mapped' => false,
+                'label' => 'Choisir',
+                'required' => true,
+                // 'constraints' => [
+                //     new File([
+                //         'maxSize' => '1024k',
+                //         'mimeTypes' => [
+                //             'image/jpeg',
+                //             'image/jpg',
+                //             'image/png',
+                //         ],
+                //         'mimeTypesMessage' => 'Please upload a valid PDF document',
+                //     ]),
+                // ],
             ]);
     }
 
