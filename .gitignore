@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -23,6 +22,4 @@
 /public/assets/
 /assets/vendor
 ###< symfony/asset-mapper ###
-
-### ignore le fichier d'environnement stp###
 .env
