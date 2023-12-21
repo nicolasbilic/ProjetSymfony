@@ -23,3 +23,6 @@
 /public/assets/
 /assets/vendor
 ###< symfony/asset-mapper ###
+
+### ignore le fichier d'environnement stp###
+.env
