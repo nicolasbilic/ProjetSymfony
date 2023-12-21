@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class ListProductsController extends AbstractController
+class ProductUserController extends AbstractController
 {
     private $kernel;
 
@@ -16,12 +16,12 @@ class ListProductsController extends AbstractController
         $this->kernel = $kernel;
     }
 
-    #[Route('/list-products', name: 'app_list_products_user')]
+    #[Route('/product', name: 'app_product')]
     public function listProduct(): Response
     {
-        $jsonData = $this->getJsonData('src/data/listProductsData.json');
+        $jsonData = $this->getJsonData('src/data/productUserData.json');
         $data = json_decode($jsonData, true);
-        return $this->render('productUser/listProducts.html.twig', [
+        return $this->render('productUser/productUser.html.twig', [
             'data' => $data,
         ]);
     }

@@ -31,6 +31,9 @@ class HomeController extends AbstractController
         ]);
     }
 
+
+
+
     public function getSlides()
     {
         // Path of the slideshow directory

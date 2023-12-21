@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ContactController extends AbstractController
+class CategoryController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/category', name: 'app_category')]
     public function index(): Response
     {
-        return $this->render('contact/contact.html.twig', []);
+        return $this->render('category/category.html.twig', [
+            'controller_name' => 'CategoryController',
+        ]);
     }
 }

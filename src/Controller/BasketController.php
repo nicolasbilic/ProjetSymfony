@@ -4,17 +4,19 @@ namespace App\Controller;
 
 use App\Services\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\UserManager;
+use Symfony\Component\HttpFoundation\Response;
 
 class BasketController extends AbstractController
 {
 
-    public function displayBasket(CartService $cartService)
+    public function displayBasket(UserManager $userManager, CartService $cartService): Response
     {
 
         $this->loadUserBasket($cartService);
 
         return $this->render(
-            'basket.html.twig',
+            'basketUser/basket.html.twig',
             [
                 'productList' => [
                     [
@@ -31,6 +33,7 @@ class BasketController extends AbstractController
                     ],
                 ],
                 "totalePrice" => 388,
+                'isLoggedIn' => $userManager->isLoggedIn,
             ]
         );
     }
