@@ -1,4 +1,10 @@
-{% extends 'base.html.twig' %} {% block main %}
+{% extends 'base.html.twig' %} {% block main %} {% if errors is not empty %}
+<div class="errorMessage">
+  {% for error in errors %}
+  <h1 class="darkGreen">{{ error }}</h1>
+  {% endfor %}
+</div>
+{% endif %} {% if selectedCategory is not empty %}
 <div class="banner">
   <img
     class="bannerPicture"
@@ -14,7 +20,7 @@
     "Image Détails">
   </div>
 </section>
-{% if subCategories is not empty %}
+{% endif %} {% if subCategories is not empty %}
 <section id="categories">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "nos catégories" | upper }}</h1>
@@ -35,8 +41,7 @@
     </div>
   </div>
 </section>
-{% endif %}
-
+{% endif %} {% if allProducts is not empty %}
 <section id="allProducts">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
@@ -59,4 +64,4 @@
     </div>
   </div>
 </section>
-{% endblock %}
+{% endif %} {% endblock %}

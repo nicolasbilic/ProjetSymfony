@@ -1,19 +1,22 @@
-{% extends 'base.html.twig' %} {% block main %}
+{% extends 'base.html.twig' %} {% block main %} {% if errors is not empty %}
+<div class="errorMessage">
+  <h1 class="darkGreen">{{ errors }}</h1>
+</div>
+{% endif %} {% if product is not empty %}
 <section id="product">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ product.0.name | upper }}</h1>
+    <h1 class="darkGreen">{{ product.name | upper }}</h1>
     <div class="pictureContainer">
       <img class="productPicture" src="/images/products/{{ data.picture }}"
       "Image Détails">
       <div>
-        <p class="productDetails">{{ product.0.description | raw | nl2br }}</p>
+        <p class="productDetails">{{ product.description | raw | nl2br }}</p>
         <div class="priceContainer">
           <button class="buyButton hover">Acheter</button>
-          <h1 class="productPrice">{{ product.0.price }}</h1>
+          <h1 class="productPrice">{{ product.price }}</h1>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-{% endblock %}
+{% endif %} {% endblock %}

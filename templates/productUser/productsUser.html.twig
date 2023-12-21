@@ -1,24 +1,25 @@
-{% extends 'base.html.twig' %} {% block main %}
+{% extends 'base.html.twig' %} {% block main %}{% if errors is not empty %}
+<div class="errorMessage">
+  <h1 class="darkGreen">{{ errors }}</h1>
+</div>
+{% endif %} {% if subcategory is not empty %}
 <div class="banner">
   <img
     class="bannerPicture"
-    src="/images/{{ subcategory.0.bannerPicture }}"
+    src="/images/{{ subcategory.bannerPicture }}"
     alt=""
   />
 </div>
+
 <section id="details">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ subcategory.0.name | upper }}</h1>
-    <p>{{ subcategory.0.description | raw | nl2br }}</p>
-    <img class="detailsPicture" src="/images/products/{{ subcategory.0.picture
-
-
-
-
-    }}" "Image Détails">
+    <h1 class="darkGreen">{{ subcategory.name | upper }}</h1>
+    <p>{{ subcategory.description | raw | nl2br }}</p>
+    <img class="detailsPicture" src="/images/products/{{ subcategory.picture }}"
+    "Image Détails">
   </div>
 </section>
-
+{% endif %} {% if products is not empty %}
 <section id="allProducts">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
@@ -41,4 +42,4 @@
     </div>
   </div>
 </section>
-{% endblock %}
+{% endif %} {% endblock %}
