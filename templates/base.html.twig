@@ -58,7 +58,12 @@
         class="footerBanner"
         src="/images/footerBanner.jpg"
         alt="Bannière du header"
+        class ="image_footer"
       />
+
+      {{
+        render(controller("App\\Controller\\FooterController::displayFooter"))
+      }}
 
       {% endblock %}
     </footer>
