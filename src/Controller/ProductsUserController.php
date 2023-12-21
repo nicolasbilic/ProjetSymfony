@@ -10,8 +10,6 @@ use App\Entity\Basket;
 use App\Entity\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 
-
-
 class ProductsUserController extends AbstractController
 {
     private $kernel;
@@ -24,18 +22,6 @@ class ProductsUserController extends AbstractController
     #[Route('/products', name: 'app_products')]
     public function listProduct(EntityManagerInterface $em, Customer $customer): Response
     {
-        $customer = $this->getUser();
-        // $vamecherchermonpanier = [];
-
-        $vamecherchermonpanier = $this->$customer->getBasket();
-        if (!$vamecherchermonpanier) {
-            $basket = new Basket();
-            $basket->setCustomer($customer);
-            $em->persist($basket);
-            $em->flush();
-        }
-
-
         $jsonData = $this->getJsonData('src/data/productsUserData.json');
         $data = json_decode($jsonData, true);
         return $this->render('productsUser.html.twig', [
