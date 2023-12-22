@@ -176,4 +176,64 @@ class Category
 
         return $this;
     }
+
+    /**
+     * Get the value of title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set the value of title
+     *
+     * @return  self
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of bannerPicture
+     */
+    public function getBannerPicture()
+    {
+        return $this->bannerPicture;
+    }
+
+    /**
+     * Set the value of bannerPicture
+     *
+     * @return  self
+     */
+    public function setBannerPicture($bannerPicture)
+    {
+        $this->bannerPicture = $bannerPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of picture
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set the value of picture
+     *
+     * @return  self
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
 }
