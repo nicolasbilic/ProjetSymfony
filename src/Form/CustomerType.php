@@ -17,15 +17,27 @@ class CustomerType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Adresse email',
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                ],
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                ],
             ])
             ->add('name', TextType::class, [
                 'label' => 'Nom',
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                ],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                ],
             ]);
     }
 
