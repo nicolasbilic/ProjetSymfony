@@ -70,9 +70,11 @@ class ProductsController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form['file']->getData();
-            $fileName = $file->getClientOriginalName();
-            $file->move($targetDirectory, $fileName);
-            $product->setPicture($targetDirectory . $fileName);
+            if ($file !== null) {
+                $fileName = $file->getClientOriginalName();
+                $file->move($targetDirectory, $fileName);
+                $product->setPicture($targetDirectory . $fileName);
+            }
             $em->persist($product);
             $em->flush();
         }

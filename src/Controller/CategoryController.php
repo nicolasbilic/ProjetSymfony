@@ -42,14 +42,18 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Banner picture
             $bannerFile = $form['bannerPicture']->getData();
-            $bannerName = $bannerFile->getClientOriginalName();
-            $bannerFile->move($targetDirectory, $bannerName);
-            $category->setBannerPicture($targetDirectory . $bannerName);
+            if ($bannerFile !== null) {
+                $bannerName = $bannerFile->getClientOriginalName();
+                $bannerFile->move($targetDirectory, $bannerName);
+                $category->setBannerPicture($targetDirectory . $bannerName);
+            }
             // Main picture
             $picture = $form['mainPicture']->getData();
-            $pictureName = $picture->getClientOriginalName();
-            $picture->move($targetDirectory, $pictureName);
-            $category->setPicture($targetDirectory . $pictureName);
+            if ($picture !== null) {
+                $pictureName = $picture->getClientOriginalName();
+                $picture->move($targetDirectory, $pictureName);
+                $category->setPicture($targetDirectory . $pictureName);
+            }
             $em->persist($category);
             $em->flush();
             return $this->redirectToRoute('app_list_categories');
