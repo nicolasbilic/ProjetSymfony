@@ -32,12 +32,14 @@
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
-          {{ form_start(form) }}
-          {{ form_row(form.submit) }}
-          {{ form_end(form) }}
         </div>
       </div>
-      {% endfor %}
+      {% endfor %} {% if form is defined %}
+      {{ form_start(form) }}
+
+      {{ form_row(form.submit) }}
+      {{ form_end(form) }}
+      {% endif %}
     </div>
   </div>
 </section>

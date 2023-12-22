@@ -13,7 +13,7 @@
         <p class="productDetails">{{ product.description | raw | nl2br }}</p>
         <div class="priceContainer">
           {{ form_start(form) }}
-            {{ form_row(form.submit) }}
+          {{ form_row(form.submit) }}
           {{ form_end(form) }}
           <h1 class="productPrice">{{ product.price }}</h1>
         </div>

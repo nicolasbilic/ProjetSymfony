@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\Repository\ProductRepository;
+use App\Services\CartService;
+use App\Form\CartType;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Product;
 
 class ProductUserController extends AbstractController
 {
@@ -23,8 +27,26 @@ class ProductUserController extends AbstractController
     }
 
     #[Route('/product', name: 'app_product')]
-    public function displayProduct(Request $request): Response
+    public function displayProduct(CartService $cartService, EntityManagerInterface $em, Request $request): Response
     {
+        $form = $this->createForm(CartType::class);
+        $form->handleRequest($request);
+        $user = $this->getUser();
+        dump($user);
+
+        if ($form->isSubmitted()) {
+            //Get user
+            $user = $this->getUser();
+            // Vérifiez si l'utilisateur est connecté
+            if ($user) {
+                $product = $em->getRepository(Product::class)->find(17);
+
+                dump($product);
+
+                $cartService->addProductToCart($user, $product, 1);
+            }
+        }
+
         // Get the product id from the query
         $productId = $request->query->get('idProduct');
 
@@ -44,6 +66,7 @@ class ProductUserController extends AbstractController
             'data' => $data,
             'product' => $product,
             'errors' => $this->errors,
+            'form' => $form->createView(),
         ]);
     }
 
