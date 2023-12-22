@@ -28,3 +28,39 @@ nav {
     text-decoration: none;
     color: white;
 }
+
+.headerList a:hover {
+    color: #186F37;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.sous-categories {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 10px;
+    background-color: rgb(29, 28, 28);
+}
+
+.sous-categories:hover {
+    display: block;
+}
+
+.profile-container:hover .sous-categories {
+    display: block;
+}
+
+.sous-categories a {
+    display: block;
+}
+
+.sous-categories a:hover {
+    color: #186F37;
+}
+
