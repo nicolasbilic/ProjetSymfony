@@ -41,12 +41,14 @@
     </div>
   </div>
 </section>
-{% endif %} {% if allProducts is not empty %}
+{% endif %}{% if allProducts is not empty %}
 <section id="allProducts">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
     <div class="categoriesContainer">
-      {% for product in allProducts %}
+      {% if form is defined %}{% set startForm = form_start(form) %} {% set
+      formRow = form_widget(form) %} {% set endForm = form_end(form) %} {% for
+      product in allProducts %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
           <img src="/images/products/hache.png" alt="{{ product.name }}" />
@@ -54,14 +56,12 @@
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
+          {{ startForm | raw }}
+          {{ formRow | raw }}
+          {{ endForm | raw }}
         </div>
       </div>
-      {% endfor %} {% if form is defined %}
-      {{ form_start(form) }}
-
-      {{ form_row(form.submit) }}
-      {{ form_end(form) }}
-      {% endif %}
+      {% endfor %}{% endif %}
     </div>
   </div>
 </section>

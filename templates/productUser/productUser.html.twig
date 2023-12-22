@@ -7,13 +7,16 @@
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ product.name | upper }}</h1>
     <div class="pictureContainer">
-      <img class="productPicture" src="/images/products/{{ data.picture }}"
-      "Image Détails">
+      <img
+        class="productPicture"
+        src="/images/{{ product.picture }}"
+        alt="Image Détails"
+      />
       <div>
         <p class="productDetails">{{ product.description | raw | nl2br }}</p>
         <div class="priceContainer">
           {{ form_start(form) }}
-            {{ form_row(form.submit) }}
+          {{ form_row(form.submit) }}
           {{ form_end(form) }}
           <h1 class="productPrice">{{ product.price }}</h1>
         </div>

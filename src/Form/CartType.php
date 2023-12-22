@@ -14,10 +14,9 @@ class CartType extends AbstractType
     {
         $builder
             ->add('submit', SubmitType::class, [
-                'label' => 'Acheter',
+                'label' => 'Mettre au panier',
                 'attr' => [
                     'class' => 'buyButton hover',
-                    'name' => 'handle-event',
                 ],
             ]);
     }

@@ -24,7 +24,9 @@
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
     <div class="categoriesContainer">
-      {% for product in products %}
+      {% if form is defined %}{% set startForm = form_start(form) %} {% set
+      formRow = form_widget(form) %} {% set endForm = form_end(form) %} {% for
+      product in products %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
           <img src="/images/products/hache.png" alt="{{ product.name }}"
@@ -32,12 +34,12 @@
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
-          {{ form_start(form) }}
-          {{ form_row(form.submit) }}
-          {{ form_end(form) }}
+          {{ startForm | raw }}
+          {{ formRow | raw }}
+          {{ endForm | raw }}
         </div>
       </div>
-      {% endfor %}
+      {% endfor %} {% endif %}
     </div>
   </div>
 </section>
