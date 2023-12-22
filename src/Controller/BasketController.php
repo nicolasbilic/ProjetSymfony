@@ -64,13 +64,15 @@ class BasketController extends AbstractController
 
         if ($user) { // Si l'utilisateur existe
             // J'utilise mon cartService pour vérifier s'il a un panier, si c'est le cas, je le récupère
-            $cart = $cartService->getCartForUser($user);
+            if ($user->getRoles()[0] === 'customer') {
+                $cart = $cartService->getCartForUser($user);
 
-            if ($cart === null) { // Si l'utilisateur n'a pas de panier, je crée un nouveau panier
-                $cartService->createCartForUser($user);
-                // $this->addFlash('success', 'Votre panier a été créé avec succès.');
+                if ($cart === null) { // Si l'utilisateur n'a pas de panier, je crée un nouveau panier
+                    $cartService->createCartForUser($user);
+                    // $this->addFlash('success', 'Votre panier a été créé avec succès.');
 
-                $this->redirectToRoute('homepage');
+                    $this->redirectToRoute('homepage');
+                }
             }
         }
     }
