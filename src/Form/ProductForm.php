@@ -11,19 +11,35 @@ use App\Entity\Category;
 use App\Entity\Tva;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints\File;
+use App\Controller\CategoryController;
+use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class ProductFormType extends AbstractType
 {
+    // protected $categoryController;
+
+    // public function __construct(CategoryController $categoryController)
+    // {
+    //     $this->categoryController = $categoryController;
+    // }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $today = new \DateTime();
-
+        // $categories = $this->categoryController->getCategoriesWithoutChild();
         $builder
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => function (Category $category): string {
-                    return $category->getName();
-                }
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                    return $er->createQueryBuilder('c1')
+                        ->leftJoin('App\Entity\Category', 'c2', 'WITH', 'c1.id = c2.parent')
+                        ->andWhere('c2.id IS NULL')
+                        ->orderBy('c1.id', 'ASC');
+                },
+                'choice_label' => 'name',
             ])
             ->add('name')
             ->add('price')
@@ -36,30 +52,30 @@ class ProductFormType extends AbstractType
                 }
             ])
             ->add('stock', null, [
-                'data' => 1, // Remplacez 1 par la valeur par défaut que vous souhaitez
+                'data' => 1,
             ])
             ->add('dateAdd', DateType::class, [
                 'data' => $today,
                 'label' => false,
                 'attr' => [
-                    'style' => 'display:none;', // Ajoutez ceci pour masquer le champ date dans le formulaire
+                    'style' => 'display:none;',
                 ]
             ])
             ->add('file', FileType::class, [
                 'mapped' => false,
                 'label' => 'Choisir',
-                'required' => true,
-                // 'constraints' => [
-                //     new File([
-                //         'maxSize' => '1024k',
-                //         'mimeTypes' => [
-                //             'image/jpeg',
-                //             'image/jpg',
-                //             'image/png',
-                //         ],
-                //         'mimeTypesMessage' => 'Please upload a valid PDF document',
-                //     ]),
-                // ],
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez selectionner un fichier de type jpeg,jpg,png de moins de 1024ko',
+                    ]),
+                ],
             ]);
     }
 

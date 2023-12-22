@@ -20,8 +20,8 @@ class CategoryFormType extends AbstractType
                 'choice_label' => function (Category $category): string {
                     return $category->getName();
                 },
-                'placeholder' => 'Sélectionnez une catégorie', // Ajoutez une option par défaut si nécessaire
-                'required' => false, // Définissez à true si la catégorie est obligatoire
+                'placeholder' => 'Sélectionnez une catégorie',
+                'required' => false,
             ])
             ->add('name')
             ->add('title')
