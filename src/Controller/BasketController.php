@@ -61,8 +61,9 @@ class BasketController extends AbstractController
     public function loadUserBasket(CartService $cartService): void
     {
         $user = $this->getUser(); // Je Récupère l'utilisateur connecté
-
-        if ($user) { // Si l'utilisateur existe
+        $userRole = $user->getRoles();
+        dump($userRole);
+        if ($userRole === "ROLE_USER") { // Si l'utilisateur existe
             // J'utilise mon cartService pour vérifier s'il a un panier, si c'est le cas, je le récupère
             $cart = $cartService->getCartForUser($user);
 
