@@ -29,6 +29,8 @@ class HomeController extends AbstractController
         $data = json_decode($jsonData, true);
         //Get new product to show
         $newProductDatas = $this->getNewProducts($entityManager);
+        dump($newProductDatas);
+
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'data' => $data,

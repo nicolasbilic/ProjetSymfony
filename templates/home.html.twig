@@ -19,10 +19,12 @@
     <div class="bestSaleGallery">
       {% endfor %} {% for bestSaleItem in data.bestSaleItems %}
       <div class="cardContainer">
-        <img
-          src="/images/products/{{ bestSaleItem.picture }}"
-          alt="{{ bestSaleItem.name }}"
-        />
+        <a href="/product/">
+          <img
+            src="/images/products/{{ bestSaleItem.picture }}"
+            alt="{{ bestSaleItem.name }}"
+          />
+        </a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ bestSaleItem.name }}</p>
           <p class="lightGreen">{{ bestSaleItem.price }} €</p>
@@ -40,10 +42,11 @@
     <div class="bestSaleGallery">
       {% for newProductData in newProductsDatas %}
       <div class="cardContainer">
-        <img
-          src="/images/{{ newProductData.picture }}"
-          alt="{{ newProductData.name }}"
-        />
+        <a href="/product/?idProduct={{ newProductData.id }}">
+          <img
+            src="/images/{{ newProductData.picture }}"
+            alt="{{ newProductData.name }}"
+        /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ newProductData.name }}</p>
           <p class="lightGreen">{{ newProductData.price }} €</p>
