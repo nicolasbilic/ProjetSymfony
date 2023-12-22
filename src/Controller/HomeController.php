@@ -22,12 +22,13 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(EntityManagerInterface $entityManager): Response
     {
+        //Get slides pictures
         $this->getSlides();
         //Get index data from Json
         $jsonData = $this->getJsonData('src/data/homeData.json');
         $data = json_decode($jsonData, true);
+        //Get new product to show
         $newProductDatas = $this->getNewProducts($entityManager);
-        dump($newProductDatas);
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'data' => $data,
@@ -37,6 +38,7 @@ class HomeController extends AbstractController
 
     public function getNewProducts(EntityManagerInterface $entityManager)
     {
+        //Get line by dateAdd then keep 6 of them
         $newProductsData = $entityManager->getRepository(Product::class)
             ->createQueryBuilder('p')
             ->select(['p.id', 'p.name', 'p.price', 'p.dateAdd as createdAt', 'p.picture', 'p.description'])
