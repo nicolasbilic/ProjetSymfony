@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block nav %}
-nav administration
+    nav administration
 {% endblock %}
 {% block main %}
-Bienvenue
-
+    {{title}}
+    {% for item in products %}
+        {{item.category.name}} {{item.name}} {{item.price}} {{item.discount}} {{item.description}} {{item.stock}} {{item.tva.value}} <a href="{{ path('app_update_product', { 'id': item.id })}}">Mettre à jour</a><a href="{{ path('app_delete_product', { 'id': item.id })}}">Supprimer</a> </br> </br>
+    {% else %}
+        Aucun produit existant
+    {% endfor %}
 {% endblock %}
 {% block footer %}
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block nav %}
+nav administration
+{% endblock %}
+{% block main %}
+{{title}}
+{% for item in categories %}
+{{item.name}} {{item.description}} <a href="{{ path('app_update_category', { 'id': item.id })}}">Mettre à jour</a><a href="{{ path('app_delete_category', { 'id': item.id })}}">Supprimer</a> </br> </br>
+{% else %}
+Aucune catégorie existante
+{% endfor %}
+{% endblock %}
+{% block footer %}
+{% endblock %}

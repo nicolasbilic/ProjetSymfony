@@ -50,13 +50,17 @@ class Category
     private Collection $subcategory;
 
     #[ORM\Column(length: 50)]
-    private ?string $picture = null;
-
-    #[ORM\Column(length: 50)]
     private ?string $bannerPicture = null;
 
     #[ORM\Column(length: 50)]
+    private ?string $picture = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(max: 50)]
     private ?string $title = null;
+
 
     public function __construct()
     {
@@ -150,6 +154,7 @@ class Category
         return $this->subcategory;
     }
 
+
     public function addSubcategory(Category $child): self
     {
         if (!$this->subcategory->contains($child)) {
@@ -168,42 +173,6 @@ class Category
                 $child->setParent(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): static
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function getBannerPicture(): ?string
-    {
-        return $this->bannerPicture;
-    }
-
-    public function setBannerPicture(string $bannerPicture): static
-    {
-        $this->bannerPicture = $bannerPicture;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
 
         return $this;
     }
