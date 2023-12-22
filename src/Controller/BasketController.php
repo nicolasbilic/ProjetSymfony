@@ -2,16 +2,35 @@
 // src/Controller/IndexController.php
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Form\CartType;
 use App\Services\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class BasketController extends AbstractController
 {
 
-    public function displayBasket(UserManager $userManager, CartService $cartService): Response
+    public function displayBasket(UserManager $userManager, CartService $cartService, Request $request, EntityManagerInterface $em): Response
     {
+        $form = $this->createForm(CartType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            //Get user
+            $user = $this->getUser();
+            // Vérifiez si l'utilisateur est connecté
+            if ($user) {
+                $product = $em->getRepository(Product::class)->find(17);
+
+                dump($product);
+
+                $cartService->addProductToCart($user, $product, 1);
+            }
+        }
 
         $this->loadUserBasket($cartService);
 
@@ -37,6 +56,7 @@ class BasketController extends AbstractController
             ]
         );
     }
+
 
     public function loadUserBasket(CartService $cartService): void
     {

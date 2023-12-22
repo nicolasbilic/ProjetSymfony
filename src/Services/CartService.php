@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entity\Customer;
 use App\Entity\Product;
 use App\Entity\Basket;
+use App\Entity\BasketLine;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -30,6 +31,21 @@ class CartService
         return $baskets->isEmpty() ? null : $baskets->first();
     }
 
+    public function addProductToCart(Customer $user, Product $product, int $quantity)
+    {
+        $basket = $this->getCartForUser($user);
+        $basketLine = new BasketLine();
+        $basketLine->setProduct($product);
+        $basketLine->setQuantity($quantity);
+
+        // Ajouter la ligne de panier au panier
+        $basket->addBasketLine($basketLine);
+
+        // Persistez les entités
+        $this->em->persist($basket);
+        $this->em->persist($basketLine);
+        $this->em->flush();
+    }
 
     public function createCartForUser(Customer $user): void
     {
