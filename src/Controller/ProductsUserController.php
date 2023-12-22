@@ -4,36 +4,70 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\KernelInterface;
-use App\Entity\Basket;
-use App\Entity\Customer;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CategoryRepository;
 
 class ProductsUserController extends AbstractController
 {
-    private $kernel;
+    private $categoryRepo;
+    private $errors;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(CategoryRepository $categoryRepo)
     {
-        $this->kernel = $kernel;
+        $this->categoryRepo = $categoryRepo;
+        $this->errors;
     }
 
     #[Route('/products', name: 'app_products')]
-    public function listProduct(EntityManagerInterface $em, Customer $customer): Response
+    public function displayListProducts(Request $request): Response
     {
-        $jsonData = $this->getJsonData('src/data/productsUserData.json');
-        $data = json_decode($jsonData, true);
+        //Get the subcategory id from the query
+        $subcategoryId = $request->query->get('category');
+        //If no query, set a default subcategory id
+        if (!$subcategoryId) {
+            $subcategoryId = 4;
+        }
+        //Get subcategory and products data from the database
+        $subcategory = $this->getSubcategory($subcategoryId);
+        $products = $this->getSubcategoryProducts($subcategoryId);
+
         return $this->render('productUser/productsUser.html.twig', [
-            'data' => $data,
-            '_dump' => $customer,
+            'subcategory' => $subcategory,
+            'products' => $products,
+            'errors' => $this->errors,
         ]);
     }
 
-    //Method to get the data's Json
-    private function getJsonData(string $path): string
+    private function getSubcategory($subcategoryId)
     {
-        $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
-        return file_get_contents($jsonFilePath);
+        $subcategory = $this->categoryRepo->find($subcategoryId);
+
+        //Check if the subcategory is found
+        if (!$subcategory) {
+            $this->errors = "No subcategory found.";
+        }
+
+        return $subcategory;
+    }
+
+    private function getSubcategoryProducts($subcategoryId)
+    {
+        $products = [];
+        $subcategory = $this->getSubcategory($subcategoryId);
+
+        //Proceed only if the subcategory is found
+        if ($subcategory) {
+            $categoryProducts = $subcategory->getProducts();
+
+            // heck if category products are found before merging
+            if ($categoryProducts->count() > 0) {
+                $products = $categoryProducts->getValues();
+            } else {
+                $this->errors = "No products found for subcategory '{$subcategory->getName()}'.";
+            }
+        }
+
+        return $products;
     }
 }

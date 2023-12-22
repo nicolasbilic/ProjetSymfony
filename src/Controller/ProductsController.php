@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductsController extends AbstractController
 {
     #[Route('list', name: 'app_list_products')]
-    public function list(ProductRepository $productRepo, Request $request): Response
+    public function displayList(ProductRepository $productRepo, Request $request): Response
     {
         $products = $productRepo->findAll();
 

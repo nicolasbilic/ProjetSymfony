@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
     {% endif %}
     <link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
-    {% if app.request.uri == 'https://127.0.0.1:8000/list-products' or
-    app.request.uri == 'https://127.0.0.1:8000/products'%}
+    {% if 'https://127.0.0.1:8000/list-products' in app.request.uri or
+    'https://127.0.0.1:8000/products' in app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/listProducts.css') }}" />
-    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/product'%}
+    {% endif %} {% if 'https://127.0.0.1:8000/product' in app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/productUser.css') }}" />
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/contact' %}
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}" />
@@ -24,9 +24,30 @@
     {% endif %}
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
     <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/images/favicon/apple-touch-icon.png"
     />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/images/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -58,7 +79,12 @@
         class="footerBanner"
         src="/images/footerBanner.jpg"
         alt="Bannière du header"
+        class="image_footer"
       />
+
+      {{
+        render(controller("App\\Controller\\FooterController::displayFooter"))
+      }}
 
       {% endblock %}
     </footer>

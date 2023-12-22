@@ -7,4 +7,57 @@ footer {
 
 .footerBanner{
     width:100%;
+} 
+
+.FooterContainer h1,
+.FooterContainer h2,
+.FooterContainer h3,
+.FooterContainer h4,
+.FooterContainer h5,
+.FooterContainer h6,
+.FooterContainer a,
+.FooterContainer p,
+.FooterContainer li {
+    color: white;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.footerBanner {
+    position: absolute;
+}
+
+.FooterContainer {
+    position: relative;
+    padding-top: 65px;
+    padding-left: 100px;
+}
+
+.colone2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.num {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .FooterContainer {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    } 
+
+    .FooterContainer {
+        padding-left: 0px;
+    }
+
+    .colone2 {
+        padding-left: 250px;
+        padding-right: 250px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
 }

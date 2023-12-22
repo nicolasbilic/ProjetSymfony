@@ -1,15 +1,15 @@
 {% block header %}
-<img
+<a href="/"><img
   class="headerBanner"
   src="/images/headerBanner.jpg"
   alt="Bannière du header"
-/>
+/></a>
 <nav>
   <ul class="headerList">
     <li><a href="/">ACCUEIL</a></li>
-    <li><a href="/list-products">SOINS</a></li>
-    <li><a href="/list-products">ARMEMENTS</a></li>
-    <li><a href="/list-products">VÊTEMENTS</a></li>
+    <li><a href="/list-products?category=soins">SOINS</a></li>
+    <li><a href="/list-products?category=armements">ARMEMENTS</a></li>
+    <li><a href="/list-products?category=vêtements">VÊTEMENTS</a></li>
     <li><a href="/contact">CONTACT</a></li>
     {% if not isLoggedIn %}
     <li><a href="/login">CONNEXION</a></li>

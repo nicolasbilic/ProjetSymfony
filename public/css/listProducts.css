@@ -1,3 +1,16 @@
+.errorMessage {
+    width:100%;
+    margin-top: 40px;
+    display:flex;
+    justify-content: center;
+}
+.errorMessage h1 {
+    border: 1px solid red;
+    width:50%;
+    padding: 20px;
+    text-align: center;
+}
+
 .banner {
     width:100%;
     height: 393px;

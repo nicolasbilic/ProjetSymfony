@@ -1,33 +1,39 @@
-{% extends 'base.html.twig' %} {% block main %}
+{% extends 'base.html.twig' %} {% block main %} {% if errors is not empty %}
+<div class="errorMessage">
+  {% for error in errors %}
+  <h1 class="darkGreen">{{ error }}</h1>
+  {% endfor %}
+</div>
+{% endif %} {% if selectedCategory is not empty %}
 <div class="banner">
   <img
     class="bannerPicture"
-    src="/images/list_products/{{ data.picture }}"
+    src="/images/list_products/{{ selectedCategory.bannerPicture }}"
     alt=""
   />
 </div>
 <section id="details">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1Details | upper }}</h1>
-    <p>{{ data.details | raw | nl2br }}</p>
-    <img class="detailsPicture" src="/images/{{ data.detailsPicture }}" "Image
-    Détails">
+    <h1 class="darkGreen">{{ selectedCategory.title | upper }}</h1>
+    <p>{{ selectedCategory.description | raw | nl2br }}</p>
+    <img class="detailsPicture" src="/images/{{ selectedCategory.picture }}"
+    "Image Détails">
   </div>
 </section>
-
+{% endif %} {% if subCategories is not empty %}
 <section id="categories">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1Categories | upper }}</h1>
+    <h1 class="darkGreen">{{ "nos catégories" | upper }}</h1>
     <div class="categoriesContainer">
-      {% for category in data.categories %}
+      {% for subCategory in subCategories %}
       <div class="cardContainer hover">
-        <a href="/products"
+        <a href="/products/?category= {{ subCategory.id }}"
           ><img
-            src="/images/products/{{ category.picture }}"
-            alt="{{ category.title }}"
+            src="/images/list_products/{{ subCategory.picture }}"
+            alt="{{ subCategory.name }}"
           />
           <div class="cardTextCat">
-            <p class="cardName lightGreen">{{ category.title | upper }}</p>
+            <p class="cardName lightGreen">{{ subCategory.name | upper }}</p>
           </div>
         </a>
       </div>
@@ -35,21 +41,20 @@
     </div>
   </div>
 </section>
-
+{% endif %} {% if allProducts is not empty %}
 <section id="allProducts">
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ data.h1AllProducts | upper }}</h1>
+    <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
     <div class="categoriesContainer">
-      {% for product in data.allProducts %}
+      {% for product in allProducts %}
       <div class="cardContainer">
-        <a href="/product"
+        <a href="/product/?idProduct={{ product.id }}"
           ><img
-            class="hover"
-            src="/images/products/{{ product.picture }}"
-            alt="{{ product.title }}"
+            src="/images/products/hache.png"
+            alt="{{ product.name }}"
         /></a>
         <div class="cardText">
-          <p class="cardName lightGreen">{{ product.title | upper }}</p>
+          <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
           <button class="buyButton">Acheter</button>
         </div>
@@ -58,4 +63,4 @@
     </div>
   </div>
 </section>
-{% endblock %}
+{% endif %} {% endblock %}
