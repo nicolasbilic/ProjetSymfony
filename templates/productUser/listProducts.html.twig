@@ -48,20 +48,20 @@
     <div class="categoriesContainer">
       {% for product in allProducts %}
       <div class="cardContainer">
-        <a href="/product/?idProduct={{ product.id }}"
-          ><img
-            src="/images/products/hache.png"
-            alt="{{ product.name }}"
-        /></a>
+        <a href="/product/?idProduct={{ product.id }}">
+          <img src="/images/products/hache.png" alt="{{ product.name }}" />
+        </a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
-          {{ form_start(form) }}
-              {{ form_row(form.submit) }}
-          {{ form_end(form) }}
         </div>
       </div>
-      {% endfor %}
+      {% endfor %} {% if form is defined %}
+      {{ form_start(form) }}
+
+      {{ form_row(form.submit) }}
+      {{ form_end(form) }}
+      {% endif %}
     </div>
   </div>
 </section>
