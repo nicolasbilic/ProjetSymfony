@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Hello {% endblock %}
+
+{% block main %}
+
+    <h1>Produits</h1>
+
+    {% for product in products %}
+
+        <h2>{{ product.name }}</h2>
+        <strong>{{ product.price }}</strong>
+        <p>
+            {{ product.description }}
+        </p>
+
+        <a href="{{ path('cart_add', {id: product.id}) }}">Ajouter au panier</a>
+
+        <hr>
+    {% endfor %}
+    
+{% endblock %}

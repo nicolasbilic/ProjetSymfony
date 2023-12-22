@@ -24,7 +24,7 @@ class BasketLine
     #[ORM\JoinColumn(nullable: false)]
     private ?Basket $basket = null;
 
-    #[ORM\ManyToOne(inversedBy: 'basketLines')]
+    #[ORM\ManyToOne(inversedBy: 'basketLines', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
 

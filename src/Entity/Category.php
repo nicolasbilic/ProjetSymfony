@@ -50,13 +50,17 @@ class Category
     private Collection $subcategory;
 
     #[ORM\Column(length: 50)]
-    private ?string $picture = null;
-
-    #[ORM\Column(length: 50)]
     private ?string $bannerPicture = null;
 
     #[ORM\Column(length: 50)]
+    private ?string $picture = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\Type('string')]
+    #[Assert\NoSuspiciousCharacters]
+    #[Assert\Length(max: 50)]
     private ?string $title = null;
+
 
     public function __construct()
     {
@@ -150,6 +154,7 @@ class Category
         return $this->subcategory;
     }
 
+
     public function addSubcategory(Category $child): self
     {
         if (!$this->subcategory->contains($child)) {
@@ -172,38 +177,62 @@ class Category
         return $this;
     }
 
-    public function getPicture(): ?string
+    /**
+     * Get the value of title
+     */
+    public function getTitle()
     {
-        return $this->picture;
+        return $this->title;
     }
 
-    public function setPicture(string $picture): static
+    /**
+     * Set the value of title
+     *
+     * @return  self
+     */
+    public function setTitle($title)
     {
-        $this->picture = $picture;
+        $this->title = $title;
 
         return $this;
     }
 
-    public function getBannerPicture(): ?string
+    /**
+     * Get the value of bannerPicture
+     */
+    public function getBannerPicture()
     {
         return $this->bannerPicture;
     }
 
-    public function setBannerPicture(string $bannerPicture): static
+    /**
+     * Set the value of bannerPicture
+     *
+     * @return  self
+     */
+    public function setBannerPicture($bannerPicture)
     {
         $this->bannerPicture = $bannerPicture;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    /**
+     * Get the value of picture
+     */
+    public function getPicture()
     {
-        return $this->title;
+        return $this->picture;
     }
 
-    public function setTitle(string $title): static
+    /**
+     * Set the value of picture
+     *
+     * @return  self
+     */
+    public function setPicture($picture)
     {
-        $this->title = $title;
+        $this->picture = $picture;
 
         return $this;
     }

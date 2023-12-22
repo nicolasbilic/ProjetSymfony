@@ -27,14 +27,14 @@
       {% for product in products %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
-          <img
-            src="/images/products/hache.png"
-            alt="{{ product.name }}"
+          <img src="/images/products/hache.png" alt="{{ product.name }}"
         /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
-          <button class="buyButton">Acheter</button>
+          {{ form_start(form) }}
+          {{ form_row(form.submit) }}
+          {{ form_end(form) }}
         </div>
       </div>
       {% endfor %}
