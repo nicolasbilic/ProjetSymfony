@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,14 +28,5 @@ class LoginController extends AbstractController
             'username' => $username,
             'error' => $error,
         ]);
-
-        // public function login(Request $request, UserPasswordHasherInterface $passwordHasher)
-        /* {
-            // ...        if ($passwordHasher->isPasswordValid($user, $submittedPassword)) {
-                // Connexion réussie        } else {
-                // Mot de passe incorrect
-            }
-            // ...
-        } */
     }
 }
