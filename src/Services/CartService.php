@@ -32,20 +32,35 @@ class CartService
         return $baskets->isEmpty() ? null : $baskets->first();
     }
 
+    // public function getCartList(): array
+    // {
+    //     $user = $this->security->getUser();
+    //     $products = [];
+    //     if ($user) {
+    //         $cart = $this->getCartForUser($user);
+
+    //         if ($cart) {
+    //             foreach ($cart->getBasketLine() as $basketLine) {
+    //                 $products[] = $basketLine->getProduct();
+    //             }
+    //         }
+    //     }
+    //     return $products;
+    // }
     public function getCartList(): array
     {
         $user = $this->security->getUser();
-        $products = [];
+        $basketLines = [];
+
         if ($user) {
             $cart = $this->getCartForUser($user);
 
             if ($cart) {
-                foreach ($cart->getBasketLine() as $basketLine) {
-                    $products[] = $basketLine->getProduct();
-                }
+                $basketLines = $cart->getBasketLine()->toArray();
             }
         }
-        return $products;
+
+        return $basketLines;
     }
 
     public function addProductToCart(Customer $user,  Product $product, int $quantity)

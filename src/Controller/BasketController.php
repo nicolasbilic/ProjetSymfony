@@ -28,6 +28,7 @@ class BasketController extends AbstractController
 
         $this->loadUserBasket($cartService);
         $products = $cartService->getCartList();
+        dump($products);
         return $this->render(
             'basketUser/basket.html.twig',
             [

@@ -6,12 +6,15 @@
 
 {% for product in products %}
 <div class="basketItem">
-  <img src="/images/{{ product.picture }}" alt="{{ product.name }}" />
-  <p class="basketItemP">{{ product.name }}</p>
+  <img
+    src="/images/{{ product.product.picture }}"
+    alt="{{ product.product.name }}"
+  />
+  <p class="basketItemP">{{ product.product.name }}</p>
   <div id="count">
     <div class="button buttonLeft"><p class="countP darkGreen">-</p></div>
     <div class="displayer">
-      <p class="countP darkGreen">{{ "quantityendurr" }}</p>
+      <p class="countP darkGreen">{{ product.quantity }}</p>
     </div>
     <div class="button buttonRight"><p class="countP darkGreen">+</p></div>
   </div>
