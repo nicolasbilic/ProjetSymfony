@@ -22,6 +22,12 @@
     app.request.uri == 'https://127.0.0.1:8000/admin' %}
     <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
     {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/register' or
+    app.request.uri == 'https://127.0.0.1:8000/admin' %}
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
     <link
       rel="apple-touch-icon"

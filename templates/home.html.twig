@@ -19,10 +19,12 @@
     <div class="bestSaleGallery">
       {% endfor %} {% for bestSaleItem in data.bestSaleItems %}
       <div class="cardContainer">
-        <img
-          src="/images/products/{{ bestSaleItem.picture }}"
-          alt="{{ bestSaleItem.name }}"
-        />
+        <a href="/product/">
+          <img
+            src="/images/products/{{ bestSaleItem.picture }}"
+            alt="{{ bestSaleItem.name }}"
+          />
+        </a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ bestSaleItem.name }}</p>
           <p class="lightGreen">{{ bestSaleItem.price }} €</p>
@@ -36,19 +38,32 @@
 
 <section id="newItems">
   <div class="sectionContainer">
-    {% for newItemsTitle in data.newItemsText %}
-    <h1 class="darkGreen">{{ newItemsTitle.title | upper }}</h1>
+    <h1 class="darkGreen">{{ "nos nouveaux produits" | upper }}</h1>
     <div class="bestSaleGallery">
-      {% endfor %} {% for newItem in data.newItems %}
+      {% for newProductData in newProductsDatas %}
       <div class="cardContainer">
-        <img
-          src="/images/products/{{ newItem.picture }}"
-          alt="{{ newItem.name }}"
-        />
+        <a href="/product/?idProduct={{ newProductData.id }}">
+          <img
+            src="/images/{{ newProductData.picture }}"
+            alt="{{ newProductData.name }}"
+        /></a>
         <div class="cardText">
-          <p class="cardName lightGreen">{{ newItem.name }}</p>
-          <p class="lightGreen">{{ newItem.price }} €</p>
-          <button class="buyButton">Acheter</button>
+          <p class="cardName lightGreen">{{ newProductData.name }}</p>
+          <p class="lightGreen">{{ newProductData.price }} €</p>
+          <form
+            action="{{
+              path('basket_add_product', { idProduct: newProductData.id })
+            }}"
+            method="post"
+            id="product-{{ newProductData.id }}"
+          >
+            <input
+              type="hidden"
+              name="id_product"
+              value="{{ newProductData.id }}"
+            />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
       {% endfor %}

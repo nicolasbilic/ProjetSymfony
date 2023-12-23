@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
+use App\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
 
 class HomeController extends AbstractController
 {
@@ -18,20 +20,36 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_index')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        //Get slides pictures
         $this->getSlides();
         //Get index data from Json
         $jsonData = $this->getJsonData('src/data/homeData.json');
         $data = json_decode($jsonData, true);
+        //Get new product to show
+        $newProductDatas = $this->getNewProducts($entityManager);
+        dump($newProductDatas);
 
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'data' => $data,
+            'newProductsDatas' => $newProductDatas,
         ]);
     }
 
-
+    public function getNewProducts(EntityManagerInterface $entityManager)
+    {
+        //Get line by dateAdd then keep 6 of them
+        $newProductsData = $entityManager->getRepository(Product::class)
+            ->createQueryBuilder('p')
+            ->select(['p.id', 'p.name', 'p.price', 'p.dateAdd as createdAt', 'p.picture', 'p.description'])
+            ->orderBy('p.dateAdd', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getArrayResult();
+        return $newProductsData;
+    }
 
 
     public function getSlides()

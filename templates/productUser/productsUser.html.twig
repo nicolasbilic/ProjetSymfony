@@ -24,20 +24,27 @@
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
     <div class="categoriesContainer">
-      {% for product in products %}
+      {% if form is defined %}{% set startForm = form_start(form) %} {% set
+      formRow = form_widget(form) %} {% set endForm = form_end(form) %} {% for
+      product in products %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
-          <img src="/images/products/hache.png" alt="{{ product.name }}"
+          <img src="/images/{{ product.picture }}" alt="{{ product.name }}"
         /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
-          {{ form_start(form) }}
-          {{ form_row(form.submit) }}
-          {{ form_end(form) }}
+          <form
+            action="{{ path('basket_add_product', { idProduct: product.id }) }}"
+            method="post"
+            id="product-{{ product.id }}"
+          >
+            <input type="hidden" name="id_product" value="{{ product.id }}" />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
-      {% endfor %}
+      {% endfor %} {% endif %}
     </div>
   </div>
 </section>

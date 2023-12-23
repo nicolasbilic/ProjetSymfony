@@ -41,7 +41,7 @@
     </div>
   </div>
 </section>
-{% endif %} {% if allProducts is not empty %}
+{% endif %}{% if allProducts is not empty %}
 <section id="allProducts">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "tous nos produits" | upper }}</h1>
@@ -49,19 +49,22 @@
       {% for product in allProducts %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
-          <img src="/images/products/hache.png" alt="{{ product.name }}" />
+          <img src="/images/{{ product.picture }}" alt="{{ product.name }}" />
         </a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
+          <form
+            action="{{ path('basket_add_product', { idProduct: product.id }) }}"
+            method="post"
+            id="product-{{ product.id }}"
+          >
+            <input type="hidden" name="id_product" value="{{ product.id }}" />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
-      {% endfor %} {% if form is defined %}
-      {{ form_start(form) }}
-
-      {{ form_row(form.submit) }}
-      {{ form_end(form) }}
-      {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
