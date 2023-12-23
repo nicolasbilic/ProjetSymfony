@@ -48,12 +48,15 @@ class AdminController extends AbstractController
         $totalOrders = $this->orderRepo->findNumberOfOrders();
         $totalCustomers = $this->customerRepo->findNumberOfCustomers();
         $totalBaskets = $this->basketRepo->findNumberOfBaskets();
+        $percBasketValidated = $totalOrders / $totalBaskets * 100;
+        $percBasketValidated = round($percBasketValidated, 2);
 
         return $this->render('admin/dashboard.html.twig', [
             'totalSales' => $totalSales,
             'totalOrders' => $totalOrders,
             'totalCustomers' => $totalCustomers,
             'totalBaskets' => $totalBaskets,
+            'percentValidatedBasket' => $percBasketValidated,
         ]);
     }
 }
