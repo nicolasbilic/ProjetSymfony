@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    nav administration
+{% endblock %}
+{% block main %}
+    {{ title }}
+    {% if forms is not empty %}
+        {% for form in forms %}
+        </br> Id #{{ form.vars.value.id}} Prénom:{{ form.vars.value.customer.firstname }} Nom:{{ form.vars.value.customer.name }} Total: {{ form.vars.value.total }}€ Date:{{ form.vars.value.date.format('d-m-Y') }}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type='submit' name='modifier_statut'>
+            {{ form_end(form) }}
+        {% endfor %}
+    {% else %}
+        Aucune commande existante
+    {% endif %}
+{% endblock %}

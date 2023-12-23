@@ -4,14 +4,17 @@
   <h1 class="darkGreen">VOTRE PANIER</h1>
 </div>
 
-{% for item in productList %}
+{% for product in products %}
 <div class="basketItem">
-  <img src="/images/products/{{ item.picture }}" alt="{{ item.name }}" />
-  <p class="basketItemP">{{ item.name }}</p>
+  <img
+    src="/images/{{ product.product.picture }}"
+    alt="{{ product.product.name }}"
+  />
+  <p class="basketItemP">{{ product.product.name }}</p>
   <div id="count">
     <div class="button buttonLeft"><p class="countP darkGreen">-</p></div>
     <div class="displayer">
-      <p class="countP darkGreen">{{ item.quantity }}</p>
+      <p class="countP darkGreen">{{ product.quantity }}</p>
     </div>
     <div class="button buttonRight"><p class="countP darkGreen">+</p></div>
   </div>

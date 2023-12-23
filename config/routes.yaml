@@ -10,3 +10,6 @@ homepage:
   path: /accueil
   controller: 'App\Controller\HomeController::index'
   methods: GET
+basket_add_product:
+  path: "/basket/add/{idProduct}"
+  controller: 'App\Controller\BasketController::handleEventCartForm'

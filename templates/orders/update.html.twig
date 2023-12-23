@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    nav administration
+{% endblock %}
+{% block main %}
+    {{ title }}
+     {{ order.id }}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type='submit' name='modifier_statut'>
+            {{ form_end(form) }}
+{% endblock %}

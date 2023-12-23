@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -22,7 +22,6 @@ class Order
     private ?float $total = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    #[Assert\Date]
     private ?\DateTimeImmutable $date = null;
 
     #[ORM\Column]
@@ -80,7 +79,7 @@ class Order
         return $this;
     }
 
-    public function getDate(): ?\DateTimeImmutable
+    public function getDate(): ?DateTimeImmutable
     {
         return $this->date;
     }

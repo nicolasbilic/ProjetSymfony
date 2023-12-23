@@ -7,45 +7,82 @@ use App\Entity\Product;
 use App\Entity\Basket;
 use App\Entity\BasketLine;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService
 {
-    private RequestStack $requestStack;
-    private EntityManagerInterface $em;
+    private  $requestStack;
+    private  $em;
+    private  $security;
 
-    public function __construct(RequestStack $requestStack, EntityManagerInterface $em)
+    public function __construct(RequestStack $requestStack, EntityManagerInterface $em,  Security $security)
     {
         $this->requestStack = $requestStack;
         $this->em = $em;
+        $this->security = $security;
     }
-
 
     public function getCartForUser(Customer $user): ?Basket
     {
         // Je récupère le panier de l'utilisateur
         $baskets = $user->getBasket();
-
         // Je retourne le premier panier trouvé
         return $baskets->isEmpty() ? null : $baskets->first();
     }
 
-    public function addProductToCart(Customer $user, Product $product, int $quantity)
+    public function getCartList(): array
     {
-        $basket = $this->getCartForUser($user);
+        $user = $this->security->getUser();
+        $basketLines = [];
+
+        if ($user) {
+            if ($user->getRoles()[0] === 'customer') {
+                $cart = $this->getCartForUser($user);
+
+                if ($cart) {
+                    foreach ($cart->getBasketLine() as $basketLine) {
+                        $products[] = $basketLine->getProduct();
+                    }
+                }
+            }
+        }
+
+        return $basketLines;
+    }
+
+    public function addProductToCart(Customer $user,  Product $product, int $quantity)
+    {
+
+        // Vérifier si le produit existe déjà dans le panier
+        $cart = $this->getCartForUser($user);
+
+        foreach ($cart->getBasketLine() as $basketLine) {
+            if ($basketLine->getProduct()->getId() === $product->getId()) {
+                // Le produit existe déjà dans le panier
+                // Incrémenter la quantité de la BasketLine existante dans la base de données
+                $basketLine->setQuantity($basketLine->getQuantity() + $quantity);
+                $this->em->persist($basketLine);
+                $this->em->flush();
+                return; // Arrêter la fonction ici puisque le produit existe déjà
+            }
+        }
+
+        // Si le produit n'existe pas dans le panier, ajoutez-le comme d'habitude
         $basketLine = new BasketLine();
         $basketLine->setProduct($product);
         $basketLine->setQuantity($quantity);
 
         // Ajouter la ligne de panier au panier
-        $basket->addBasketLine($basketLine);
+        $cart->addBasketLine($basketLine);
 
         // Persistez les entités
-        $this->em->persist($basket);
+        $this->em->persist($cart);
         $this->em->persist($basketLine);
         $this->em->flush();
     }
+
 
     public function createCartForUser(Customer $user): void
     {
