@@ -31,8 +31,8 @@ class OrderFormType extends AbstractType
             ])
             ->add('basket', EntityType::class, [
                 'class' => Basket::class,
-                // 'attr' => ['style' => 'display: none;'],
-                // 'label' => false,
+                'attr' => ['style' => 'display: none;'],
+                'label' => false,
                 'choice_label' => function (Basket $basket): string {
                     return $basket->getId();
                 }
@@ -40,23 +40,24 @@ class OrderFormType extends AbstractType
             ])
             ->add('shippingAddress', EntityType::class, [
                 'class' => Address::class,
-                // 'attr' => ['style' => 'display: none;'],
-                // 'label' => false,
+                'attr' => ['style' => 'display: none;'],
+                'label' => false,
                 'choice_label' => function (Address $address): string {
                     return $address->getId();
                 }
             ])
             ->add('invoiceAddress', EntityType::class, [
                 'class' => Address::class,
-                // 'attr' => ['style' => 'display: none;'],
-                // 'label' => false,
+                'attr' => ['style' => 'display: none;'],
+                'label' => false,
                 'choice_label' => function (Address $address): string {
                     return $address->getId();
                 }
             ])
             ->add('date', DateTimeType::class, [
                 'widget' => 'single_text',
-                'input'  => 'datetime_immutable',
+                'attr' => ['style' => 'display: none;'],
+                'label' => false,
                 'required' => false,
             ])
 
@@ -66,15 +67,15 @@ class OrderFormType extends AbstractType
             ])
             ->add('customer', EntityType::class, [
                 'class' => Customer::class,
-                // 'attr' => ['style' => 'display: none;'],
-                // 'label' => false,
+                'attr' => ['style' => 'display: none;'],
+                'label' => false,
                 'choice_label' => function (Customer $customer): string {
                     return $customer->getName();
                 }
             ])
             ->add('shippingPrice', null, [
-                // 'attr' => ['style' => 'display: none;'],
-                // 'label' => false,
+                'attr' => ['style' => 'display: none;'],
+                'label' => false,
             ]);
     }
 

@@ -16,40 +16,42 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('admin/orders/')]
 class OrderController extends AbstractController
 {
-    // #[Route('list', name: 'app_list_orders')]
-    // public function list(OrderRepository $orderRepo, Request $request, EntityManagerInterface $em): Response
-    // {
-    //     $orders = $orderRepo->findAll();
-    //     $forms = [];
-
-    //     foreach ($orders as $order) {
-    //         $form = $this->createForm(OrderFormType::class, $order);
-    //         $forms[] = $form->createView();
-
-    //         $form->handleRequest($request);
-    //         if ($form->isSubmitted() && $form->isValid()) {
-    //             $order = $form->getData();
-    //             $em->persist($order);
-    //             $em->flush();
-    //         }
-    //     }
-
-    //     return $this->render('orders/list.html.twig', [
-    //         'title' => 'Liste des commandes',
-    //         'forms' => $forms,
-    //     ]);
-    // }
-
     #[Route('list', name: 'app_list_orders')]
     public function list(OrderRepository $orderRepo, Request $request, EntityManagerInterface $em): Response
     {
         $orders = $orderRepo->findAll();
+        $forms = [];
 
-        return $this->render('orders/list.html.twig', [
+        foreach ($orders as $order) {
+            $form = $this->createForm(OrderFormType::class, $order);
+            $forms[] = $form->createView();
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $order = $form->getData();
+                $em->persist($order);
+                $em->flush();
+
+                return $this->redirectToRoute('app_list_orders');
+            }
+        }
+
+        return $this->render('orders/listedit.html.twig', [
             'title' => 'Liste des commandes',
-            'orders' => $orders,
+            'forms' => $forms,
         ]);
     }
+
+    // #[Route('list', name: 'app_list_orders')]
+    // public function list(OrderRepository $orderRepo, Request $request, EntityManagerInterface $em): Response
+    // {
+    //     $orders = $orderRepo->findAll();
+
+    //     return $this->render('orders/listnoedit.html.twig', [
+    //         'title' => 'Liste des commandes',
+    //         'orders' => $orders,
+    //     ]);
+    // }
 
     #[Route('update/{id}', name: 'app_update_order')]
     public function update(
