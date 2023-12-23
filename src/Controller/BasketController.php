@@ -10,9 +10,17 @@ use App\Services\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class BasketController extends AbstractController
 {
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
 
     public function displayBasket(UserManager $userManager, CartService $cartService, Request $request, EntityManagerInterface $em): Response
     {
@@ -75,5 +83,18 @@ class BasketController extends AbstractController
                 }
             }
         }
+    }
+
+    public function getProductId($idProduct, EntityManagerInterface $em, CartService $cartService)
+    {
+        $user = $this->getUser();
+        if ($user) {
+            $product = $em->getRepository(Product::class)->find($idProduct);
+            $cartService->addProductToCart($user, $product, 1);
+        }
+
+        // Redirigez l'utilisateur vers la page précédente (referer)
+        $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+        return new RedirectResponse($referer);
     }
 }

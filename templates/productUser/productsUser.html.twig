@@ -29,14 +29,19 @@
       product in products %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
-          <img src="/images/products/hache.png" alt="{{ product.name }}"
+          <img src="/images/{{ product.picture }}" alt="{{ product.name }}"
         /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
-          {{ startForm | raw }}
-          {{ formRow | raw }}
-          {{ endForm | raw }}
+          <form
+            action="{{ path('basket_add_product', { idProduct: product.id }) }}"
+            method="post"
+            id="product-{{ product.id }}"
+          >
+            <input type="hidden" name="id_product" value="{{ product.id }}" />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
       {% endfor %} {% endif %}
