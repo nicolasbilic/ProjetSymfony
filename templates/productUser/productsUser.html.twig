@@ -3,6 +3,11 @@
   <h1 class="darkGreen">{{ errors }}</h1>
 </div>
 {% endif %} {% if subcategory is not empty %}
+<ul class="track-list">
+  <li><a href="/">Accueil</a></li><span>/</span>
+  <li><a href="/list-products?category={{ categoryOfSubcategory.name }}">{{ categoryOfSubcategory.name }}</a></li><span>/</span>
+  <li><a href="/products?category={{ subcategory.id }}" > {{ subcategory.name }}</a></li>
+</ul>
 <div class="banner">
   <img
     class="bannerPicture"
@@ -10,7 +15,6 @@
     alt=""
   />
 </div>
-
 <section id="details">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ subcategory.name | upper }}</h1>

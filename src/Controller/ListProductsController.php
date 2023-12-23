@@ -45,7 +45,6 @@ class ListProductsController extends AbstractController
             }
         }
 
-
         //Get the main category (heal / weapon / close) from the query
         $categoryName = $request->query->get('category');
 

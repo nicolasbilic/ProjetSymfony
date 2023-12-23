@@ -29,7 +29,7 @@ class ProductsUserController extends AbstractController
         $form = $this->createForm(CartType::class);
         $form->handleRequest($request);
         $user = $this->getUser();
-        dump($user);
+        //dump($user);
 
         if ($form->isSubmitted()) {
             //Get user
@@ -44,7 +44,6 @@ class ProductsUserController extends AbstractController
             }
         }
 
-
         //Get the subcategory id from the query
         $subcategoryId = $request->query->get('category');
         //If no query, set a default subcategory id
@@ -55,7 +54,10 @@ class ProductsUserController extends AbstractController
         $subcategory = $this->getSubcategory($subcategoryId);
         $products = $this->getSubcategoryProducts($subcategoryId);
 
+        $categoryOfSubcategory = $subcategory->getParent(); // code que j'ai rajouté
+
         return $this->render('productUser/productsUser.html.twig', [
+            'categoryOfSubcategory' => $categoryOfSubcategory, // code que j'ai rajouté
             'subcategory' => $subcategory,
             'products' => $products,
             'errors' => $this->errors,

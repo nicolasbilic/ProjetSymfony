@@ -5,6 +5,10 @@
   {% endfor %}
 </div>
 {% endif %} {% if selectedCategory is not empty %}
+<ul class="track-list">
+  <li><a href="/">Accueil</a></li><span>/</span>
+  <li><a href="/list-products?category={{ selectedCategory.name }}">{{ selectedCategory.name }}</a></li>
+</ul>
 <div class="banner">
   <img
     class="bannerPicture"

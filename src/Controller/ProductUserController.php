@@ -56,7 +56,12 @@ class ProductUserController extends AbstractController
             $this->errors = "No product found.";
         }
 
+        $categoryOfProduct = $product->getCategory(); // code que j'ai rajouté
+        $parentCategory = $categoryOfProduct->getParent(); // code que j'ai rajouté
+
         return $this->render('productUser/productUser.html.twig', [
+            'parentCategory' => $parentCategory, // code que j'ai rajouté
+            'categoryOfProduct' => $categoryOfProduct, // code que j'ai rajouté
             'product' => $product,
             'errors' => $this->errors,
             'form' => $form->createView(),

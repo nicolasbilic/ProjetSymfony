@@ -10,6 +10,38 @@
     padding: 20px;
     text-align: center;
 }
+.track-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 600px;
+    /* background-color: rgb(224, 173, 173); */
+}
+.track-list li {
+    font-size: 25px;
+    margin-right: 10px;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+}
+.track-list li a{
+    text-decoration: none;
+    color: white;
+}
+.track-list span {
+    margin-right: 8px;
+    margin-left: 0px;
+    font-size: 30px;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* .track-list li.selected a {
+    color: #679B33;
+} */
+
+.track-list li:last-child {
+    margin-right: 0;
+}
 
 #product {
     width:100%;
