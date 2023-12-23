@@ -3,18 +3,24 @@
 {% block nav %}
     nav administration
 {% endblock %}
-
 {% block main %}
     {{ title }}
-    {% for item in orders %}
-        {{ item.id }} {{ item.state.label }} {{ item.total }}
-        {% for orderLine in item.orderLines %}
-            {{ orderLine.total }} {{ orderLine.product_name }}
-        {% else %}
-            Aucune catégorie existante
+    {# {% if forms is not empty %}
+        {% for form in forms %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type='submit' name='modifier_statut'>
+            {{ form_end(form) }}
         {% endfor %}
-    {% endfor %}
-{% endblock %}
+    {% else %}
+        Aucune commande existante
+    {% endif %} #}
+    {% if orders is not empty %}
+        {% for order in orders %}
+            </br> </br> {{order.id}} {{order.customer.firstname}} {{order.customer.name}} {{order.total}} <a href="{{ path('app_update_order', { 'id': order.id })}}">Mettre à jour</a> 
+        {% endfor %}
+    {% else %}
+        Aucune commande existante
+    {% endif %}
 
-{% block footer %}
 {% endblock %}
