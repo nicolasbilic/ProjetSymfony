@@ -12,4 +12,4 @@ homepage:
   methods: GET
 basket_add_product:
   path: "/basket/add/{idProduct}"
-  controller: 'App\Controller\BasketController::getProductId'
+  controller: 'App\Controller\BasketController::handleEventCartForm'
