@@ -27,9 +27,11 @@ class CartService
     public function getCartForUser(Customer $user): ?Basket
     {
         // Je récupère le panier de l'utilisateur
-        $baskets = $user->getBasket();
-        // Je retourne le premier panier trouvé
-        return $baskets->isEmpty() ? null : $baskets->first();
+        if ($user->getRoles()[0] === 'customer') {
+            $baskets = $user->getBasket();
+            // Je retourne le premier panier trouvé
+            return $baskets->isEmpty() ? null : $baskets->first();
+        }
     }
 
     public function getCartList(): array
@@ -37,11 +39,13 @@ class CartService
         $user = $this->security->getUser();
         $products = [];
         if ($user) {
-            $cart = $this->getCartForUser($user);
+            if ($user->getRoles()[0] === 'customer') {
+                $cart = $this->getCartForUser($user);
 
-            if ($cart) {
-                foreach ($cart->getBasketLine() as $basketLine) {
-                    $products[] = $basketLine->getProduct();
+                if ($cart) {
+                    foreach ($cart->getBasketLine() as $basketLine) {
+                        $products[] = $basketLine->getProduct();
+                    }
                 }
             }
         }
