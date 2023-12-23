@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Order;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Float_;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @extends ServiceEntityRepository<Order>
@@ -42,5 +44,21 @@ class OrderRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findTotalSales()
+    {
+        return $this->createQueryBuilder('o')
+            ->select('SUM(o.total) as totalSales')
+            ->getQuery()
+            ->getResult()[0]['totalSales'];
+    }
+
+    public function findNumberOfOrders(): Int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o) as NbOrders')
+            ->getQuery()
+            ->getResult()[0]['NbOrders'];
     }
 }

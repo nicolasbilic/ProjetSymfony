@@ -61,4 +61,12 @@ class CustomerRepository extends ServiceEntityRepository implements PasswordUpgr
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findNumberOfCustomers(): Int
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c) as NbCustomers')
+            ->getQuery()
+            ->getResult()[0]['NbCustomers'];
+    }
 }
