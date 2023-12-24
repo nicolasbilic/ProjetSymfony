@@ -1,7 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!!{% endblock %}
-
+{% block header %}
+<a href="/admin/dashboard"><img
+  class="headerBanner"
+  src="/images/headerBanner.jpg"
+  alt="Bannière du header"
+/></a>
+<nav>
+  <ul class="headerList">
+    <li><a href="/admin/dashboard">ACCUEIL</a></li>
+    <li><a href="/admin/products/list">PRODUITS</a></li>
+    <li><a href="/admin/categories/list">CATÉGORIES</a></li>
+    <li><a href="/admin/orders/list">COMMANDES</a></li>
+  </ul>
+</nav>
+{% endblock %}
 {% block main %}
 <section id="login">
     <div class="sectionContainer">

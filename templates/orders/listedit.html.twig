@@ -1,19 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block nav %}
-    nav administration
+{% block header %}
+<a href="/admin/dashboard"><img
+  class="headerBanner"
+  src="/images/headerBanner.jpg"
+  alt="Bannière du header"
+/></a>
+<nav>
+  <ul class="headerList">
+    <li><a href="/admin/dashboard">ACCUEIL</a></li>
+    <li><a href="/admin/products/list">PRODUITS</a></li>
+    <li><a href="/admin/categories/list">CATÉGORIES</a></li>
+    <li><a href="/admin/orders/list">COMMANDES</a></li>
+  </ul>
+</nav>
 {% endblock %}
 {% block main %}
-    {{ title }}
+  <table class="table table-striped table-bordered table-hover table-responsive zombie-table">
+    <thead>
+      <th colspan="6" id="order-table-title">Liste des commandes</th>
+      <tr>
+        <th>Id #</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Total</th>
+        <th>Date</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
     {% if forms is not empty %}
-        {% for form in forms %}
-        </br> Id #{{ form.vars.value.id}} Prénom:{{ form.vars.value.customer.firstname }} Nom:{{ form.vars.value.customer.name }} Total: {{ form.vars.value.total }}€ Date:{{ form.vars.value.date.format('d-m-Y') }}
+    <tbody>
+      {% for form in forms %}
+        <tr>
+          <td> {{ form.vars.value.id}} </td>
+          <td> {{ form.vars.value.customer.firstname }} </td>
+          <td> {{ form.vars.value.customer.name }} </td>
+          <td> {{ form.vars.value.total }}€ </td>
+          <td> {{ form.vars.value.date.format('d-m-Y') }} </td>
+          <td>
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <input type='submit' name='modifier_statut'>
+            <input type='submit' name='modifier_statut' class="btn btn-success">
             {{ form_end(form) }}
-        {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
     {% else %}
-        Aucune commande existante
+      Aucune commande existante
     {% endif %}
+    </tbody>
+  </table>
 {% endblock %}

@@ -40,11 +40,23 @@ class ProductFormType extends AbstractType
                         ->orderBy('c1.id', 'ASC');
                 },
                 'choice_label' => 'name',
+                /* 'attr' => [
+                    'class' => 'btn btn-primary',
+                ], */
             ])
             ->add('name')
-            ->add('price')
+            ->add('price', null, [
+                'attr' => [
+                    'style' => 'text-align:center;',
+                    'class' => 'inputright',
+                ]
+            ])
             ->add('description')
-            ->add('discount')
+            ->add('discount', null, [
+                'attr' => [
+                    'style' => 'text-align:center;',
+                ]
+            ])
             ->add('tva', EntityType::class, [
                 'class' => Tva::class,
                 'choice_label' => function (Tva $tva): string {
