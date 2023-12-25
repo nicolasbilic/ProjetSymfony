@@ -19,8 +19,8 @@ class Address
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Veuillez rentrer un numéro de rue.')]
     #[Assert\NotNull(message: 'Veuillez rentrer un numéro de rue.')]
-    #[Assert\Type('integer', message: 'Veuillez rentrer un nombre.')]
-    private ?int $number = null;
+    #[Assert\Type('string', message: 'Veuillez rentrer un nombre.')]
+    private ?string $number = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez rentrer une rue.')]

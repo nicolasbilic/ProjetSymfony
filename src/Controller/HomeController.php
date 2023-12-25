@@ -29,7 +29,16 @@ class HomeController extends AbstractController
         $data = json_decode($jsonData, true);
         //Get new product to show
         $newProductDatas = $this->getNewProducts($entityManager);
-        dump($newProductDatas);
+
+        $user = $this->getUser();
+
+        if ($user) {
+            $role = $user->getRoles()[0];
+            dump($role);
+            if ($user->getRoles()[0] !== 'customer') {
+                return $this->redirectToRoute('app_admin_dashboard');
+            }
+        }
 
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
