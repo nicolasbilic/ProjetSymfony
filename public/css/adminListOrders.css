@@ -1,0 +1,64 @@
+.table {
+    width: 100%;
+}
+
+title {
+    color: white !important;
+}
+
+.div-btn-table-zombie {
+    text-align: center;
+}
+
+.btn-table-zombie {
+    margin: 10px;
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+  width: 10%;
+}
+
+.zombie-table th,
+.zombie-table td {
+    color: white !important;
+    background-color: #679B33 !important;
+    text-align: center;
+    vertical-align: middle;
+}
+.zombie-table th {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Creepster', cursive;
+    font-size: 25px;
+}
+#order-table-title {
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    font-size: 35px;
+    background-color: #186F37 !important;
+}
+.zombie-table tbody tr:hover {
+    background-color: #4b4b4b !important;
+}
+.zombie-table input {
+    color: white !important;
+    text-decoration: none;
+    /* display: block; */
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+    margin: 5px;
+    font-size: 18px;
+}
+.zombie-table select {
+    font-family: 'Creepster', cursive;
+    font-size: 25px;
+    /* box-sizing: border-box; */
+    /* padding: 5px; */
+    width: 40%;
+    height: auto;
+}
+.zombie-table a:hover {
+    color: #a5ef5c !important;
+}

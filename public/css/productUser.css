@@ -33,6 +33,7 @@
     font-size: 30px;
     font-family: 'Creepster', cursive;
     text-shadow: 2px 2px 4px #000;
+    color: white !important;
 }
 
 /* .track-list li.selected a {

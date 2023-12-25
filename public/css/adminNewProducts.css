@@ -1,0 +1,68 @@
+.table {
+    width: 100%;
+}
+
+.form-element {
+    border: none;
+    /* box-sizing: border-box;
+    vertical-align: middle; */
+}
+
+.inputright {
+    text-align: right; /* Align text to the right */
+    padding-right: 25px; 
+}
+
+.zombie-table th {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    font-size: 35px;
+}
+
+#create-product-title {
+    text-align: center;
+    background-color: #186F37 !important;
+}
+
+title {
+    color: white !important;
+}
+
+.div-btn-table-zombie {
+    text-align: center;
+}
+
+.btn-table-zombie {
+    margin: 10px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 10%;
+}
+
+.zombie-table th,
+.zombie-table td {
+    color: white !important;
+    background-color: #679B33 !important;
+    text-align: center;
+    vertical-align: middle;
+}
+.zombie-table td {
+    font-family: 'Creepster', cursive;
+    font-size: 25px;
+}
+.zombie-table tbody tr:hover {
+    background-color: #4b4b4b !important;
+}
+.zombie-table a {
+    color: #11ff00 !important;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+.zombie-table a:hover {
+    color: #6bff60 !important;
+}

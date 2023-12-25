@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     {% if app.request.uri == 'https://127.0.0.1:8000/' or app.request.uri ==
     'https://127.0.0.1:8000/accueil' %}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
@@ -27,6 +28,30 @@
     {% if app.request.uri == 'https://127.0.0.1:8000/register' or
     app.request.uri == 'https://127.0.0.1:8000/admin' %}
     <link rel="stylesheet" href="{{ asset('css/register.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/admin/products/list' %}
+    <link rel="stylesheet" href="{{ asset('css/adminListProducts.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/admin/categories/list' %}
+    <link rel="stylesheet" href="{{ asset('css/adminListCategories.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/admin/products/new' %}
+    <link rel="stylesheet" href="{{ asset('css/adminNewProducts.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/admin/categories/new' %}
+    <link rel="stylesheet" href="{{ asset('css/adminNewCategories.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/admin/dashboard' %}
+    <link rel="stylesheet" href="{{ asset('css/adminDashboard.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/admin/orders/list' %}
+    <link rel="stylesheet" href="{{ asset('css/adminListOrders.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     {% endif %}
 
