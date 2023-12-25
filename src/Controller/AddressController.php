@@ -39,7 +39,7 @@ class AddressController extends AbstractController
                 $em->persist($customer);
             }
             $em->flush();
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_new_order');
         }
         return $this->render('address/new.html.twig', [
             'title' => 'Création d\'une adresse',

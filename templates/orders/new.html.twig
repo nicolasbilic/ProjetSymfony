@@ -17,6 +17,7 @@ si t'as pas d'adresse il te renvoie vers la page de création d'adresse #}
     </br>{{address.number}}{{address.street}} 
     </br>{{address.additional ? address.addiotional : '' }} 
     </br>{{address.city}} {{address.zipCode}}
+<a href="{{ path('app_new_address') }}" class="btn btn-success">Modifier ladresse</a>
     <form method="post" action="{{ path('app_new_order') }}">
         <button type="submit" name="validate">Valider la commande</button>
     </form>

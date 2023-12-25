@@ -104,4 +104,44 @@ class OrderCustomerController extends AbstractController
             'address' => $address,
         ]);
     }
+
+
+    #[Route('list', name: 'app_list_orders')]
+    public function displayList(Request $request): Response
+    {
+
+        $customer = $this->getUser();
+        $orders = [];
+        if ($customer instanceof Customer) {
+            $orders = $customer->getOrderCustomer();
+        }
+
+        return $this->render('orders/CustomerOrderlist.html.twig', [
+            'title' => 'Vos commandes',
+            'orders' => $orders,
+        ]);
+    }
+
+    #[Route('details/{id}', name: 'app_show_order')]
+    public function displayOrder(Request $request, ?Order $order): Response
+    {
+        $customer = $this->getUser();
+        $orderLines = $order->getOrderLine();
+        if ($order === null) {
+            return $this->redirectToRoute('app_list_orders');
+        }
+        if ($customer instanceof Customer) {
+            $orders = $customer->getOrderCustomer();
+            if ($order->getCustomer() != $customer) {
+                return $this->redirectToRoute('app_list_orders');
+            }
+        }
+
+
+        return $this->render('orders/details.html.twig', [
+            'title' => 'Votre commande',
+            'order' => $order,
+            'orderLines' => $orderLines,
+        ]);
+    }
 }
