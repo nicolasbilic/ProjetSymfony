@@ -13,3 +13,6 @@ homepage:
 basket_add_product:
   path: "/basket/add/{idProduct}"
   controller: 'App\Controller\BasketController::handleEventCartForm'
+basket_modify_quantity:
+  path: "/basket/modify/quantity"
+  controller: 'App\Controller\BasketController::handleEventCountForm'

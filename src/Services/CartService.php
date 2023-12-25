@@ -32,25 +32,6 @@ class CartService
         return $baskets->isEmpty() ? null : $baskets->first();
     }
 
-    // public function getCartList(): array
-    // {
-    //     $user = $this->security->getUser();
-    //     $basketLines = [];
-
-    //     if ($user) {
-    //         if ($user->getRoles()[0] === 'customer') {
-    //             $cart = $this->getCartForUser($user);
-
-    //             if ($cart) {
-    //                 foreach ($cart->getBasketLine() as $basketLine) {
-    //                     $products[] = $basketLine->getProduct();
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     return $basketLines;
-    // }
     public function getCartList(): array
     {
         $user = $this->security->getUser();
@@ -67,10 +48,35 @@ class CartService
 
         return $basketLines;
     }
+    public function modifyQuantity(string $actionValue, Customer $user,  Product $product)
+    {
+            $cart = $this->getCartForUser($user);
+          
+        foreach ($cart->getBasketLine() as $basketLine) {
+            if ($basketLine->getProduct()->getId() === $product->getId()) {
+                // Le produit existe déjà dans le panier
+                // Incrémenter ou décrémenter la quantité de la BasketLine existante dans la base de données
+                $currentQuantity = $basketLine->getQuantity();
+                // Si $actionValue est '+', incrémenter la quantité
+                // Sinon, décrémenter la quantité
+                if($currentQuantity === 1 && $actionValue === '-'){
+                    $this->em->remove($basketLine);
+
+
+                } else {
+                    $newQuantity = $actionValue === '+' ? $currentQuantity + 1 : max(0, $currentQuantity - 1);
+                    $basketLine->setQuantity($newQuantity);
+                    $this->em->persist($basketLine);
+                }
+                $this->em->flush();
+
+                return; // Arrêter la fonction ici puisque le produit existe déjà
+            }
+        } 
+    }
 
     public function addProductToCart(Customer $user,  Product $product, int $quantity)
     {
-
         // Vérifier si le produit existe déjà dans le panier
         $cart = $this->getCartForUser($user);
 

@@ -11,16 +11,20 @@
     alt="{{ product.product.name }}"
   />
   <p class="basketItemP">{{ product.product.name }}</p>
-  <div id="count">
-    <div class="button buttonLeft"><p class="countP darkGreen">-</p></div>
-    <div class="displayer">
-      <p class="countP darkGreen">{{ product.quantity }}</p>
-    </div>
-    <div class="button buttonRight"><p class="countP darkGreen">+</p></div>
-  </div>
+    <form
+      action="{{ path('basket_modify_quantity')}}"
+      method="post"
+      id="count"
+    >
+      <input type="hidden" name="id_product" value="{{ product.product.id }}" />
+      <button type="submit" name="actionCount" value="-" class="buttonLeft button">-</button>
+      <div class="displayer">
+        <p class="countP darkGreen">{{ product.quantity }}</p>
+      </div>
+      <button type="submit" name="actionCount" value="+" class="buttonRight button">+</button>
+    </form>
 </div>
 {% endfor %}
-
 <div id="price">TOTAL : {{ totalePrice }}€</div>
 <button class="basketSubmit">PAYER</button>
 <script type="module" src="{{ asset('/js/handleClicIconBasket.js') }}"></script>

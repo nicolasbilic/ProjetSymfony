@@ -25,7 +25,6 @@ class BasketController extends AbstractController
     public function displayBasket(UserManager $userManager, CartService $cartService): Response
     {
 
-
         $this->loadUserBasket($cartService);
         $products = $cartService->getCartList();
         dump($products);
@@ -42,7 +41,6 @@ class BasketController extends AbstractController
     public function loadUserBasket(CartService $cartService): void
     {
         $user = $this->getUser(); // Je Récupère l'utilisateur connecté
-
         if ($user) { // Si l'utilisateur existe
             // J'utilise mon cartService pour vérifier s'il a un panier, si c'est le cas, je le récupère
             if ($user->getRoles()[0] === 'customer') {
@@ -66,5 +64,20 @@ class BasketController extends AbstractController
         //Redirect user on the current page
         $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
         return new RedirectResponse($referer);
+    }
+
+    public function handleEventCountForm(Request $request, EntityManagerInterface $em, CartService $cartService)
+    {
+
+        $user = $this->getUser();
+        if ($user) {
+            $actionValue = $request->request->get('actionCount');
+            $productId = $request->request->get('id_product'); 
+            $product = $em->getRepository(Product::class)->find($productId);
+            $cartService->modifyQuantity($actionValue, $user, $product);
+        }
+    //Redirect user on the current page
+    $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+    return new RedirectResponse($referer);
     }
 }
