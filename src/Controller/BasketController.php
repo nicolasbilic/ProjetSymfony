@@ -77,25 +77,11 @@ class BasketController extends AbstractController
             $product = $em->getRepository(Product::class)->find($productId);
             $cartService->modifyQuantity($actionValue, $user, $product);
         }
-    //Redirect user on the current page
-    $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
-    return new RedirectResponse($referer);
+        //Redirect user on the current page
+        $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+        return new RedirectResponse($referer);
     }
 
-    public function handleEventCountForm(Request $request, EntityManagerInterface $em, CartService $cartService)
-    {
-
-        $user = $this->getUser();
-        if ($user) {
-            $actionValue = $request->request->get('actionCount');
-            $productId = $request->request->get('id_product'); 
-            $product = $em->getRepository(Product::class)->find($productId);
-            $cartService->modifyQuantity($actionValue, $user, $product);
-        }
-    //Redirect user on the current page
-    $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
-    return new RedirectResponse($referer);
-    }
 
     public function calculateBasketTotal($basket): float
     {
