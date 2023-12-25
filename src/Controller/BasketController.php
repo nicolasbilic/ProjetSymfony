@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\BasketRepository;
 use App\Repository\ProductRepository;
 use App\Services\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,5 +80,36 @@ class BasketController extends AbstractController
     //Redirect user on the current page
     $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
     return new RedirectResponse($referer);
+    }
+
+    public function handleEventCountForm(Request $request, EntityManagerInterface $em, CartService $cartService)
+    {
+
+        $user = $this->getUser();
+        if ($user) {
+            $actionValue = $request->request->get('actionCount');
+            $productId = $request->request->get('id_product'); 
+            $product = $em->getRepository(Product::class)->find($productId);
+            $cartService->modifyQuantity($actionValue, $user, $product);
+        }
+    //Redirect user on the current page
+    $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+    return new RedirectResponse($referer);
+    }
+
+    public function calculateBasketTotal($basket): float
+    {
+        $basketLines = $basket->getBasketLine();
+        if (!empty($basketLines)) {
+            $total = 0.0;
+            foreach ($basketLines as $basketLine) {
+                $productPrice = $basketLine->getProduct()->getPrice();
+                $quantity = $basketLine->getQuantity();
+                $total += $productPrice * $quantity;
+            }
+            return $total;
+        } else {
+            return 0;
+        }
     }
 }

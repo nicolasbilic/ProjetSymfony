@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    nav administration
+{% endblock %}
+{% block main %}
+    {{ title }}
+    {% if orders is not empty %}
+        {% for order in orders %}
+            </br> {{order.id}} {{order.total}}€ {{ order.date.format('d-m-Y') }}  <a href="{{ path('app_show_order', { 'id': order.id })}}">Détails</a> 
+        {% endfor %}
+    {% else %}
+        Aucune commande existante
+    {% endif %}
+
+{% endblock %}
