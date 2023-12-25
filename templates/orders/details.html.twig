@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    nav administration
+{% endblock %}
+
+{% block main %}
+    {{ title }}
+    {{order.id}} {{order.total}}€ {{ order.date.format('d-m-Y') }} 
+    
+    {% if orderLines is not empty %}
+        {% for orderLine in orderLines %}
+            </br> {{ orderLine.id }} {{ orderLine.productName }} {{ orderLine.price }} {{ orderLine.quantity }}
+        {% endfor %}
+    {% else %}
+        Aucune commande existante
+    {% endif %}
+{% endblock %}
