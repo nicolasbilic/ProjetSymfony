@@ -48,6 +48,7 @@ class CartService
 
         return $basketLines;
     }
+
     public function modifyQuantity(string $actionValue, Customer $user,  Product $product)
     {
             $cart = $this->getCartForUser($user);
@@ -123,6 +124,21 @@ class CartService
             $user->addBasket($basket);
             $this->em->persist($basket);
             $this->em->flush();
+        }
+    }
+
+    public function calculateBasketTotal($products): float
+    {
+        if (!empty($products)) {
+            $total = 0.0;
+            foreach ($products as $basketLine) {
+                $productPrice = $basketLine->getProduct()->getPrice();
+                $quantity = $basketLine->getQuantity();
+                $total += $productPrice * $quantity;
+            }
+            return $total;
+        } else {
+            return 0;
         }
     }
 

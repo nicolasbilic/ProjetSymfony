@@ -28,11 +28,12 @@ class BasketController extends AbstractController
 
         $this->loadUserBasket($cartService);
         $products = $cartService->getCartList();
-        dump($products);
+        $totalPrice = $cartService->calculateBasketTotal($products);
+        dump($totalPrice);
         return $this->render(
             'basketUser/basket.html.twig',
             [
-                "totalePrice" => 388,
+                "totalePrice" => $totalPrice,
                 "products" => $products,
                 'isLoggedIn' => $userManager->isLoggedIn,
             ]
@@ -83,19 +84,5 @@ class BasketController extends AbstractController
     }
 
 
-    public function calculateBasketTotal($basket): float
-    {
-        $basketLines = $basket->getBasketLine();
-        if (!empty($basketLines)) {
-            $total = 0.0;
-            foreach ($basketLines as $basketLine) {
-                $productPrice = $basketLine->getProduct()->getPrice();
-                $quantity = $basketLine->getQuantity();
-                $total += $productPrice * $quantity;
-            }
-            return $total;
-        } else {
-            return 0;
-        }
-    }
+   
 }
