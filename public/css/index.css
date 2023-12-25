@@ -80,6 +80,15 @@ main {
     transform: translateY(-65px);
 }
 
+.cardName {
+    width:100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    white-space: nowrap;      
+    overflow: hidden;          
+    text-overflow: ellipsis; 
+}
+
 .buyButton {
     width:75%;
     height: 40px;

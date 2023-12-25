@@ -129,12 +129,20 @@
 }
 .cardText {
     z-index: 2;
-
     padding-top: 10px;
     height:200px;
     background-color: black;
     border-top: 1px solid #9E9E9E;
     transition: transform 1s;
+}
+
+.cardName {
+    width:100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    white-space: nowrap;      
+    overflow: hidden;          
+    text-overflow: ellipsis; 
 }
 
 .cardTextCat {

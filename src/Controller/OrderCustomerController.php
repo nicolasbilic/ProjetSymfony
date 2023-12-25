@@ -43,7 +43,8 @@ class OrderCustomerController extends AbstractController
         }
         dump($basket);
         dump($basketlines);
-        $totalBasket = $this->basketController->calculateBasketTotal($basket);
+        $products = $cartService->getCartList();
+        $totalBasket = $cartService->calculateBasketTotal($products);
         $waitingPaymentState = $em->getRepository(OrderState::class)->find(1);
 
         if ($address === null) {
