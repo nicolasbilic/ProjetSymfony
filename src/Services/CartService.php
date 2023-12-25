@@ -32,6 +32,25 @@ class CartService
         return $baskets->isEmpty() ? null : $baskets->first();
     }
 
+    // public function getCartList(): array
+    // {
+    //     $user = $this->security->getUser();
+    //     $basketLines = [];
+
+    //     if ($user) {
+    //         if ($user->getRoles()[0] === 'customer') {
+    //             $cart = $this->getCartForUser($user);
+
+    //             if ($cart) {
+    //                 foreach ($cart->getBasketLine() as $basketLine) {
+    //                     $products[] = $basketLine->getProduct();
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     return $basketLines;
+    // }
     public function getCartList(): array
     {
         $user = $this->security->getUser();
@@ -40,11 +59,8 @@ class CartService
         if ($user) {
             if ($user->getRoles()[0] === 'customer') {
                 $cart = $this->getCartForUser($user);
-
                 if ($cart) {
-                    foreach ($cart->getBasketLine() as $basketLine) {
-                        $products[] = $basketLine->getProduct();
-                    }
+                    $basketLines = $cart->getBasketLine()->toArray();
                 }
             }
         }
