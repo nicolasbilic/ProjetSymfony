@@ -16,7 +16,7 @@
     'https://127.0.0.1:8000/products' in app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/listProducts.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %} {% if 'https://127.0.0.1:8000/product' in app.request.uri %}
+    {% endif %} {% if 'https://127.0.0.1:8000/product?' in app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/productUser.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/contact' %}
