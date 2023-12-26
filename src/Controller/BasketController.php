@@ -83,6 +83,16 @@ class BasketController extends AbstractController
         return new RedirectResponse($referer);
     }
 
-
+    public function handleEventClearForm(Request $request, EntityManagerInterface $em, CartService $cartService) 
+    {
+        $user = $this->getUser();
+        if ($user) {
+            $cartService->createNewCart($user);
+            $this->loadUserBasket($cartService);
+        }
+                //Redirect user on the current page
+                $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+                return new RedirectResponse($referer);
+    }
    
 }

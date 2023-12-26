@@ -4,10 +4,9 @@ export default function handleClicIconBasket() {
   const basketHeader = document.querySelector(".basketHeader");
   const basketH1 = document.querySelector(".basketHeader h1");
   const basketItem = document.querySelectorAll(".basketItem");
-  const counter = document.querySelector("#count");
   const price = document.querySelector("#price");
   const basketSubmit = document.querySelector(".basketSubmit");
-
+  const clearCart = document.querySelector(".clearCart");
   let basketOpen = false;
 
   basketHeader.addEventListener("click", () => {
@@ -24,13 +23,15 @@ export default function handleClicIconBasket() {
       basketH1.style.visibility = "visible";
       basketHeader.style.borderBottom = "1px solid #186F37";
       //Display all items
-      basketItem.forEach((item) => {
-        item.style.visibility = "visible";
-      });
+      if(basketItem){
+        basketItem.forEach((item) => {
+          item.style.visibility = "visible";
+        });
+      }
       //Display counter / price / buttonn
-      counter.style.visibility = "visible";
       price.style.visibility = "visible";
       basketSubmit.style.visibility = "visible";
+      clearCart.style.visibility = "visible";
     } else {
       basketOpen = false;
       setTimeout(() => {
@@ -44,16 +45,19 @@ export default function handleClicIconBasket() {
       basketH1.style.transition = "visibility 1s";
       basketH1.style.visibility = "hidden";
       basketHeader.style.borderBottom = "none";
-      basketItem.forEach((item) => {
-        item.style.transition = "visibility 1s";
-        item.style.visibility = "hidden";
-      });
-      counter.style.transition = "visibility 1s";
-      counter.style.visibility = "hidden";
+      if(basketItem){
+        basketItem.forEach((item) => {
+          item.style.transition = "visibility 1s";
+          item.style.visibility = "hidden";
+        });
+      }
       price.style.transition = "visibility 1s";
       price.style.visibility = "hidden";
       basketSubmit.style.transition = "visibility 1s";
       basketSubmit.style.visibility = "hidden";
+      clearCart.style.transition = "visibility 1s";
+      clearCart.style.visibility = "hidden";
+
     }
   });
 }

@@ -16,3 +16,6 @@ basket_add_product:
 basket_modify_quantity:
   path: "/basket/modify/quantity"
   controller: 'App\Controller\BasketController::handleEventCountForm'
+basket_clear_cart:
+  path: "/basket/clear/cart"
+  controller: 'App\Controller\BasketController::handleEventClearForm'

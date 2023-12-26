@@ -125,6 +125,16 @@ class CartService
         }
     }
 
+    public function createNewCart($user)
+    {
+        $basket = new Basket();
+        $basket->setCustomer($user);
+        //Ajoute le panier à l'utilisateur et le rentre dans la base de données
+        $user->addBasket($basket);
+        $this->em->persist($basket);
+        $this->em->flush();
+    }
+
     public function calculateBasketTotal($products): float
     {
         if (!empty($products)) {
