@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+{{title}}
+  {% if isLogged%}
+  <a href="/reviews/new">Ajouter un avis</a>
+  {% endif %}
+  {% if reviews is not empty %}
+    {% for review in reviews %}
+      </br>{{review.value}}
+      </br>{{review.title}}
+      </br>{{review.resume}}
+    {% endfor %}
+  {% else %}
+  Aucune catégorie existante
+  {% endif %}
+
+{% endblock %}
