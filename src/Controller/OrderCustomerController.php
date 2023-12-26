@@ -33,6 +33,7 @@ class OrderCustomerController extends AbstractController
     #[Route('new', name: 'app_new_order')]
     public function create(OrderRepository $orderRepo, Request $request, EntityManagerInterface $em, CartService $cartService): Response
     {
+        $orderId = 0;
         $customer = $this->getUser();
         $order = new Order();
         $basket = $cartService->getCartForUser($customer);
@@ -70,6 +71,8 @@ class OrderCustomerController extends AbstractController
                 dump('create');
                 $em->persist($order);
                 $em->flush();
+                $orderId = $order->getId();
+
 
                 foreach ($basketlines as $basketline) {
                     $product = $basketline->getProduct();
@@ -92,7 +95,7 @@ class OrderCustomerController extends AbstractController
                 $basket->setCustomer($customer);
                 $em->persist($basket);
                 $em->flush();
-                return $this->redirectToRoute('app_index'); // renvoyer sur page récapitulatif de la commande !!
+                return $this->redirectToRoute('app_show_order', ['id' => $orderId]);
             }
         }
 

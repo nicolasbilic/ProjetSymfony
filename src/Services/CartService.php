@@ -29,7 +29,7 @@ class CartService
         // Je récupère le panier de l'utilisateur
         $baskets = $user->getBasket();
         // Je retourne le premier panier trouvé
-        return $baskets->isEmpty() ? null : $baskets->first();
+        return $baskets->isEmpty() ? null : $baskets->last();
     }
 
     public function getCartList(): array
@@ -51,8 +51,8 @@ class CartService
 
     public function modifyQuantity(string $actionValue, Customer $user,  Product $product)
     {
-            $cart = $this->getCartForUser($user);
-          
+        $cart = $this->getCartForUser($user);
+
         foreach ($cart->getBasketLine() as $basketLine) {
             if ($basketLine->getProduct()->getId() === $product->getId()) {
                 // Le produit existe déjà dans le panier
@@ -60,10 +60,8 @@ class CartService
                 $currentQuantity = $basketLine->getQuantity();
                 // Si $actionValue est '+', incrémenter la quantité
                 // Sinon, décrémenter la quantité
-                if($currentQuantity === 1 && $actionValue === '-'){
+                if ($currentQuantity === 1 && $actionValue === '-') {
                     $this->em->remove($basketLine);
-
-
                 } else {
                     $newQuantity = $actionValue === '+' ? $currentQuantity + 1 : max(0, $currentQuantity - 1);
                     $basketLine->setQuantity($newQuantity);
@@ -73,7 +71,7 @@ class CartService
 
                 return; // Arrêter la fonction ici puisque le produit existe déjà
             }
-        } 
+        }
     }
 
     public function addProductToCart(Customer $user,  Product $product, int $quantity)
