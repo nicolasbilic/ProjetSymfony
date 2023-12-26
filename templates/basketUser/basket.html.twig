@@ -26,7 +26,13 @@
 </div>
 {% endfor %}
 <div id="price">TOTAL : {{ totalePrice }}€</div>
-<div class="clearCart darkGreen"><p>vider mon panier</p></div>
+<form
+      action="{{ path('basket_clear_cart')}}"
+      method="post"
+      id="clearCart"
+    >
+<button type="submit" class="clearCart darkGreen">vider mon panier</button>
+</form>
 <button class="basketSubmit" onclick="window.location.href='{{ path('app_new_order') }}'">PAYER</button>
 <script type="module" src="{{ asset('/js/handleClicIconBasket.js') }}"></script>
 {% else %}
