@@ -34,7 +34,6 @@ class HomeController extends AbstractController
         $user = $this->getUser();
 
         if ($user) {
-            $role = $user->getRoles()[0];
             if ($user instanceof Admin) {
                 return $this->redirectToRoute('app_admin_dashboard');
             }
