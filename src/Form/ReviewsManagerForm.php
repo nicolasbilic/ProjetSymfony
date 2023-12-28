@@ -51,6 +51,7 @@ class ReviewsManagerFormType extends AbstractType
                 ],
                 'label' => 'Statut',
                 'required' => true,
+                'label_attr' => ['class' => 'status-label'],
             ]);
     }
 

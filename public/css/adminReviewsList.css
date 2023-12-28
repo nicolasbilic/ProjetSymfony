@@ -1,0 +1,35 @@
+#order-table-title {
+    color: green;
+}
+
+.status-label {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.zombie-table th,
+.zombie-table td {
+    color: white !important;
+    background-color: #679B33 !important;
+    text-align: center;
+    vertical-align: middle;
+}
+.zombie-table td {
+    font-family: 'Boogaloo', sans-serif;
+    font-size: 23px;
+}
+.zombie-table th {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Creepster', cursive;
+    font-size: 25px;
+}
+#review-table-title {
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    font-size: 35px;
+    background-color: #186F37 !important;
+}
+.zombie-table tbody tr:hover {
+    background-color: #4b4b4b !important;
+}
