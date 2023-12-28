@@ -60,6 +60,8 @@ class BasketController extends AbstractController
         if ($user) {
             $product = $em->getRepository(Product::class)->find($idProduct);
             $cartService->addProductToCart($user, $product, 1);
+        } else {
+            return $this->redirectToRoute('login');
         }
         //Redirect user on the current page
         $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
@@ -68,7 +70,6 @@ class BasketController extends AbstractController
 
     public function handleEventCountForm(Request $request, EntityManagerInterface $em, CartService $cartService)
     {
-
         $user = $this->getUser();
         if ($user) {
             $actionValue = $request->request->get('actionCount');

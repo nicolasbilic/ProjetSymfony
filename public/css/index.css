@@ -46,7 +46,7 @@ main {
 
 .bestSaleGallery {
     width: 200%;
-    margin-top: 80px;
+    margin-top: 40px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -69,10 +69,11 @@ main {
 }
 
 .arrowCarouselContainer img {
-    width:5%;
+    width:4%;
     position: absolute;
-    top:240px;
+    top:200px;
     cursor: pointer;
+    z-index: 4;
 }
 
 .nextArrow {

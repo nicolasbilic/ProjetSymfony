@@ -41,7 +41,20 @@
         <div class="cardText">
           <p class="cardName lightGreen">{{ bestSaleItem.product.name }}</p>
           <p class="lightGreen">{{ bestSaleItem.product.price }} €</p>
-          <button class="buyButton">Acheter</button>
+          <form
+            action="{{
+              path('basket_add_product', { idProduct: bestSaleItem.product.id })
+            }}"
+            method="post"
+            id="product-{{ bestSaleItem.product.id }}"
+          >
+            <input
+              type="hidden"
+              name="id_product"
+              value="{{ bestSaleItem.product.id }}"
+            />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
       {% endfor %}
