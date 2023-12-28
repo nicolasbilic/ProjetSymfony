@@ -6,19 +6,76 @@ si t'as pas d'adresse il te renvoie vers la page de création d'adresse #}
 {% endblock %}
 
 {% block main %}
-    <h2>{{ title }}</h2>
-    {{customer.firstName}} {{customer.name}}
-    {% for basketLine in basketLines %}
-    </br>{{basketLine.product.name}} {{basketLine.product.price}} {{basketLine.quantity}}
-    {% endfor %}
-    </br>Total: {{ basketTotal}}€ 
-    </br>Paiement: Chèque
-    </br>Adresse de livraison & de facturation :
-    </br>{{address.number}}{{address.street}} 
-    </br>{{address.additional ? address.additional : '' }} 
-    </br>{{address.city}} {{address.zipCode}}
-<a href="{{ path('app_new_address') }}" class="btn btn-success">Modifier ladresse</a>
-    <form method="post" action="{{ path('app_new_order') }}">
-        <button type="submit" name="validate">Valider la commande</button>
-    </form>
+    <div class="customer-order-block">
+        <h2 class="title">{{ title }}</h2>
+        <section class="order-section">
+            <div class="section-title">
+                <h4><span>1</span>Adresse de livraison</h4>
+            </div>
+            <div class="order-content">
+                <ul class="address-list">
+                    <li>{{customer.firstName}} {{customer.name}}</li>
+                    <li>{{address.number}} &#32; {{address.street}} </li>
+                    <li>{{address.additional ? address.additional : '' }} </li>
+                    <li>{{address.city}}, {{address.zipCode}}</li>
+                    <li>
+                        <a href="{{ path('app_new_address') }}" class="btn btn-success btn-address">Modifier mon adresse</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="order-section">
+            <div class="section-title">
+                <h4><span>2</span>Mode de paiement</h4>
+            </div>
+            <div class="order-content">
+                <ul class="pay-list">
+                    <li>Payer par : <span>Chèque</span></li>
+                    <li><a href="#">Adresse de facturation :</a><span>identique à l'adresse de livraison</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="order-section-product">
+            <div class="section-title">
+                <h4><span>3</span>Vérification de la commande</h4>
+            </div>
+            {% for basketLine in basketLines %}
+                {% if basketLine.product.picture is not null %}
+                    <div class="order-content-product">
+                        <div class="img-order-new">
+                            <img src="{{ asset('images/' ~ basketLine.product.picture) }}" alt="{{ basketLine.product.name }}"/>
+                        </div>
+                {% else %}
+                    <span>Aucune image disponible</span>
+                {% endif %}
+                    <ul class="product-info-list">
+                        <li>{{basketLine.product.name}}</li>
+                        <li>{{basketLine.product.price}}€</li>
+                        <li>Qté : {{basketLine.quantity}}</li>
+                    </ul>
+                </div>
+                {# line #}
+                <div class="line-container"></div>
+            {% endfor %}
+        </section>
+        
+        <section class="order-section-validation">
+            <div class="section-title">
+                <h4><span>4</span>Validation de la commande</h4>
+            </div>
+            <div class="order-content">
+                <ul class="pay-list">
+                    <li>Total : <span>{{ basketTotal}} €</span></li>
+                    <li>
+                        <form method="post" action="{{ path('app_new_order') }}">
+                            <button type="submit" name="validate" class="btn btn-success btn-address">Valider la commande
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
 {% endblock %}  

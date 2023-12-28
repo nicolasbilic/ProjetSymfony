@@ -31,6 +31,10 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
         $customer = $this->getUser();
 
+        if (!($customer instanceof Customer)) {
+            return $this->redirectToRoute('app_index');
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($address);
             if ($customer instanceof Customer) {
@@ -41,7 +45,7 @@ class AddressController extends AbstractController
             return $this->redirectToRoute('app_new_order');
         }
         return $this->render('address/new.html.twig', [
-            'title' => 'Création d\'une adresse',
+            'title' => 'Créer / Modifier votre adresse',
             'form' => $form,
         ]);
     }
