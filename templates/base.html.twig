@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Eater&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet">
     {% if app.request.uri == 'https://127.0.0.1:8000/' or app.request.uri ==
     'https://127.0.0.1:8000/accueil' %}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
@@ -52,6 +54,17 @@
     {% endif %}
     {% if app.request.uri == 'https://127.0.0.1:8000/admin/orders/list' %}
     <link rel="stylesheet" href="{{ asset('css/adminListOrders.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/customer/orders/new' %}
+    <link rel="stylesheet" href="{{ asset('css/customerOrderNew.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/customer/address/new' %}
+    <link rel="stylesheet" href="{{ asset('css/addressNew.css') }}" />
+    {% endif %}
+    {% if 'https://127.0.0.1:8000/customer/orders/details' in app.request.uri %}
+    <link rel="stylesheet" href="{{ asset('css/customerOrderDetails.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     {% endif %}
 

@@ -5,9 +5,45 @@
 {% endblock %}
 
 {% block main %}
-    <h2>{{ title }}</h2>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type='submit' name='créer'>
-    {{ form_end(form) }}
+    <div class="address-block">
+        <section class="order-section">
+            <div class="section-title">
+                <h2>{{ title }}</h2>
+            </div>
+            <div class="adress-content">
+                {{ form_start(form) }}
+                    {{ form_row(form.number) }} {# Replace field1 with your form field names #}
+                    {{ form_row(form.street) }}
+                    {{ form_row(form.additional) }}
+                    {{ form_row(form.city) }}
+                    {{ form_row(form.zip_code) }}
+                    <div class="parent-btn-address">
+                        <input type='submit' name='créer' class="btn btn-success btn-address">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </section>
+    </div>
 {% endblock %}
+
+
+
+
+
+
+
+{# {% block main %}
+    <div class="address-block">
+        <section class="order-section">
+            <div class="section-title">
+                <h2>{{ title }}</h2>
+            </div>
+            <div class="adress-content">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <input type='submit' name='créer' class="btn btn-success btn-address">
+                {{ form_end(form) }}
+            </div>
+        </section>
+    </div>
+{% endblock %} #}

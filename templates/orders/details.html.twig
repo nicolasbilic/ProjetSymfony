@@ -5,14 +5,73 @@
 {% endblock %}
 
 {% block main %}
-    {{ title }}
-    {{order.id}} {{order.total}}€ {{ order.date.format('d-m-Y') }} 
-    
-    {% if orderLines is not empty %}
-        {% for orderLine in orderLines %}
-            </br> {{ orderLine.id }} {{ orderLine.productName }} {{ orderLine.price }} {{ orderLine.quantity }}
-        {% endfor %}
-    {% else %}
-        Aucune commande existante
-    {% endif %}
+    <section class="order-confirmation-block">
+        <div class="order-content-review">
+            <div class="section-title">
+                <h2 id="zombie-table-title">{{ title }}</h2>
+                {# <h4>Vérification de la commande</h4> #}
+            </div>
+            <div class="order-content-info">
+                <table class="table table-striped table-bordered table-hover table-responsive zombie-table">
+                    <thead>
+                        <tr>
+                            <th>Identifiant commande</th>
+                            <th>Total</th>
+                            <th>Date de commande</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.total }}€</td>
+                            <td>{{ order.date.format('d-m-Y') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <section class="order-section-product">
+            {% if orderLines is not empty %}
+                {% for orderLine in orderLines %}
+                    <div class="order-content-product">
+                        <ul class="product-info-list">
+                            <li>Identifiant produit : <span>{{ orderLine.id }}</span></li>
+                            <li>Nom produit : <span>{{ orderLine.productName }}</span></li>
+                            <li>Prix produit : <span>{{ orderLine.price }}</span></li>
+                            <li>Qté : <span>{{ orderLine.quantity }}</span></li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% else %}
+                Aucune commande existante
+            {% endif %}
+            
+            {# <img src="/public/images/a-very-happy-zombie.png" alt="a very happy zombie"> #}
+            <img src="{{ asset('images/a-very-happy-zombie.png') }}" alt=""/>
+            
+        </section>
+    </section>
 {% endblock %}
+
+{# <section class="order-section-product">
+    <div class="section-title">
+        <h4><span>3</span>Vérification de la commande</h4>
+    </div>
+    {% for basketLine in basketLines %}
+        {% if basketLine.product.picture is not null %}
+            <div class="order-content-product">
+                <div class="img-order-new">
+                    <img src="{{ asset('images/' ~ basketLine.product.picture) }}" alt="{{ basketLine.product.name }}"/>
+                </div>
+        {% else %}
+                <span>Aucune image disponible</span>
+        {% endif %}
+                <ul class="product-info-list">
+                    <li>{{basketLine.product.name}}</li>
+                    <li>{{basketLine.product.price}}€</li>
+                    <li>Qté : {{basketLine.quantity}}</li>
+                </ul>
+            </div>
+        <div class="line-container"></div>
+    {% endfor %}
+</section> #}

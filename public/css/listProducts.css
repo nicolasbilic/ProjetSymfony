@@ -26,6 +26,10 @@
     text-decoration: none;
     color: white !important;
 }
+.track-list li a:hover{
+    text-decoration: none;
+    color: green !important;
+}
 .track-list span {
     margin-right: 8px;
     margin-left: 0px;
