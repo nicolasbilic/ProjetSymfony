@@ -19,10 +19,19 @@
 {% if bestSales is not empty %}
 <section id="bestSale">
   <div class="sectionContainer">
+    <div class="arrowCarouselContainer">
+      <img
+        src="/images/bestSale/arrow.png"
+        style="transform: scaleX(-1)"
+        alt="Précédent"
+        class="previousArrow"
+      />
+      <img src="/images/bestSale/arrow.png" alt="suivant" class="nextArrow" />
+    </div>
     <h1 class="darkGreen">{{ "nos meilleurs ventes" | upper }}</h1>
     <div class="bestSaleGallery">
       {% for bestSaleItem in bestSales %}
-      <div class="cardContainer">
+      <div class="cardContainerBestSale">
         <a href="/product?idProduct={{ bestSaleItem.product.id }}">
           <img
             src="/images/{{ bestSaleItem.product.picture }}"
@@ -44,7 +53,7 @@
 <section id="newItems">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "nos nouveaux produits" | upper }}</h1>
-    <div class="bestSaleGallery">
+    <div class="gallery">
       {% for newProductData in newProductsDatas %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ newProductData.id }}">
@@ -77,4 +86,5 @@
   </div>
 </section>
 <script type="module" src="{{ asset('/js/indexSlideshow.js') }}"></script>
+<script type="module" src="{{ asset('/js/carouselBestSale.js') }}"></script>
 {% endblock %}

@@ -63,11 +63,9 @@ class HomeController extends AbstractController
     {
         // Path of the slideshow directory
         $directoryPath = $this->kernel->getProjectDir() . '/public/images/bannerSlideshow';
-
         // Get the files in the directory
         $files = scandir($directoryPath);
         $jpgFiles = [];
-
         foreach ($files as $file) {
             // Exclude "." and ".."
             if ($file !== "." && $file !== "..") {
@@ -78,9 +76,7 @@ class HomeController extends AbstractController
                 }
             }
         }
-
         $this->slides = $jpgFiles;
-
         return $jpgFiles;
     }
 }

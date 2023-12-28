@@ -40,9 +40,46 @@ main {
     box-sizing: border-box;
     border-radius: 10px;
     border: 1px solid #9E9E9E;
+    overflow: hidden;
+
 }
 
 .bestSaleGallery {
+    width: 200%;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.cardContainerBestSale {
+    width:10%;
+    max-height: 310px;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #9E9E9E;
+    margin-left: 80px;
+    margin-bottom: 40px;
+}
+
+.arrowCarouselContainer {
+    width:100%;
+    position: relative;
+}
+
+.arrowCarouselContainer img {
+    width:5%;
+    position: absolute;
+    top:240px;
+    cursor: pointer;
+}
+
+.nextArrow {
+    right:-80px; 
+}
+
+.gallery {
     width: 100%;
     margin-top: 40px;
     display: flex;
@@ -59,9 +96,9 @@ main {
     border: 1px solid #9E9E9E;
     margin-left: 80px;
     margin-bottom: 40px;
-
 }
-.cardContainer img{
+
+.cardContainer img, .cardContainerBestSale img {
     width:100%;
     object-fit: contain;
     background-image: url('/images/card_background.jpg');
