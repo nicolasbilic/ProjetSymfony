@@ -31,6 +31,10 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
         $customer = $this->getUser();
 
+        if (!($customer instanceof Customer)) {
+            return $this->redirectToRoute('app_index');
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($address);
             if ($customer instanceof Customer) {
