@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OrderRepository;
 
 class HomeController extends AbstractController
 {
@@ -21,10 +22,12 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_index')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, OrderRepository  $orderRepository): Response
     {
         //Get slides pictures
         $this->getSlides();
+        $bestSales = $orderRepository->getBestSales();
+        dump($bestSales);
         //Get index data from Json
         $jsonData = $this->getJsonData('src/data/homeData.json');
         $data = json_decode($jsonData, true);
@@ -42,6 +45,7 @@ class HomeController extends AbstractController
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'data' => $data,
+            'bestSales' => $bestSales,
             'newProductsDatas' => $newProductDatas,
         ]);
     }
@@ -58,7 +62,6 @@ class HomeController extends AbstractController
             ->getArrayResult();
         return $newProductsData;
     }
-
 
     public function getSlides()
     {

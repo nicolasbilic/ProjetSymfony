@@ -7,27 +7,27 @@
 <section id="aboutUs">
   {% for aboutUsSection in data.aboutUs %}
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ aboutUsSection.title | upper }}</h1>
+    <h1 class="darkGreen">{{ "a propos de necro defense store" | upper }}</h1>
     <p>{{ aboutUsSection.description | raw | nl2br }}</p>
   </div>
   {% endfor %}
 </section>
+{% if bestSales is not empty %}
 <section id="bestSale">
   <div class="sectionContainer">
-    {% for bestSaleSection in data.bestSale %}
-    <h1 class="darkGreen">{{ bestSaleSection.title | upper }}</h1>
+    <h1 class="darkGreen">{{ "nos meilleurs ventes" | upper }}</h1>
     <div class="bestSaleGallery">
-      {% endfor %} {% for bestSaleItem in data.bestSaleItems %}
+      {% for bestSaleItem in bestSales %}
       <div class="cardContainer">
-        <a href="/product/">
+        <a href="/product?idProduct={{ bestSaleItem.product.id }}">
           <img
-            src="/images/products/{{ bestSaleItem.picture }}"
-            alt="{{ bestSaleItem.name }}"
+            src="/images/{{ bestSaleItem.product.picture }}"
+            alt="{{ bestSaleItem.product.name }}"
           />
         </a>
         <div class="cardText">
-          <p class="cardName lightGreen">{{ bestSaleItem.name }}</p>
-          <p class="lightGreen">{{ bestSaleItem.price }} €</p>
+          <p class="cardName lightGreen">{{ bestSaleItem.product.name }}</p>
+          <p class="lightGreen">{{ bestSaleItem.product.price }} €</p>
           <button class="buyButton">Acheter</button>
         </div>
       </div>
@@ -35,6 +35,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 <section id="newItems">
   <div class="sectionContainer">

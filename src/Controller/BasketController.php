@@ -3,8 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Repository\BasketRepository;
-use App\Repository\ProductRepository;
+use App\Repository\OrderRepository;
 use App\Services\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\UserManager;
