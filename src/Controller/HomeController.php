@@ -2,6 +2,7 @@
 // src/Controller/IndexController.php
 namespace App\Controller;
 
+use App\Entity\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,8 +35,7 @@ class HomeController extends AbstractController
 
         if ($user) {
             $role = $user->getRoles()[0];
-            dump($role);
-            if ($user->getRoles()[0] !== 'customer') {
+            if ($user instanceof Admin) {
                 return $this->redirectToRoute('app_admin_dashboard');
             }
         }
