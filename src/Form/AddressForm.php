@@ -19,22 +19,27 @@ class AddressFormType extends AbstractType
             ->add('number', NumberType::class, [
                 'attr' => ['class' => 'custom-input-class'],
                 'label_attr' => ['class' => 'custom-label-class'],
+                'label' => 'Numéro',
             ])
             ->add('street', TextType::class, [
                 'attr' => ['class' => 'custom-input-class'],
                 'label_attr' => ['class' => 'custom-label-class'],
+                'label' => 'Rue',
             ])
             ->add('additional', TextType::class, [
                 'attr' => ['class' => 'custom-input-class'],
                 'label_attr' => ['class' => 'custom-label-class'],
+                'label' => 'Complément',
             ])
             ->add('city', TextType::class, [
                 'attr' => ['class' => 'custom-input-class'],
                 'label_attr' => ['class' => 'custom-label-class'],
+                'label' => 'Ville',
             ])
             ->add('zip_code', NumberType::class, [
                 'attr' => ['class' => 'custom-input-class'],
                 'label_attr' => ['class' => 'custom-label-class'],
+                'label' => 'Code Postal',
             ]);
     }
 
