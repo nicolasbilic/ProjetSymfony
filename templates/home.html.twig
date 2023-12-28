@@ -5,41 +5,68 @@
   {% endfor %}
 </div>
 <section id="aboutUs">
-  {% for aboutUsSection in data.aboutUs %}
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ aboutUsSection.title | upper }}</h1>
-    <p>{{ aboutUsSection.description | raw | nl2br }}</p>
+    <h1 class="darkGreen">{{ "a propos de necro defense store" | upper }}</h1>
+    <p>
+      {{
+        "Bienvenue à Necro Defense Store, l'ultime repaire pour les survivants intrépides dans un monde infesté de zombies ! Préparez-vous à affronter l'apocalypse avec notre arsenal de matériel de survie, d'armes dévastatrices, de vêtements résistants et de soins indispensables.\n\n💀 Équipez-vous comme un pro de l'apocalypse :\n\nPlongez dans notre collection de matériel de survie conçue pour les âmes audacieuses. Des trousses de premiers soins pour soigner les blessures aux équipements spécialisés pour repousser les morts-vivants, nous avons tout ce dont vous avez besoin pour rester en vie.\n\n🔫 Armement de Destruction Massive :\n\nExplorez notre arsenal impressionnant avec des armes de tous types, du corps à corps au longue portée. Des machettes dévastatrices aux fusils à pompe puissants, choisissez votre arme avec sagesse pour écraser les hordes de zombies qui se dressent sur votre chemin.\n\nRelevez le défi, écrasez les zombies, et survivez avec style. Necro Defense Store - où les survivants se procurent l'équipement pour rester les derniers debout !"
+          | raw
+          | nl2br
+      }}
+    </p>
   </div>
-  {% endfor %}
 </section>
+{% if bestSales is not empty %}
 <section id="bestSale">
   <div class="sectionContainer">
-    {% for bestSaleSection in data.bestSale %}
-    <h1 class="darkGreen">{{ bestSaleSection.title | upper }}</h1>
+    <div class="arrowCarouselContainer">
+      <img
+        src="/images/bestSale/arrow.png"
+        style="transform: scaleX(-1)"
+        alt="Précédent"
+        class="previousArrow"
+      />
+      <img src="/images/bestSale/arrow.png" alt="suivant" class="nextArrow" />
+    </div>
+    <h1 class="darkGreen">{{ "nos meilleurs ventes" | upper }}</h1>
     <div class="bestSaleGallery">
-      {% endfor %} {% for bestSaleItem in data.bestSaleItems %}
-      <div class="cardContainer">
-        <a href="/product/">
+      {% for bestSaleItem in bestSales %}
+      <div class="cardContainerBestSale">
+        <a href="/product?idProduct={{ bestSaleItem.product.id }}">
           <img
-            src="/images/products/{{ bestSaleItem.picture }}"
-            alt="{{ bestSaleItem.name }}"
+            src="/images/{{ bestSaleItem.product.picture }}"
+            alt="{{ bestSaleItem.product.name }}"
           />
         </a>
         <div class="cardText">
-          <p class="cardName lightGreen">{{ bestSaleItem.name }}</p>
-          <p class="lightGreen">{{ bestSaleItem.price }} €</p>
-          <button class="buyButton">Acheter</button>
+          <p class="cardName lightGreen">{{ bestSaleItem.product.name }}</p>
+          <p class="lightGreen">{{ bestSaleItem.product.price }} €</p>
+          <form
+            action="{{
+              path('basket_add_product', { idProduct: bestSaleItem.product.id })
+            }}"
+            method="post"
+            id="product-{{ bestSaleItem.product.id }}"
+          >
+            <input
+              type="hidden"
+              name="id_product"
+              value="{{ bestSaleItem.product.id }}"
+            />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
       {% endfor %}
     </div>
   </div>
 </section>
+{% endif %}
 
 <section id="newItems">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "nos nouveaux produits" | upper }}</h1>
-    <div class="bestSaleGallery">
+    <div class="gallery">
       {% for newProductData in newProductsDatas %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ newProductData.id }}">
@@ -72,4 +99,5 @@
   </div>
 </section>
 <script type="module" src="{{ asset('/js/indexSlideshow.js') }}"></script>
+<script type="module" src="{{ asset('/js/carouselBestSale.js') }}"></script>
 {% endblock %}

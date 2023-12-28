@@ -11,7 +11,6 @@
         <p>Ajouter d'autres articles disponibles sur le site <a href="{{ path('shop_index') }}">Voir les articles</a></p>
         <a href="{{path('cart_removeAll') }}">Supprimer tout mon panier</a>
         {% set total = null %}
-        {# {{ dump(cart) }} #}
         {% for item in cart %}
         {% set total = total + (item.product.price * item.quantity) %}
 

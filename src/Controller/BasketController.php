@@ -3,8 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Repository\BasketRepository;
-use App\Repository\ProductRepository;
+use App\Repository\OrderRepository;
 use App\Services\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\UserManager;
@@ -29,7 +28,6 @@ class BasketController extends AbstractController
         $this->loadUserBasket($cartService);
         $products = $cartService->getCartList();
         $totalPrice = $cartService->calculateBasketTotal($products);
-        dump($totalPrice);
         return $this->render(
             'basketUser/basket.html.twig',
             [
@@ -62,6 +60,8 @@ class BasketController extends AbstractController
         if ($user) {
             $product = $em->getRepository(Product::class)->find($idProduct);
             $cartService->addProductToCart($user, $product, 1);
+        } else {
+            return $this->redirectToRoute('login');
         }
         //Redirect user on the current page
         $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
@@ -70,11 +70,10 @@ class BasketController extends AbstractController
 
     public function handleEventCountForm(Request $request, EntityManagerInterface $em, CartService $cartService)
     {
-
         $user = $this->getUser();
         if ($user) {
             $actionValue = $request->request->get('actionCount');
-            $productId = $request->request->get('id_product'); 
+            $productId = $request->request->get('id_product');
             $product = $em->getRepository(Product::class)->find($productId);
             $cartService->modifyQuantity($actionValue, $user, $product);
         }
@@ -83,16 +82,15 @@ class BasketController extends AbstractController
         return new RedirectResponse($referer);
     }
 
-    public function handleEventClearForm(Request $request, EntityManagerInterface $em, CartService $cartService) 
+    public function handleEventClearForm(Request $request, EntityManagerInterface $em, CartService $cartService)
     {
         $user = $this->getUser();
         if ($user) {
             $cartService->createNewCart($user);
             $this->loadUserBasket($cartService);
         }
-                //Redirect user on the current page
-                $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
-                return new RedirectResponse($referer);
+        //Redirect user on the current page
+        $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+        return new RedirectResponse($referer);
     }
-   
 }

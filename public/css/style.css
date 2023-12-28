@@ -29,7 +29,7 @@ p {
 }
 
 .darkGreen {
-    color: #186F37;
+    color: #186F37 !important;
     margin:0;
 }
 
