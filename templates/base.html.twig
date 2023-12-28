@@ -67,6 +67,10 @@
     <link rel="stylesheet" href="{{ asset('css/customerOrderDetails.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/customer/orders/list' %}
+    <link rel="stylesheet" href="{{ asset('css/customerOrderList.css') }}" />
+    {% endif %}
+
 
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
     <link
