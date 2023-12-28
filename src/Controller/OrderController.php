@@ -45,7 +45,7 @@ class OrderController extends AbstractController
                 $em->persist($order);
                 $em->flush();
 
-                return $this->redirectToRoute('app_list_orders');
+                return $this->redirectToRoute('app_admin_list_orders');
             }
         }
 
