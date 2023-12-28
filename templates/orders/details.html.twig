@@ -9,7 +9,7 @@
         <div class="order-content-review">
             <div class="section-title">
                 <h2 id="zombie-table-title">{{ title }}</h2>
-                {# <h4>Vérification de la commande</h4> #}
+                <p class="thank-you-message"> Merci pour votre commande! <br> Vous pouvez suivre l'état de vos commandes dans l'onglet "Mes Commandes" de votre Profil.</p>
             </div>
             <div class="order-content-info">
                 <table class="table table-striped table-bordered table-hover table-responsive zombie-table">
@@ -32,46 +32,26 @@
         </div>
         <section class="order-section-product">
             {% if orderLines is not empty %}
-                {% for orderLine in orderLines %}
-                    <div class="order-content-product">
+                <div class="order-content-product" style="background-image: url('{{ asset('images/bloody-floor.png') }}');">
+                    <h3 id="title-product">Mes Produits</h3>
+                    {% for orderLine in orderLines %}
                         <ul class="product-info-list">
                             <li>Identifiant produit : <span>{{ orderLine.id }}</span></li>
                             <li>Nom produit : <span>{{ orderLine.productName }}</span></li>
                             <li>Prix produit : <span>{{ orderLine.price }}</span></li>
                             <li>Qté : <span>{{ orderLine.quantity }}</span></li>
                         </ul>
-                    </div>
-                {% endfor %}
+                        <div class="line-container"></div>
+                    {% endfor %}
+                </div>
             {% else %}
                 Aucune commande existante
             {% endif %}
-            
-            {# <img src="/public/images/a-very-happy-zombie.png" alt="a very happy zombie"> #}
-            <img src="{{ asset('images/a-very-happy-zombie.png') }}" alt=""/>
-            
+            <div class="img-order-new">
+                <img src="{{ asset('images/a-very-happy-zombie.png') }}" alt=""/>
+            </div>
         </section>
     </section>
-{% endblock %}
 
-{# <section class="order-section-product">
-    <div class="section-title">
-        <h4><span>3</span>Vérification de la commande</h4>
-    </div>
-    {% for basketLine in basketLines %}
-        {% if basketLine.product.picture is not null %}
-            <div class="order-content-product">
-                <div class="img-order-new">
-                    <img src="{{ asset('images/' ~ basketLine.product.picture) }}" alt="{{ basketLine.product.name }}"/>
-                </div>
-        {% else %}
-                <span>Aucune image disponible</span>
-        {% endif %}
-                <ul class="product-info-list">
-                    <li>{{basketLine.product.name}}</li>
-                    <li>{{basketLine.product.price}}€</li>
-                    <li>Qté : {{basketLine.quantity}}</li>
-                </ul>
-            </div>
-        <div class="line-container"></div>
-    {% endfor %}
-</section> #}
+
+{% endblock %}
