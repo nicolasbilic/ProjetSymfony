@@ -71,6 +71,9 @@
     justify-content: space-between;
 }
 
+.productRight{
+    width:45%;
+}
 .priceContainer {
     display: flex;
     justify-content: space-between;
@@ -84,6 +87,8 @@
 
 .productPicture {
     width:50%;
+    background-image: url('/images/card_background.jpg');
+    background-size: cover;
 }
 
 .productPrice {

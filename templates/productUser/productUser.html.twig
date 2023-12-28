@@ -29,7 +29,7 @@
         src="/images/{{ product.picture }}"
         alt="Image Détails"
       />
-      <div>
+      <div class="productRight">
         <p class="productDetails">{{ product.description | raw | nl2br }}</p>
         <div class="priceContainer">
           <form
@@ -38,7 +38,9 @@
             id="product-{{ product.id }}"
           >
             <input type="hidden" name="id_product" value="{{ product.id }}" />
-            <button type="submit" class="buyButton">Mettre au panier</button>
+            <button type="submit" class="buyButton hover">
+              Mettre au panier
+            </button>
           </form>
           <h1 class="productPrice">{{ product.price }} €</h1>
         </div>

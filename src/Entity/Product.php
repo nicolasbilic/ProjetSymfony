@@ -28,7 +28,7 @@ class Product
     #[Assert\Type(type: 'float', message: 'Le champ doit être un nombre avec décimales')]
     private ?float $price = null;
 
-    #[ORM\Column(length: 500, nullable: true)]
+    #[ORM\Column(length: 1600, nullable: true)]
     #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
     #[Assert\Type(type: 'string', message: 'Le champ doit être une chaîne de caractères')]
     private ?string $description = null;
