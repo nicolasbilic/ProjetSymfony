@@ -5,12 +5,16 @@
   {% endfor %}
 </div>
 <section id="aboutUs">
-  {% for aboutUsSection in data.aboutUs %}
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "a propos de necro defense store" | upper }}</h1>
-    <p>{{ aboutUsSection.description | raw | nl2br }}</p>
+    <p>
+      {{
+        "Bienvenue à Necro Defense Store, l'ultime repaire pour les survivants intrépides dans un monde infesté de zombies ! Préparez-vous à affronter l'apocalypse avec notre arsenal de matériel de survie, d'armes dévastatrices, de vêtements résistants et de soins indispensables.\n\n💀 Équipez-vous comme un pro de l'apocalypse :\n\nPlongez dans notre collection de matériel de survie conçue pour les âmes audacieuses. Des trousses de premiers soins pour soigner les blessures aux équipements spécialisés pour repousser les morts-vivants, nous avons tout ce dont vous avez besoin pour rester en vie.\n\n🔫 Armement de Destruction Massive :\n\nExplorez notre arsenal impressionnant avec des armes de tous types, du corps à corps au longue portée. Des machettes dévastatrices aux fusils à pompe puissants, choisissez votre arme avec sagesse pour écraser les hordes de zombies qui se dressent sur votre chemin.\n\nRelevez le défi, écrasez les zombies, et survivez avec style. Necro Defense Store - où les survivants se procurent l'équipement pour rester les derniers debout !"
+          | raw
+          | nl2br
+      }}
+    </p>
   </div>
-  {% endfor %}
 </section>
 {% if bestSales is not empty %}
 <section id="bestSale">

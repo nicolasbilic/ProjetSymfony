@@ -27,10 +27,7 @@ class HomeController extends AbstractController
         //Get slides pictures
         $this->getSlides();
         $bestSales = $orderRepository->getBestSales();
-        dump($bestSales);
-        //Get index data from Json
-        $jsonData = $this->getJsonData('src/data/homeData.json');
-        $data = json_decode($jsonData, true);
+
         //Get new product to show
         $newProductDatas = $this->getNewProducts($entityManager);
 
@@ -44,7 +41,6 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
-            'data' => $data,
             'bestSales' => $bestSales,
             'newProductsDatas' => $newProductDatas,
         ]);
@@ -86,12 +82,5 @@ class HomeController extends AbstractController
         $this->slides = $jpgFiles;
 
         return $jpgFiles;
-    }
-
-    //Method to get the data's Json
-    private function getJsonData(string $path): string
-    {
-        $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
-        return file_get_contents($jsonFilePath);
     }
 }
