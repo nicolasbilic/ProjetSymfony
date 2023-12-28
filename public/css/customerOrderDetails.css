@@ -1,0 +1,136 @@
+.order-confirmation-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    /* background-color: #186F37; */
+}
+
+.order-section-product {
+    /********* display flex *********/
+    /* display: flex !important;
+    flex-direction: column !important; */
+    display: flex;
+    width: 100%;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    font-size: 25px;
+
+
+    background-color: rgba(10, 37, 55, 0.5);
+    border: 3px solid #32cd32d9;
+    box-shadow: 0 0 10px #186F37;
+    border-radius: 20px;
+
+     margin-top: 20px;
+    /*padding-top: 5px; */
+    /* background-color: rgb(0, 132, 255); */
+}
+.order-content-product {
+/*     display: flex;
+    justify-content: center;
+    align-items: center; */
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    /* width: 50%; */
+    /* background-image: url("{{ asset('images/bloody-knife.jpg') }}"); */
+    background-size: cover; /* Ajuste la taille de l'image pour remplir complètement la div */
+    background-position: center; /* Centre l'image dans la div */
+    font-family: 'Boogaloo', sans-serif;
+    font-size: 25px;
+    /* border-bottom: 1px solid white; */
+    padding: 10px;
+    margin: 10px 5px;
+    /* background-color: rgba(139, 0, 0, 1); */
+    border-radius: 40px;
+}
+.product-info-list {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    list-style: none;
+    /* background-color: purple; */
+}
+.product-info-list li span {
+    color: rgb(5, 167, 5);
+}
+.section-title {
+    text-align: center;
+    margin-top: 10px;
+}
+.order-content-info {
+    display: flex;
+    justify-content: center;
+}
+.img-order-new {
+    width: 100%;
+    height: auto;
+    margin: 10px 5px;
+    /* display: flex;
+    justify-content: center; */
+    /* background-color: yellow; */
+    /* border: 1px solid white; */
+    /* align-self: flex-start; */
+}
+.img-order-new img{
+    width: 640px;
+    height: auto;
+    border-radius: 10px;
+    /* align-self: flex-start; */
+    /* border: 1px solid white; */
+    /* display: block;
+    margin: auto; */
+}
+
+
+.table {
+    width: 90% !important;
+    border: 3px solid #ffffffd9 !important;
+    box-shadow: 0 0 10px #186F37 !important;
+    border-radius: 55px !important;
+}
+.zombie-table th,
+.zombie-table td {
+    color: white !important;
+    background-color: rgb(5, 167, 5) !important;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Boogaloo', sans-serif;
+    font-size: 20px;
+}
+.zombie-table th {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Creepster', cursive;
+    font-size: 25px;
+}
+#zombie-table-title {
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    color: rgb(5, 167, 5) !important;
+    font-size: 35px;
+    background-color: rgba(10, 37, 55, 0.5);
+    border: 2px solid #32cd32d9;
+    box-shadow: 0 0 10px #186F37;
+    padding: 5px;
+    border-radius: 20px;
+}
+.zombie-table tbody tr:hover {
+    background-color: #4b4b4b !important;
+}
+.line-container {
+    width: 80%;
+    margin: 0px auto 0px;
+    border-bottom: 1px solid white;
+}
+.thank-you-message {
+    font-family: 'Boogaloo', sans-serif;
+    color: white;
+    font-size: 22px;
+}
+#title-product {
+    padding-left: 33px;
+    text-decoration: underline;
+}
