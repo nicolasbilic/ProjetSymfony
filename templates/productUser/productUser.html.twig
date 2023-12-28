@@ -4,10 +4,21 @@
 </div>
 {% endif %} {% if product is not empty %}
 <ul class="track-list">
-  <li><a href="/">Accueil</a></li><span>/</span>
-  <li><a href="/list-products?category={{ parentCategory.name }}" >{{ parentCategory.name }}</a></li><span>/</span>
-  <li><a href="/products?category={{ categoryOfProduct.id }}"  >{{ categoryOfProduct.name }}</a></li><span>/</span>
-  <li><a href="#">Produit</a></li>
+  <li><a href="/">Accueil</a></li>
+  <span>/</span>
+  <li>
+    <a href="/list-products?category={{ parentCategory.name }}">{{
+      parentCategory.name
+    }}</a>
+  </li>
+  <span>/</span>
+  <li>
+    <a href="/products?category={{ categoryOfProduct.id }}">{{
+      categoryOfProduct.name
+    }}</a>
+  </li>
+  <span>/</span>
+  <li><a href="#" class="endArianeLink">Produit</a></li>
 </ul>
 <section id="product">
   <div class="sectionContainer">

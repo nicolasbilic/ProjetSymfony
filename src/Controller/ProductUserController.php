@@ -30,20 +30,6 @@ class ProductUserController extends AbstractController
         $form = $this->createForm(CartType::class);
         $form->handleRequest($request);
         $user = $this->getUser();
-        dump($user);
-
-        if ($form->isSubmitted()) {
-            //Get user
-            $user = $this->getUser();
-            // Vérifiez si l'utilisateur est connecté
-            if ($user) {
-                $product = $em->getRepository(Product::class)->find(17);
-
-                dump($product);
-
-                $cartService->addProductToCart($user, $product, 1);
-            }
-        }
 
         // Get the product id from the query
         $productId = $request->query->get('idProduct');

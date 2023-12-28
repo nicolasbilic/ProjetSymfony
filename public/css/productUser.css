@@ -36,12 +36,13 @@
     color: white !important;
 }
 
-/* .track-list li.selected a {
-    color: #679B33;
-} */
-
 .track-list li:last-child {
     margin-right: 0;
+}
+
+.endArianeLink {
+    color: #186F37 !important;
+    text-decoration: none;
 }
 
 #product {

@@ -42,8 +42,6 @@ class OrderCustomerController extends AbstractController
         if ($customer instanceof Customer) {
             $address = $customer->getAddress();
         }
-        dump($basket);
-        dump($basketlines);
         $products = $cartService->getCartList();
         $totalBasket = $cartService->calculateBasketTotal($products);
         $waitingPaymentState = $em->getRepository(OrderState::class)->find(1);
@@ -68,7 +66,6 @@ class OrderCustomerController extends AbstractController
                 $order->setDate($today);
                 $order->setBasket($basket);
                 $order->setCustomer($customer);
-                dump('create');
                 $em->persist($order);
                 $em->flush();
                 $orderId = $order->getId();

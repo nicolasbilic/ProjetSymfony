@@ -29,7 +29,6 @@ class BasketController extends AbstractController
         $this->loadUserBasket($cartService);
         $products = $cartService->getCartList();
         $totalPrice = $cartService->calculateBasketTotal($products);
-        dump($totalPrice);
         return $this->render(
             'basketUser/basket.html.twig',
             [
@@ -74,7 +73,7 @@ class BasketController extends AbstractController
         $user = $this->getUser();
         if ($user) {
             $actionValue = $request->request->get('actionCount');
-            $productId = $request->request->get('id_product'); 
+            $productId = $request->request->get('id_product');
             $product = $em->getRepository(Product::class)->find($productId);
             $cartService->modifyQuantity($actionValue, $user, $product);
         }
@@ -83,16 +82,15 @@ class BasketController extends AbstractController
         return new RedirectResponse($referer);
     }
 
-    public function handleEventClearForm(Request $request, EntityManagerInterface $em, CartService $cartService) 
+    public function handleEventClearForm(Request $request, EntityManagerInterface $em, CartService $cartService)
     {
         $user = $this->getUser();
         if ($user) {
             $cartService->createNewCart($user);
             $this->loadUserBasket($cartService);
         }
-                //Redirect user on the current page
-                $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
-                return new RedirectResponse($referer);
+        //Redirect user on the current page
+        $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+        return new RedirectResponse($referer);
     }
-   
 }
