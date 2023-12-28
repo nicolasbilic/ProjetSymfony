@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Order;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Types\Float_;
@@ -60,5 +61,33 @@ class OrderRepository extends ServiceEntityRepository
             ->select('COUNT(o) as NbOrders')
             ->getQuery()
             ->getResult()[0]['NbOrders'];
+    }
+
+    public function getBestSales()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT ol.product_name, SUM(ol.quantity) AS totalSales
+            FROM App\Entity\OrderLine ol
+            GROUP BY ol.product_name
+            ORDER BY totalSales DESC'
+        );
+        $query->setMaxResults(6);
+        $bestSales = $query->getResult();
+
+        // Fetch details for each product
+        foreach ($bestSales as &$sale) {
+            $productName = $sale['product_name'];
+            $productRepository = $entityManager->getRepository(Product::class);
+
+            // Fetch the product entity based on product_name
+            $product = $productRepository->findOneBy(['name' => $productName]);
+
+            // Merge the details into the result
+            $sale['product'] = $product;
+        }
+
+        return $bestSales;
     }
 }

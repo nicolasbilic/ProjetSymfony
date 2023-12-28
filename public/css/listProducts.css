@@ -21,10 +21,17 @@
     margin-right: 10px;
     font-family: 'Creepster', cursive;
     text-shadow: 2px 2px 4px #000;
+    color: white;
+
 }
 .track-list li a{
     text-decoration: none;
-    color: white ;
+    color:white;
+}
+
+.endArianeLink {
+    color: #186F37 !important;
+    text-decoration: none;
 }
 .track-list li a:hover{
     text-decoration: none;

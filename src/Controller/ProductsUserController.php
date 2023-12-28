@@ -29,7 +29,6 @@ class ProductsUserController extends AbstractController
         $form = $this->createForm(CartType::class);
         $form->handleRequest($request);
         $user = $this->getUser();
-        //dump($user);
 
         if ($form->isSubmitted()) {
             //Get user
@@ -37,9 +36,6 @@ class ProductsUserController extends AbstractController
             // Vérifiez si l'utilisateur est connecté
             if ($user) {
                 $product = $em->getRepository(Product::class)->find(17);
-
-                dump($product);
-
                 $cartService->addProductToCart($user, $product, 1);
             }
         }

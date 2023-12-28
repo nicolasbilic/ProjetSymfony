@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OrderRepository;
 
 class HomeController extends AbstractController
 {
@@ -21,13 +22,12 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_index')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, OrderRepository  $orderRepository): Response
     {
         //Get slides pictures
         $this->getSlides();
-        //Get index data from Json
-        $jsonData = $this->getJsonData('src/data/homeData.json');
-        $data = json_decode($jsonData, true);
+        $bestSales = $orderRepository->getBestSales();
+
         //Get new product to show
         $newProductDatas = $this->getNewProducts($entityManager);
 
@@ -41,7 +41,7 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
-            'data' => $data,
+            'bestSales' => $bestSales,
             'newProductsDatas' => $newProductDatas,
         ]);
     }
@@ -59,16 +59,13 @@ class HomeController extends AbstractController
         return $newProductsData;
     }
 
-
     public function getSlides()
     {
         // Path of the slideshow directory
         $directoryPath = $this->kernel->getProjectDir() . '/public/images/bannerSlideshow';
-
         // Get the files in the directory
         $files = scandir($directoryPath);
         $jpgFiles = [];
-
         foreach ($files as $file) {
             // Exclude "." and ".."
             if ($file !== "." && $file !== "..") {
@@ -79,16 +76,7 @@ class HomeController extends AbstractController
                 }
             }
         }
-
         $this->slides = $jpgFiles;
-
         return $jpgFiles;
-    }
-
-    //Method to get the data's Json
-    private function getJsonData(string $path): string
-    {
-        $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
-        return file_get_contents($jsonFilePath);
     }
 }
