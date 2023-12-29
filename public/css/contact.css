@@ -45,23 +45,24 @@
 .formContactBody input, .formContactBody select, .formContactBody textarea {
     background-color: #0A2536;
     border: 1px solid #186F37;
-    color: grey;
+    color:grey;
     margin-bottom: 20px;
 }
 .formContactBody input:focus, .formContactBody select:focus, .formContactBody textarea:focus  {
     background-color: #0A2536;
-    color:grey;
+    color:white;
 }
 .formContactBody input::placeholder, .formContactBody textarea::placeholder {
-    color: grey;
+    color:grey;
 }
 
 .inputsFullName {
     display: flex;
     justify-content: space-between;
+    width:70%;
 }
 .inputsFullName input{
-    width: 48%;
+    width: 100%;
 }
 
 .formContactBody option {
