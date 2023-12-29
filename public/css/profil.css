@@ -16,7 +16,7 @@ main {
 }
 
 #updateProfil {
-    /* display: none; */
+    display: none;
 }
 
 #profil h1, #updateProfil h1 {
@@ -65,6 +65,7 @@ main {
     width:7%;
     height: auto;
     object-fit: contain;
+    cursor: pointer;
 }
 form {
     width:100%;
@@ -101,14 +102,35 @@ input[type="file"]{
  opacity: 0;
 }
 
-.validateButton {
-    width:100%;
+.buttonForm {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.validateButton, .cancelButton {
+    width:48%;
     height: 40px;
     margin-top: 20px;
     background-color: #0A2536;
     color:white;
-    border:1px solid #679B33;
+    border:1px solid #186F37;
     border-radius: 20px;
+}
+.validateButton:hover {
+    background-color: #186F37;
+
+}
+
+.cancelButton:hover {
+    background-color: rgb(153, 40, 40);
+
+}
+.cancelButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(145, 21, 21);
+    cursor: pointer;
 }
 
 .updateAvatar {
