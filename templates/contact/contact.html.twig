@@ -3,7 +3,7 @@
 <section id="contact">
   <div class="sectionContainer">
     <img
-      src="/images/pinup.jpg"
+      src="/img/pinup.jpg"
       class="contactPicture"
       alt="Image pin up zombie"
     />
@@ -18,48 +18,20 @@
       <div class="formContactContainer">
         <h1 class="darkGreen">{{ "Formulaire de contact" | upper }}</h1>
         <div class="formContactBody">
-          <form method="post">
-            {{ form_start(form) }}
-            <div class="inputsFullName">
-              {{ form_row(form.firstName, {'attr': {'class': 'form-control', 'id':'floatingInput', 'placeholder': 'Ex: Lord'
-
-
-
-
-
-              }}) }}
-              {{ form_row(form.lastName, {'attr': {'class': 'form-control', 'id':'floatingInput', 'placeholder': 'Ex: Défourailleur'
-
-
-
-
-
-              }}) }}
-            </div>
-            {{ form_row(form.email, {'attr': {'class': 'form-control', 'id':'floatingInput'
-
-
-
-
-
+          {{ form_start(form) }}
+          <div class="inputsFullName">
+            {{ form_row(form.firstName, {'attr': {'class': 'form-control', 'id':'floatingInput', 'placeholder': 'Ex: Lord'
             }}) }}
-            {{ form_row(form.reason, {'attr': {'class': 'form-control'
-
-
-
-
-
-            }}) }}
-            {{ form_row(form.message, {'attr': {'class': 'form-control your-custom-class','id':"exampleFormControlTextarea1" ,'placeholder': 'Votre message'
-
-
-
-
-
-            }}) }}
-            <button type="submit" class="contactButton">Envoyer</button>
-            {{ form_end(form) }}
-          </form>
+            {{ form_row(form.lastName, {'attr': {'class': 'form-control', 'id':'floatingInput', 'placeholder': 'Ex: Défourailleur'
+            }}) }} {{ form_row(form.value, {'attr': {'class': 'form-control'}})
+            }}
+          </div>
+          {{ form_row(form.email, {'attr': {'class': 'form-control', 'id':'floatingInput'
+          }}) }} {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+          {{ form_row(form.message, {'attr': {'class': 'form-control your-custom-class','id':"exampleFormControlTextarea1" ,'placeholder': 'Votre message'
+          }}) }}
+          <button type="submit" class="contactButton">Envoyer</button>
+          {{ form_end(form) }}
         </div>
       </div>
     </div>

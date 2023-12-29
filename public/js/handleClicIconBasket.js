@@ -13,7 +13,7 @@ export default function handleClicIconBasket() {
     if (!basketOpen) {
       basketOpen = true;
       //Apply basketBody style
-      basketIcon.src = "/images/iconbasket.png";
+      basketIcon.src = "/img/iconbasket.png";
       basketBody.style.transition = "transform 1s";
       basketBody.style.transform = "translateX(-300px)";
       basketBody.style.backgroundColor = "rgba(0, 0, 0, 0.95)";
@@ -23,7 +23,7 @@ export default function handleClicIconBasket() {
       basketH1.style.visibility = "visible";
       basketHeader.style.borderBottom = "1px solid #186F37";
       //Display all items
-      if(basketItem){
+      if (basketItem) {
         basketItem.forEach((item) => {
           item.style.visibility = "visible";
         });
@@ -35,7 +35,7 @@ export default function handleClicIconBasket() {
     } else {
       basketOpen = false;
       setTimeout(() => {
-        basketIcon.src = "/images/iconbasketwhite.png";
+        basketIcon.src = "/img/iconbasketwhite.png";
       }, 1000);
       basketBody.style.transition = "transform 1s, background-color 1s";
       basketBody.style.transform = "translateX(0px)";
@@ -45,7 +45,7 @@ export default function handleClicIconBasket() {
       basketH1.style.transition = "visibility 1s";
       basketH1.style.visibility = "hidden";
       basketHeader.style.borderBottom = "none";
-      if(basketItem){
+      if (basketItem) {
         basketItem.forEach((item) => {
           item.style.transition = "visibility 1s";
           item.style.visibility = "hidden";
@@ -57,7 +57,6 @@ export default function handleClicIconBasket() {
       basketSubmit.style.visibility = "hidden";
       clearCart.style.transition = "visibility 1s";
       clearCart.style.visibility = "hidden";
-
     }
   });
 }

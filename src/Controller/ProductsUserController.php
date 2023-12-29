@@ -28,17 +28,6 @@ class ProductsUserController extends AbstractController
     {
         $form = $this->createForm(CartType::class);
         $form->handleRequest($request);
-        $user = $this->getUser();
-
-        if ($form->isSubmitted()) {
-            //Get user
-            $user = $this->getUser();
-            // Vérifiez si l'utilisateur est connecté
-            if ($user) {
-                $product = $em->getRepository(Product::class)->find(17);
-                $cartService->addProductToCart($user, $product, 1);
-            }
-        }
 
         //Get the subcategory id from the query
         $subcategoryId = $request->query->get('category');

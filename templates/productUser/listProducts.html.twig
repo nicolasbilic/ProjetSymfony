@@ -19,7 +19,7 @@
 <div class="banner">
   <img
     class="bannerPicture"
-    src="/images/list_products/{{ selectedCategory.bannerPicture }}"
+    src="/img/list_products/{{ selectedCategory.bannerPicture }}"
     alt=""
   />
 </div>
@@ -27,8 +27,8 @@
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ selectedCategory.name | upper }}</h1>
     <p>{{ selectedCategory.description | raw | nl2br }}</p>
-    <img class="detailsPicture" src="/images/{{ selectedCategory.picture }}"
-    "Image Détails">
+    <img class="detailsPicture" src="/img/{{ selectedCategory.picture }}" "Image
+    Détails">
   </div>
 </section>
 {% endif %} {% if subCategories is not empty %}
@@ -40,7 +40,7 @@
       <div class="cardContainer hover">
         <a href="/products/?category= {{ subCategory.id }}"
           ><img
-            src="/images/list_products/{{ subCategory.picture }}"
+            src="/img/list_products/{{ subCategory.picture }}"
             alt="{{ subCategory.name }}"
           />
           <div class="cardTextCat">
@@ -60,7 +60,7 @@
       {% for product in allProducts %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
-          <img src="/images/{{ product.picture }}" alt="{{ product.name }}" />
+          <img src="/{{ product.picture }}" alt="{{ product.name }}" />
         </a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>

@@ -22,11 +22,21 @@ class ContactType extends AbstractType
                 'label' => 'Last Name',
                 'attr' => ['placeholder' => 'Défourailleur'],
             ])
+            ->add('value', ChoiceType::class, [
+                'label' => 'Note',
+                'choices' => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                ],
+            ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'attr' => ['placeholder' => 'mange@tesmorts.com'],
             ])
-            ->add('reason', ChoiceType::class, [
+            ->add('title', ChoiceType::class, [
                 'label' => 'Motif de contact',
                 'choices' => [
                     'Nous Contacter' => 1,

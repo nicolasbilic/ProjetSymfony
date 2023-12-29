@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %} {% block main %}
+<section id="profil">
+  <div class="sectionContainer">
+    <div>
+      <h1 class="darkGreen">{{ "Mon profil" | upper }}</h1>
+      <img class="update" src="/img/update.png" alt="Update button" />
+    </div>
+    <div>
+      <p>Prénom :</p>
+      <p>{{ userInfo.firstName | capitalize }}</p>
+    </div>
+    <div>
+      <p>Nom :</p>
+      <p>{{ userInfo.name | capitalize }}</p>
+    </div>
+    <div>
+      <p>Email :</p>
+      <p>{{ userInfo.email }}</p>
+    </div>
+    <div>
+      <p>Mot-de-passe :</p>
+      <p>*******</p>
+    </div>
+    {% if userInfo.picture is not same as NULL %}
+    <div class="containerAvatar">
+      <img class="avatar" src="/{{ userInfo.picture }}" alt="Avatar" />
+    </div>
+    {% else %}
+    <div class="containerAvatar">
+      <img class="avatar" src="/img/profil/default.png" alt="Avatar" />
+    </div>
+    {% endif %}
+  </div>
+</section>
+<section id="updateProfil">
+  <div class="sectionContainer">
+    <div>
+      <h1 class="darkGreen">{{ "Mon profil" | upper }}</h1>
+    </div>
+    {{ form_start(form) }}
+    {{ form_row(form.firstName, {'value': userInfo.firstName is defined ? userInfo.firstName|capitalize : ''}) }}
+    {{ form_row(form.name, {'value': userInfo.name is defined ? userInfo.name|capitalize : ''}) }}
+    {{ form_row(form.email, {'value': userInfo.email is defined ? userInfo.email : ''}) }}
+    {{ form_row(form.password, {'attr': {'placeholder': '********'}}) }}
+    {{ form_row(form.picture) }}
+
+    <button type="submit" class="validateButton">Valider</button>
+    {{ form_end(form) }}
+
+    {% if userInfo.picture is not same as NULL %}
+    <div class="containerAvatar">
+      <img class="avatar" src="/{{ userInfo.picture }}" alt="Avatar" />
+    </div>
+    {% else %}
+    <div class="containerAvatar">
+      <img class="avatar" src="/img/profil/avatar/default.png" alt="Avatar" />
+    </div>
+
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

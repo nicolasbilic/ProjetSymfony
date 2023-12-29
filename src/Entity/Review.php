@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReviewRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -37,6 +38,18 @@ class Review
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: 'Le champ doit être renseigné')]
     private ?string $state = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date_review = null;
+
+    #[ORM\Column(length: 45)]
+    private ?string $userFirstName = null;
+
+    #[ORM\Column(length: 45)]
+    private ?string $userLastName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $user_id = null;
 
     public function getId(): ?int
     {
@@ -87,6 +100,54 @@ class Review
     public function setState(string $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getDateReview(): ?\DateTimeImmutable
+    {
+        return $this->date_review;
+    }
+
+    public function setDateReview(\DateTimeImmutable $date_review): static
+    {
+        $this->date_review = $date_review;
+
+        return $this;
+    }
+
+    public function getUserFirstName(): ?string
+    {
+        return $this->userFirstName;
+    }
+
+    public function setUserFirstName(string $userFirstName): static
+    {
+        $this->userFirstName = $userFirstName;
+
+        return $this;
+    }
+
+    public function getUserLastName(): ?string
+    {
+        return $this->userLastName;
+    }
+
+    public function setUserLastName(string $userLastName): static
+    {
+        $this->userLastName = $userLastName;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?int $user_id): static
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

@@ -21,7 +21,7 @@
 <div class="banner">
   <img
     class="bannerPicture"
-    src="/images/{{ subcategory.bannerPicture }}"
+    src="/img/{{ subcategory.bannerPicture }}"
     alt=""
   />
 </div>
@@ -29,8 +29,8 @@
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ subcategory.name | upper }}</h1>
     <p>{{ subcategory.description | raw | nl2br }}</p>
-    <img class="detailsPicture" src="/images/products/{{ subcategory.picture }}"
-    "Image Détails">
+    <img class="detailsPicture" src="/img/{{ subcategory.picture }}" "Image
+    Détails">
   </div>
 </section>
 {% endif %} {% if products is not empty %}
@@ -43,7 +43,7 @@
       product in products %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
-          <img src="/images/{{ product.picture }}" alt="{{ product.name }}"
+          <img src="/{{ product.picture }}" alt="{{ product.name }}"
         /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>

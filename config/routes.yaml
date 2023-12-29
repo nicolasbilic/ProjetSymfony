@@ -13,6 +13,9 @@ homepage:
 login:
   path: /login
   controller: App\Controller\LoginController::login
+contact:
+  path: /contact
+  controller: App\Controller\ContactController::contact
 basket_add_product:
   path: "/basket/add/{idProduct}"
   controller: 'App\Controller\BasketController::handleEventCartForm'

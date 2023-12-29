@@ -99,6 +99,9 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Basket::class, orphanRemoval: true)]
     private Collection $basket;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $picture = null;
+
     public function __construct()
     {
         $this->order_customer = new ArrayCollection();
@@ -287,6 +290,18 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }

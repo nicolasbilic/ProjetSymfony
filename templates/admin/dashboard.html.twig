@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
-{% block header %}
-<a href="/admin/dashboard"><img
-  class="headerBanner"
-  src="/images/headerBanner.jpg"
-  alt="Bannière du header"
+{% extends 'base.html.twig' %} {% block header %}
+<a href="/admin/dashboard"
+  ><img
+    class="headerBanner"
+    src="/img/headerBanner.jpg"
+    alt="Bannière du header"
 /></a>
 <nav>
   <ul class="headerList">
@@ -14,41 +14,38 @@
     <li><a href="/admin/reviews/list">AVIS</a></li>
   </ul>
 </nav>
-{% endblock %}
-
-{% block main %}
-  <table class="table table-striped table-bordered table-hover table-responsive zombie-table">
-    <thead>
-      <th colspan="2" id="kpi">INDICATEURS DE PERFORMANCES &#40;KPI&#41;</th>
-      <tr>
-        <th>RUBRIQUE</th>
-        <th>TOTAUX</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Ventes</td>
-        <td>{{totalSales}}€</td> 
-      </tr>
-      <tr>
-        <td>Clients</td>
-        <td>{{totalCustomers}}</td> 
-      </tr>
-      <tr>
-        <td>Paniers</td>
-        <td>{{totalBaskets}}</td> 
-      </tr>
-      <tr>
-        <td>Commandes</td>
-        <td>{{totalOrders}}</td> 
-      </tr>
-      <tr>
-        <td>Taux de validation Panier</td>
-        <td>{{percentValidatedBasket}}%</td> 
-      </tr>
-      
-    </tbody>
-    </table>
-  {% endblock %}
-  {% block footer %}
-{% endblock %}
+{% endblock %} {% block main %}
+<table
+  class="table table-striped table-bordered table-hover table-responsive zombie-table"
+>
+  <thead>
+    <th colspan="2" id="kpi">INDICATEURS DE PERFORMANCES &#40;KPI&#41;</th>
+    <tr>
+      <th>RUBRIQUE</th>
+      <th>TOTAUX</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ventes</td>
+      <td>{{ totalSales }}€</td>
+    </tr>
+    <tr>
+      <td>Clients</td>
+      <td>{{ totalCustomers }}</td>
+    </tr>
+    <tr>
+      <td>Paniers</td>
+      <td>{{ totalBaskets }}</td>
+    </tr>
+    <tr>
+      <td>Commandes</td>
+      <td>{{ totalOrders }}</td>
+    </tr>
+    <tr>
+      <td>Taux de validation Panier</td>
+      <td>{{ percentValidatedBasket }}%</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %} {% block footer %} {% endblock %}
