@@ -10,7 +10,6 @@ use App\Repository\CategoryRepository;
 use App\Services\CartService;
 use App\Form\CartType;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Product;
 
 class ProductsUserController extends AbstractController
 {
@@ -24,7 +23,7 @@ class ProductsUserController extends AbstractController
     }
 
     #[Route('/products', name: 'app_products')]
-    public function displayListProducts(CartService $cartService, EntityManagerInterface $em, Request $request): Response
+    public function displayListProducts(Request $request): Response
     {
         $form = $this->createForm(CartType::class);
         $form->handleRequest($request);
@@ -58,7 +57,6 @@ class ProductsUserController extends AbstractController
         if (!$subcategory) {
             $this->errors = "No subcategory found.";
         }
-
         return $subcategory;
     }
 
@@ -66,7 +64,6 @@ class ProductsUserController extends AbstractController
     {
         $products = [];
         $subcategory = $this->getSubcategory($subcategoryId);
-
         //Proceed only if the subcategory is found
         if ($subcategory) {
             $categoryProducts = $subcategory->getProducts();
@@ -78,7 +75,6 @@ class ProductsUserController extends AbstractController
                 $this->errors = "No products found for subcategory '{$subcategory->getName()}'.";
             }
         }
-
         return $products;
     }
 }

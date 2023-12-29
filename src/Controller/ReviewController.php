@@ -15,12 +15,8 @@ use App\Repository\ReviewRepository;
 #[Route('/reviews/')]
 class ReviewController extends AbstractController
 {
-    public function __construct()
-    {
-    }
-
     #[Route('list', name: 'app_list_reviews')]
-    public function displayList(ReviewRepository $reviewRepo, Request $request): Response
+    public function displayList(ReviewRepository $reviewRepo): Response
     {
         $reviews = $reviewRepo->findApprovedReviews();
         $customer = $this->getUser();
@@ -34,7 +30,7 @@ class ReviewController extends AbstractController
     }
 
     #[Route('new', name: 'app_new_review')]
-    public function new(EntityManagerInterface $em, Request $request, ReviewRepository $reviewRepository): Response
+    public function new(EntityManagerInterface $em, Request $request): Response
     {
         $review = new Review();
         $form = $this->createForm(ReviewFormType::class, $review);

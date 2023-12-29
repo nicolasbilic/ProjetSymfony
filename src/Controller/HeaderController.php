@@ -7,7 +7,6 @@ use App\Services\UserManager;
 
 class HeaderController extends AbstractController
 {
-
     public function displayHeader(UserManager $userManager)
     {
         return $this->render(

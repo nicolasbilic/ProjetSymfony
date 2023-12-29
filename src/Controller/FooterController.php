@@ -7,7 +7,6 @@ use App\Services\UserManager;
 
 class FooterController extends AbstractController
 {
-
     public function displayFooter(UserManager $userManager)
     {
         return $this->render(

@@ -10,19 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\AddressRepository;
-
-
 
 #[Route('customer/address/')]
 class AddressController extends AbstractController
 {
-
-    public function __construct()
-    {
-    }
-
-
     #[Route('new', name: 'app_new_address')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {

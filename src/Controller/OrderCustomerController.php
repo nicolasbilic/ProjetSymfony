@@ -6,32 +6,20 @@ use App\Entity\Address;
 use App\Entity\Basket;
 use App\Entity\Order;
 use App\Entity\OrderLine;
-use App\Repository\BasketRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Customer;
 use App\Entity\OrderState;
-use App\Form\ValidateOrderFormType;
 use App\Services\CartService;
 
 #[Route('customer/orders/')]
 class OrderCustomerController extends AbstractController
 {
-    private $basketRepo;
-    private $basketController;
-
-    public function __construct(BasketRepository $basketRepo, BasketController $basketController)
-    {
-        $this->basketRepo = $basketRepo;
-        $this->basketController = $basketController;
-    }
-
     #[Route('new', name: 'app_new_order')]
-    public function create(OrderRepository $orderRepo, Request $request, EntityManagerInterface $em, CartService $cartService): Response
+    public function create(Request $request, EntityManagerInterface $em, CartService $cartService): Response
     {
         $orderId = 0;
         $customer = $this->getUser();
@@ -69,8 +57,6 @@ class OrderCustomerController extends AbstractController
                 $em->persist($order);
                 $em->flush();
                 $orderId = $order->getId();
-
-
                 foreach ($basketlines as $basketline) {
                     $product = $basketline->getProduct();
                     $orderLine = new OrderLine();
@@ -106,11 +92,9 @@ class OrderCustomerController extends AbstractController
         ]);
     }
 
-
     #[Route('list', name: 'app_list_orders')]
-    public function displayList(Request $request): Response
+    public function displayList(): Response
     {
-
         $customer = $this->getUser();
         $orders = [];
         if ($customer instanceof Customer) {
@@ -124,7 +108,7 @@ class OrderCustomerController extends AbstractController
     }
 
     #[Route('details/{id}', name: 'app_show_order')]
-    public function displayOrder(Request $request, ?Order $order): Response
+    public function displayOrder(?Order $order): Response
     {
         $customer = $this->getUser();
         $orderLines = $order->getOrderLine();
@@ -137,7 +121,6 @@ class OrderCustomerController extends AbstractController
                 return $this->redirectToRoute('app_list_orders');
             }
         }
-
 
         return $this->render('orders/details.html.twig', [
             'title' => 'Votre commande',

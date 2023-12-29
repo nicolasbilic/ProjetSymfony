@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\CustomerType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
@@ -22,7 +21,6 @@ class RegisterController extends AbstractController
         ]);
     } */
     private UserPasswordHasherInterface $hasher;
-
     private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher)
@@ -37,8 +35,6 @@ class RegisterController extends AbstractController
         $customer = new Customer();
         $form = $this->createForm(CustomerType::class, $customer);
         $form->handleRequest($request);
-        /* $errors = $form->getErrors(true, false);
-        dump($errors); */
         if ($form->isSubmitted() && $form->isValid()) {
             //Get user password
             $userPassword = $form->get('password')->getData();

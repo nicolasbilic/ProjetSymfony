@@ -1,5 +1,5 @@
 <?php
-// src/Controller/IndexController.php
+
 namespace App\Controller;
 
 use App\Entity\Admin;
@@ -27,7 +27,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(EntityManagerInterface $entityManager, OrderRepository  $orderRepository, ReviewRepository $reviewRepo, ManagerRegistry $doctrine): Response
     {
-
         $user = $this->getUser();
         if ($user) {
             if ($user instanceof Admin) {
@@ -37,7 +36,6 @@ class HomeController extends AbstractController
         //Get slides pictures
         $this->getSlides();
         $bestSales = $orderRepository->getBestSales();
-
         //Get new product to show
         $newProductDatas = $this->getNewProducts($entityManager);
         $reviews = $this->getReviews($reviewRepo);

@@ -12,7 +12,6 @@ use App\Entity\Customer;
 use App\Form\ProfilForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProfilController extends AbstractController
 {
@@ -52,7 +51,6 @@ class ProfilController extends AbstractController
                     $user->setPicture($targetDirectory . $fileName);
                 }
             }
-
             //Save modifications
             $entityManager->flush();
         }

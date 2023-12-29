@@ -6,12 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\KernelInterface;
 use App\Repository\ProductRepository;
-use App\Services\CartService;
 use App\Form\CartType;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Product;
+
 
 class ProductUserController extends AbstractController
 {

@@ -42,7 +42,6 @@ class ContactController extends AbstractController
                 $reviewData = $form->getData();
                 $user = $this->getUser();
                 $userId = ($user instanceof Customer) ? $user->getId() : null;
-
                 //Create the object review
                 $review = new Review();
                 $review

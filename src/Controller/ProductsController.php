@@ -10,17 +10,12 @@ use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ProductFormType;
-use App\Repository\CategoryRepository;
 
 #[Route('admin/products/')]
 class ProductsController extends AbstractController
 {
-    public function __construct()
-    {
-    }
-
     #[Route('list', name: 'app_list_products')]
-    public function displayList(ProductRepository $productRepo, Request $request): Response
+    public function displayList(ProductRepository $productRepo): Response
     {
         $products = $productRepo->findAll();
 
@@ -30,7 +25,7 @@ class ProductsController extends AbstractController
     }
 
     #[Route('new', name: 'app_new_product')]
-    public function new(EntityManagerInterface $em, Request $request, ProductRepository $productRepository): Response
+    public function new(EntityManagerInterface $em, Request $request): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductFormType::class, $product);
@@ -65,7 +60,6 @@ class ProductsController extends AbstractController
 
         $targetDirectory = 'img/products/';
         $form = $this->createForm(ProductFormType::class, $product);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form['file']->getData();
@@ -82,7 +76,6 @@ class ProductsController extends AbstractController
             'form' => $form,
         ]);
     }
-
 
     #[Route('delete/{id}', name: 'app_delete_product')]
     public function delete(
