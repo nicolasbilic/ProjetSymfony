@@ -70,6 +70,9 @@
     {% if app.request.uri == 'https://127.0.0.1:8000/customer/orders/list' %}
     <link rel="stylesheet" href="{{ asset('css/customerOrderList.css') }}" />
     {% endif %}
+    {% if app.request.uri == 'https://127.0.0.1:8000/admin/reviews/list' %}
+    <link rel="stylesheet" href="{{ asset('css/adminReviewsList.css') }}" />
+    {% endif %}
 
 
     <title>{% block title %}Necro Defense Store{% endblock %}</title>

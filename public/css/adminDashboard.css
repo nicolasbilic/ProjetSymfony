@@ -43,6 +43,7 @@ td:nth-child(2) {
     font-family: 'Creepster', cursive;
     font-size: 25px;
 }
+
 .zombie-table tbody tr:hover {
     background-color: #4b4b4b !important;
 }
