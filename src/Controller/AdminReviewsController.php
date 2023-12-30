@@ -13,7 +13,7 @@ use App\Repository\ReviewRepository;
 #[Route('/admin/reviews/')]
 class AdminReviewsController extends AbstractController
 {
-    #[Route('/admin/reviews/list', name: 'app_admin_reviews_manager')]
+    #[Route('list', name: 'app_reviews_manager')]
     public function list(ReviewRepository $reviewRepo, Request $request, EntityManagerInterface $em): Response
     {
         $reviews = $reviewRepo->findAll();
@@ -28,7 +28,7 @@ class AdminReviewsController extends AbstractController
                 $order = $form->getData();
                 $em->persist($order);
                 $em->flush();
-                return $this->redirectToRoute('app_admin_reviews_manager');
+                return $this->redirectToRoute('app_reviews_manager');
             }
         }
 
