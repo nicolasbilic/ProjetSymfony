@@ -1,8 +1,9 @@
 <?php
-// src/Controller/IndexController.php
+
 namespace App\Controller;
 
 use App\Entity\Admin;
+use App\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,6 +11,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderRepository;
+use App\Repository\ReviewRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 class HomeController extends AbstractController
 {
@@ -22,27 +25,36 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_index')]
-    public function index(EntityManagerInterface $entityManager, OrderRepository  $orderRepository): Response
+    public function index(EntityManagerInterface $entityManager, OrderRepository  $orderRepository, ReviewRepository $reviewRepo, ManagerRegistry $doctrine): Response
     {
-        //Get slides pictures
-        $this->getSlides();
-        $bestSales = $orderRepository->getBestSales();
-
-        //Get new product to show
-        $newProductDatas = $this->getNewProducts($entityManager);
-
         $user = $this->getUser();
-
         if ($user) {
             if ($user instanceof Admin) {
                 return $this->redirectToRoute('app_admin_dashboard');
             }
         }
-
+        //Get slides pictures
+        $this->getSlides();
+        $bestSales = $orderRepository->getBestSales();
+        //Get new product to show
+        $newProductDatas = $this->getNewProducts($entityManager);
+        $reviews = $this->getReviews($reviewRepo);
+        $pictureReviews = [];
+        foreach ($reviews as $review) {
+            $userId = $review->getUserId();
+            if ($userId) {
+                // Utilisez le gestionnaire de doctrine pour récupérer l'utilisateur
+                $user =  $doctrine->getRepository(Customer::class)->find($userId);
+                $pictureReviews[] = $user->getPicture();
+            }
+        }
+        dump($pictureReviews);
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'bestSales' => $bestSales,
             'newProductsDatas' => $newProductDatas,
+            'reviews' => $reviews,
+            'reviewsPic' => $pictureReviews
         ]);
     }
 
@@ -62,7 +74,7 @@ class HomeController extends AbstractController
     public function getSlides()
     {
         // Path of the slideshow directory
-        $directoryPath = $this->kernel->getProjectDir() . '/public/images/bannerSlideshow';
+        $directoryPath = $this->kernel->getProjectDir() . '/public/img/bannerSlideshow';
         // Get the files in the directory
         $files = scandir($directoryPath);
         $jpgFiles = [];
@@ -78,5 +90,15 @@ class HomeController extends AbstractController
         }
         $this->slides = $jpgFiles;
         return $jpgFiles;
+    }
+
+    public function getReviews(ReviewRepository $reviewRepo)
+    {
+        $reviews = $reviewRepo->findBy(
+            ['state' => 'approved'],
+            ['date_review' => 'DESC'],
+            4
+        );
+        return $reviews;
     }
 }

@@ -2,7 +2,7 @@
 <a href="/"
   ><img
     class="headerBanner"
-    src="/images/headerBanner.jpg"
+    src="/img/headerBanner.jpg"
     alt="Bannière du header"
 /></a>
 <nav>
@@ -17,13 +17,14 @@
     <li><a href="/login">CONNEXION</a></li>
     {% else %}
     <li>
-        <div class="profil-container">
-            <a href="#" class="profil">PROFIL</a>
-            <div class ="subcategories">
-              <a href = "/customer/orders/list">Mes commandes</a>
-              <a href = "/logout">Se deconnecter</a>
-            </div>
+      <div class="profil-container">
+        <a href="#" class="profil">PROFIL</a>
+        <div class="subcategories">
+          <a href="/updateProfil">Mon profil</a>
+          <a href="/customer/orders/list">Mes commandes</a>
+          <a href="/logout">Se deconnecter</a>
         </div>
+      </div>
     </li>
     {% endif %}
   </ul>

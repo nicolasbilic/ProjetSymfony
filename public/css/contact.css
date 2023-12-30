@@ -59,7 +59,7 @@
 .inputsFullName {
     display: flex;
     justify-content: space-between;
-    width:70%;
+    width:80%;
 }
 .inputsFullName input{
     width: 100%;
@@ -83,3 +83,4 @@
 .contactButton:hover {
     background-color: #679B33;
 }
+

@@ -32,8 +32,8 @@
         </div>
         <section class="order-section-product">
             {% if orderLines is not empty %}
-                <div class="order-content-product" style="background-image: url('{{ asset('images/bloody-floor.png') }}');">
-                    <h3 id="title-product">Mes Produits</h3>
+            <div class="order-content-product" style="background-image: url('/img/bloody-floor.png');">
+                <h3 id="title-product">Mes Produits</h3>
                     {% for orderLine in orderLines %}
                         <ul class="product-info-list">
                             <li>Identifiant produit : <span>{{ orderLine.id }}</span></li>
@@ -48,7 +48,7 @@
                 Aucune commande existante
             {% endif %}
             <div class="img-order-new">
-                <img src="{{ asset('images/a-very-happy-zombie.png') }}" alt="a very happy zombie"/>
+                <img src="{{ asset('img/a-very-happy-zombie.png') }}" alt="a very happy zombie"/>
             </div>
         </section>
     </section>

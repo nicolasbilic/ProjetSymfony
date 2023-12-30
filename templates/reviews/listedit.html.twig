@@ -1,10 +1,9 @@
-{% extends 'base.html.twig' %}
-
-{% block header %}
-<a href="/admin/dashboard"><img
-  class="headerBanner"
-  src="/images/headerBanner.jpg"
-  alt="Bannière du header"
+{% extends 'base.html.twig' %} {% block header %}
+<a href="/admin/dashboard"
+  ><img
+    class="headerBanner"
+    src="/img/headerBanner.jpg"
+    alt="Bannière du header"
 /></a>
 <nav>
   <ul class="headerList">
@@ -15,36 +14,34 @@
     <li><a href="/admin/reviews/list">AVIS</a></li>
   </ul>
 </nav>
-{% endblock %}
-{% block main %}
-  <table class="table table-striped table-bordered table-hover table-responsive zombie-table">
-    <thead>
-      <th colspan="4" id="review-table-title">Liste des avis</th>
-      <tr>
-        <th>Note</th>
-        <th>Titre</th>
-        <th>Message</th>
-        <th>Statut</th>
-      </tr>
-    </thead>
-    {% if forms is not empty %}
-    <tbody>
-      {% for form in forms %}
-        <tr>
-          <td> {{ form.vars.value.value }} </td>
-          <td> {{ form.vars.value.title }} </td>
-          <td> {{ form.vars.value.resume }} </td>
-          <td>
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input type='submit' name='modifier_statut' class="btn btn-success">
-            {{ form_end(form) }}
-          </td>
-        </tr>
-      {% endfor %}
-    {% else %}
-      Aucun avis existante
-    {% endif %}
-    </tbody>
-  </table>
+{% endblock %} {% block main %}
+<table
+  class="table table-striped table-bordered table-hover table-responsive zombie-table"
+>
+  <thead>
+    <th colspan="4" id="review-table-title">Liste des avis</th>
+    <tr>
+      <th>Note</th>
+      <th>Titre</th>
+      <th>Message</th>
+      <th>Statut</th>
+    </tr>
+  </thead>
+  {% if forms is not empty %}
+  <tbody>
+    {% for form in forms %}
+    <tr>
+      <td>{{ form.vars.value.value }}</td>
+      <td>{{ form.vars.value.title }}</td>
+      <td>{{ form.vars.value.resume }}</td>
+      <td>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" name="modifier_statut" class="btn btn-success" />
+        {{ form_end(form) }}
+      </td>
+    </tr>
+    {% endfor %} {% else %} Aucun avis existante {% endif %}
+  </tbody>
+</table>
 {% endblock %}

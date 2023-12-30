@@ -6,9 +6,18 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Eater&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Eater&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap"
+      rel="stylesheet"
+    />
     {% if app.request.uri == 'https://127.0.0.1:8000/' or app.request.uri ==
     'https://127.0.0.1:8000/accueil' %}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
@@ -17,86 +26,120 @@
     {% if 'https://127.0.0.1:8000/list-products' in app.request.uri or
     'https://127.0.0.1:8000/products' in app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/listProducts.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
     {% endif %} {% if 'https://127.0.0.1:8000/product?' in app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/productUser.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/contact' %}
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}" />
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/login' or
     app.request.uri == 'https://127.0.0.1:8000/admin' %}
     <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/register' or
+    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/register' or
     app.request.uri == 'https://127.0.0.1:8000/admin' %}
     <link rel="stylesheet" href="{{ asset('css/register.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/admin/products/list' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/admin/products/list' %}
     <link rel="stylesheet" href="{{ asset('css/adminListProducts.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/admin/categories/list' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/admin/categories/list' %}
     <link rel="stylesheet" href="{{ asset('css/adminListCategories.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/admin/products/new' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/admin/products/new' %}
     <link rel="stylesheet" href="{{ asset('css/adminNewProducts.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/admin/categories/new' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/admin/categories/new' %}
     <link rel="stylesheet" href="{{ asset('css/adminNewCategories.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/admin/dashboard' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/admin/dashboard' %}
     <link rel="stylesheet" href="{{ asset('css/adminDashboard.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/admin/orders/list' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/admin/orders/list' %}
     <link rel="stylesheet" href="{{ asset('css/adminListOrders.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/customer/orders/new' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/customer/orders/new' %}
     <link rel="stylesheet" href="{{ asset('css/customerOrderNew.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/customer/address/new' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/customer/address/new' %}
     <link rel="stylesheet" href="{{ asset('css/addressNew.css') }}" />
-    {% endif %}
-    {% if 'https://127.0.0.1:8000/customer/orders/details' in app.request.uri %}
+    {% endif %} {% if 'https://127.0.0.1:8000/customer/orders/details' in
+    app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/customerOrderDetails.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/customer/orders/list' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/customer/orders/list' %}
     <link rel="stylesheet" href="{{ asset('css/customerOrderList.css') }}" />
-    {% endif %}
-    {% if app.request.uri == 'https://127.0.0.1:8000/admin/reviews/list' %}
+    {% endif %} {% if app.request.uri ==
+    'https://127.0.0.1:8000/admin/reviews/list' %}
     <link rel="stylesheet" href="{{ asset('css/adminReviewsList.css') }}" />
+    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/updateProfil'
+    %}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}" />
     {% endif %}
-
 
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
     <link
       rel="apple-touch-icon"
       sizes="144x144"
-      href="/images/favicon/apple-touch-icon.png"
+      href="/img/favicon/apple-touch-icon.png"
     />
     <link
       rel="icon"
-      type="image/png"
+      type="img/png"
       sizes="32x32"
-      href="/images/favicon/favicon-32x32.png"
+      href="/img/favicon/favicon-32x32.png"
     />
     <link
       rel="icon"
-      type="image/png"
+      type="img/png"
       sizes="16x16"
-      href="/images/favicon/favicon-16x16.png"
+      href="/img/favicon/favicon-16x16.png"
     />
-    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <link rel="manifest" href="/img/favicon/site.webmanifest" />
     <link
       rel="mask-icon"
-      href="/images/favicon/safari-pinned-tab.svg"
+      href="/img/favicon/safari-pinned-tab.svg"
       color="#5bbad5"
     />
     <meta name="msapplication-TileColor" content="#da532c" />
@@ -130,7 +173,7 @@
       {% block footer %}
       <img
         class="footerBanner"
-        src="/images/footerBanner.jpg"
+        src="/img/footerBanner.jpg"
         alt="Bannière du header"
         class="image_footer"
       />

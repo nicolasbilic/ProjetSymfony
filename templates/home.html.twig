@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} {% block main %}
 <div class="slideshowContainer">
   {% for slide in slideShowPictures %}
-  <img src="/images/bannerSlideshow/{{ slide }}" alt="Carrousel Bannière" />
+  <img src="/img/bannerSlideshow/{{ slide }}" alt="Carrousel Bannière" />
   {% endfor %}
 </div>
 <section id="aboutUs">
@@ -21,12 +21,12 @@
   <div class="sectionContainer">
     <div class="arrowCarouselContainer">
       <img
-        src="/images/bestSale/arrow.png"
+        src="/img/bestSale/arrow.png"
         style="transform: scaleX(-1)"
         alt="Précédent"
         class="previousArrow"
       />
-      <img src="/images/bestSale/arrow.png" alt="suivant" class="nextArrow" />
+      <img src="/img/bestSale/arrow.png" alt="suivant" class="nextArrow" />
     </div>
     <h1 class="darkGreen">{{ "nos meilleurs ventes" | upper }}</h1>
     <div class="bestSaleGallery">
@@ -34,7 +34,7 @@
       <div class="cardContainerBestSale">
         <a href="/product?idProduct={{ bestSaleItem.product.id }}">
           <img
-            src="/images/{{ bestSaleItem.product.picture }}"
+            src="/{{ bestSaleItem.product.picture }}"
             alt="{{ bestSaleItem.product.name }}"
           />
         </a>
@@ -71,7 +71,7 @@
       <div class="cardContainer">
         <a href="/product/?idProduct={{ newProductData.id }}">
           <img
-            src="/images/{{ newProductData.picture }}"
+            src="/{{ newProductData.picture }}"
             alt="{{ newProductData.name }}"
         /></a>
         <div class="cardText">
@@ -95,6 +95,59 @@
       </div>
       {% endfor %}
     </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="containerReviews">
+    <h1 class="darkGreen">{{ "nos retours clients" | upper }}</h1>
+    {% for i in range(0, 1) %}
+    <div class="review">
+      <div class="reviewDetails">
+        {% if reviewsPic is not same as NULL %}
+        <img src="{{ asset(reviewsPic[i]) }}" class="avatar" alt="Avatar" />
+        {% endif %}
+        <div class="reviewDetailsText">
+          {{ reviews[i].UserFirstName }}
+          <div class="reviewDetailsDateStars">
+            {% for j in range(1, reviews[i].value) %}
+            <img src="{{ asset('/img/fullStar.png') }}" alt="Full Star" />
+            {% endfor %} {% if reviews[i].value < 5 %} {% for k in
+            range(reviews[i].value, 4) %}
+            <img src="{{ asset('/img/emptyStar.png') }}" alt="Empty Star" />
+            {% endfor %} {% endif %}
+            <p>{{ reviews[i].dateReview|date('d/m/y') }}</p>
+          </div>
+        </div>
+      </div>
+      <p class="userMessage">"{{ reviews[i].resume | raw }}"</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="containerReviews">
+    <h1 class="darkGreen">{{ "nos retours clients" | upper }}</h1>
+    {% for i in range(2, 3) %}
+    <div class="review">
+      <div class="reviewDetails">
+        {% if reviewsPic is not same as NULL %}
+        <img src="{{ asset(reviewsPic[i]) }}" class="avatar" alt="Avatar" />
+        {% endif %}
+        <div class="reviewDetailsText">
+          {{ reviews[i].UserFirstName }}
+          <div class="reviewDetailsDateStars">
+            {% for j in range(1, reviews[i].value) %}
+            <img src="{{ asset('/img/fullStar.png') }}" alt="Full Star" />
+            {% endfor %} {% if reviews[i].value < 5 %} {% for k in
+            range(reviews[i].value, 4) %}
+            <img src="{{ asset('/img/emptyStar.png') }}" alt="Empty Star" />
+            {% endfor %} {% endif %}
+            <p>{{ reviews[i].dateReview|date('d/m/y') }}</p>
+          </div>
+        </div>
+      </div>
+      <p class="userMessage">"{{ reviews[i].resume | raw }}"</p>
+    </div>
+    {% endfor %}
   </div>
 </section>
 <script type="module" src="{{ asset('/js/indexSlideshow.js') }}"></script>

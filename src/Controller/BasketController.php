@@ -1,9 +1,8 @@
 <?php
-// src/Controller/IndexController.php
+
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Repository\OrderRepository;
 use App\Services\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\UserManager;
@@ -24,7 +23,6 @@ class BasketController extends AbstractController
 
     public function displayBasket(UserManager $userManager, CartService $cartService): Response
     {
-
         $this->loadUserBasket($cartService);
         $products = $cartService->getCartList();
         $totalPrice = $cartService->calculateBasketTotal($products);

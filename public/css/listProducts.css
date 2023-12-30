@@ -133,7 +133,7 @@
 .cardContainer img{
     width:100%;
     object-fit: contain;
-    background-image: url('/images/card_background.jpg');
+    background-image: url('/img/card_background.jpg');
     background-size: contain; 
     transition: transform 0.5s;
 

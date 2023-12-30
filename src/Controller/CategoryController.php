@@ -22,7 +22,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('list', name: 'app_list_categories')]
-    public function list(Request $request): Response
+    public function list(): Response
     {
         $categories = $this->categoryRepo->findAll();
 

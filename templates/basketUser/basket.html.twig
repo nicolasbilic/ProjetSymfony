@@ -1,47 +1,52 @@
 {% if app.user %}
 <div class="basketHeader">
-  <img class="iconBasket" src="/images/iconbasketwhite.png" alt="Logo panier" />
+  <img class="iconBasket" src="/img/iconbasketwhite.png" alt="Logo panier" />
   <h1 class="darkGreen">VOTRE PANIER</h1>
 </div>
 
 {% for product in products %}
 <div class="basketItem">
-  <img
-    src="/images/{{ product.product.picture }}"
-    alt="{{ product.product.name }}"
-  />
+  <img src="/{{ product.product.picture }}" alt="{{ product.product.name }}" />
   <p class="basketItemP">{{ product.product.name }}</p>
-    <form
-      action="{{ path('basket_modify_quantity')}}"
-      method="post"
-      id="count"
+  <form action="{{ path('basket_modify_quantity') }}" method="post" id="count">
+    <input type="hidden" name="id_product" value="{{ product.product.id }}" />
+    <button
+      type="submit"
+      name="actionCount"
+      value="-"
+      class="buttonLeft button"
     >
-      <input type="hidden" name="id_product" value="{{ product.product.id }}" />
-      <button type="submit" name="actionCount" value="-" class="buttonLeft button">-</button>
-      <div class="displayer">
-        <p class="countP darkGreen">{{ product.quantity }}</p>
-      </div>
-      <button type="submit" name="actionCount" value="+" class="buttonRight button">+</button>
-    </form>
+      -
+    </button>
+    <div class="displayer">
+      <p class="countP darkGreen">{{ product.quantity }}</p>
+    </div>
+    <button
+      type="submit"
+      name="actionCount"
+      value="+"
+      class="buttonRight button"
+    >
+      +
+    </button>
+  </form>
 </div>
 {% endfor %}
 <div id="price">TOTAL : {{ totalePrice }}€</div>
-<form
-      action="{{ path('basket_clear_cart')}}"
-      method="post"
-      id="clearCart"
-    >
-<button type="submit" class="clearCart darkGreen">vider mon panier</button>
+<form action="{{ path('basket_clear_cart') }}" method="post" id="clearCart">
+  <button type="submit" class="clearCart darkGreen">vider mon panier</button>
 </form>
-<button class="basketSubmit" onclick="window.location.href='{{ path('app_new_order') }}'">PAYER</button>
+<button
+  class="basketSubmit"
+  onclick="window.location.href='{{ path('app_new_order') }}'"
+>
+  PAYER
+</button>
 <script type="module" src="{{ asset('/js/handleClicIconBasket.js') }}"></script>
 {% else %}
 <div class="basketHeader">
   <a href="/login"
-    ><img
-      class="iconBasket"
-      src="/images/iconbasketwhite.png"
-      alt="Logo panier"
+    ><img class="iconBasket" src="/img/iconbasketwhite.png" alt="Logo panier"
   /></a>
 </div>
 {% endif %}
