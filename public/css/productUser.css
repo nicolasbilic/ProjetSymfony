@@ -114,3 +114,8 @@
 .hover:hover {
     transform: scale(1.05);
 }
+
+
+.first a, .previous a, .page a, .next a, .last  a {
+    color: #186F37 !important;
+}
