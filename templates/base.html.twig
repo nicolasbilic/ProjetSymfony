@@ -116,6 +116,8 @@
     {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/updateProfil'
     %}
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}" />
+    {% endif %} {% if app.request.uri == 'https://127.0.0.1:8000/page-404' %}
+    <link rel="stylesheet" href="{{ asset('css/page-404.css') }}" />
     {% endif %}
 
     <title>{% block title %}Necro Defense Store{% endblock %}</title>
