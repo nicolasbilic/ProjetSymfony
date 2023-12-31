@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
-use App\Services\CartService;
 use App\Form\CartType;
-use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class ProductsUserController extends AbstractController
 {
@@ -23,11 +23,11 @@ class ProductsUserController extends AbstractController
     }
 
     #[Route('/products', name: 'app_products')]
-    public function displayListProducts(Request $request): Response
+    public function displayListProducts(PaginatorInterface $paginator, Request $request): Response
     {
         $form = $this->createForm(CartType::class);
         $form->handleRequest($request);
-
+        $pagination = [];
         //Get the subcategory id from the query
         $subcategoryId = $request->query->get('category');
         //If no query, set a default subcategory id
@@ -36,14 +36,21 @@ class ProductsUserController extends AbstractController
         }
         //Get subcategory and products data from the database
         $subcategory = $this->getSubcategory($subcategoryId);
-        $products = $this->getSubcategoryProducts($subcategoryId);
-
+        if ($subcategory) {
+            $pagination = $paginator->paginate(
+                $this->getSubcategoryProducts($subcategoryId),
+                $request->query->get('page', 1),
+                9
+            );
+        } else {
+            $pagination = [];
+        }
         $categoryOfSubcategory = $subcategory->getParent(); // code que j'ai rajouté
 
         return $this->render('productUser/productsUser.html.twig', [
             'categoryOfSubcategory' => $categoryOfSubcategory, // code que j'ai rajouté
             'subcategory' => $subcategory,
-            'products' => $products,
+            'products' => $pagination,
             'errors' => $this->errors,
             'form' => $form->createView(),
         ]);

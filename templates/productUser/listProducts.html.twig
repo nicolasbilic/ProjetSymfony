@@ -77,6 +77,9 @@
       </div>
       {% endfor %}
     </div>
+    <div class="paginator">{{ knp_pagination_render(allProducts) }}</div>
   </div>
 </section>
+<script type="module" src="{{ asset('/js/productsListStyle.js') }}"></script>
+
 {% endif %} {% endblock %}

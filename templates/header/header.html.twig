@@ -1,9 +1,6 @@
 {% block header %}
 <a href="/"
-  ><img
-    class="headerBanner"
-    src="/img/headerBanner.jpg"
-    alt="Bannière du header"
+  ><img class="headerBanner" src="/img/header.gif" alt="Bannière du header"
 /></a>
 <nav>
   <ul class="headerList">
@@ -18,7 +15,7 @@
     {% else %}
     <li>
       <div class="profil-container">
-        <a href="#" class="profil">PROFIL</a>
+        <a href="/updateProfil" class="profil">PROFIL</a>
         <div class="subcategories">
           <a href="/updateProfil">Mon profil</a>
           <a href="/customer/orders/list">Mes commandes</a>
@@ -34,4 +31,5 @@
     {% endblock %}
   </section>
 </nav>
+<script type="module" src="{{ asset('/js/colorNav.js') }}"></script>
 {% endblock %}
