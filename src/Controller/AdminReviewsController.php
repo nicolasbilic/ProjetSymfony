@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Admin;
+use App\Entity\Review;
+use App\Form\ReviewFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReviewRepository;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Form\FormView;
 
 #[Route('/admin/reviews/')]
 class AdminReviewsController extends AbstractController
@@ -30,24 +33,33 @@ class AdminReviewsController extends AbstractController
             return $this->redirectToRoute('app_admin_login');
         }
         $reviews = $reviewRepo->findAll();
-        $forms = [];
-
-        foreach ($reviews as $review) {
-            $form = $this->createForm(ReviewsManagerFormType::class, $review);
-            $forms[] = $form->createView();
-
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $order = $form->getData();
-                $em->persist($order);
-                $em->flush();
-                return $this->redirectToRoute('app_reviews_manager');
-            }
-        }
 
         return $this->render('reviews/listedit.html.twig', [
             'title' => 'Liste des avis',
-            'forms' => $forms,
+            'reviews' => $reviews,
+        ]);
+    }
+
+    #[Route('update/{id}', name: 'app_update_review')]
+    public function update(
+        Request $request,
+        EntityManagerInterface $em,
+        ?Review $review,
+    ) {
+        if ($review === null) {
+            return $this->redirectToRoute('app_reviews_manager');
+        }
+
+        $form = $this->createForm(ReviewsManagerFormType::class, $review);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($review);
+            $em->flush();
+            return $this->redirectToRoute('app_reviews_manager');
+        }
+        return $this->render('reviews/update.html.twig', [
+            'title' => 'Mise à jour de l\'avis',
+            'form' => $form,
         ]);
     }
 }
