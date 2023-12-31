@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderRepository;
 use App\Repository\ReviewRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -25,7 +27,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_index')]
-    public function index(EntityManagerInterface $entityManager, OrderRepository  $orderRepository, ReviewRepository $reviewRepo, ManagerRegistry $doctrine): Response
+    public function index(PaginatorInterface $paginator, EntityManagerInterface $entityManager, OrderRepository  $orderRepository, ReviewRepository $reviewRepo, ManagerRegistry $doctrine, Request $request): Response
     {
         $user = $this->getUser();
         if ($user) {
@@ -37,6 +39,11 @@ class HomeController extends AbstractController
         $this->getSlides();
         $bestSales = $orderRepository->getBestSales();
         //Get new product to show
+        $pagination = $paginator->paginate(
+            $this->getNewProducts($entityManager),
+            $request->query->get('page', 1),
+            9
+        );
         $newProductDatas = $this->getNewProducts($entityManager);
         $reviews = $this->getReviews($reviewRepo);
         $pictureReviews = [];
@@ -48,11 +55,10 @@ class HomeController extends AbstractController
                 $pictureReviews[] = $user->getPicture();
             }
         }
-        dump($pictureReviews);
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
             'bestSales' => $bestSales,
-            'newProductsDatas' => $newProductDatas,
+            'newProductsDatas' => $pagination,
             'reviews' => $reviews,
             'reviewsPic' => $pictureReviews
         ]);
@@ -65,7 +71,6 @@ class HomeController extends AbstractController
             ->createQueryBuilder('p')
             ->select(['p.id', 'p.name', 'p.price', 'p.dateAdd as createdAt', 'p.picture', 'p.description'])
             ->orderBy('p.dateAdd', 'DESC')
-            ->setMaxResults(6)
             ->getQuery()
             ->getArrayResult();
         return $newProductsData;
