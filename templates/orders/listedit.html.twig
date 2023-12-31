@@ -29,20 +29,22 @@
       <th>Statut</th>
     </tr>
   </thead>
-  {% if forms is not empty %}
+  {% if orders is not empty %}
   <tbody>
-    {% for form in forms %}
+    {% for order in orders %}
     <tr>
-      <td>{{ form.vars.value.id }}</td>
-      <td>{{ form.vars.value.customer.firstname }}</td>
-      <td>{{ form.vars.value.customer.name }}</td>
-      <td>{{ form.vars.value.total }}€</td>
-      <td>{{ form.vars.value.date.format("d-m-Y") }}</td>
+      <td>{{ order.id }}</td>
+      <td>{{ order.customer.firstname }}</td>
+      <td>{{ order.customer.name }}</td>
+      <td>{{ order.total }}€</td>
+      <td>{{ order.date.format("d-m-Y") }}</td>
       <td>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" name="modifier_statut" class="btn btn-success" />
-        {{ form_end(form) }}
+      {{ order.orderState.label}}
+       <a
+          href="{{ path('app_update_order', { id: order.id }) }}"
+          class="btn btn-success"
+          >Modifier l'état</a
+        >
       </td>
     </tr>
     {% endfor %} {% else %} Aucune commande existante {% endif %}

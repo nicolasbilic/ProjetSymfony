@@ -27,18 +27,20 @@
       <th>Statut</th>
     </tr>
   </thead>
-  {% if forms is not empty %}
+  {% if reviews is not empty %}
   <tbody>
-    {% for form in forms %}
+    {% for review in reviews %}
     <tr>
-      <td>{{ form.vars.value.value }}</td>
-      <td>{{ form.vars.value.title }}</td>
-      <td>{{ form.vars.value.resume }}</td>
+      <td>{{ review.value }}</td>
+      <td>{{ review.title }}</td>
+      <td>{{ review.resume }}</td>
       <td>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" name="modifier_statut" class="btn btn-success" />
-        {{ form_end(form) }}
+          {{ review.state}}
+        <a
+          href="{{ path('app_update_review', { id: review.id }) }}"
+          class="btn btn-success"
+          >Modifier l'état</a
+        >
       </td>
     </tr>
     {% endfor %} {% else %} Aucun avis existante {% endif %}
