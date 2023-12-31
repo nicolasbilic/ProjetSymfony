@@ -1,9 +1,11 @@
-{% extends 'base.html.twig' %} {% block main %}
+{% extends 'base.html.twig' %} {% block main %} {% if slideShowPictures is not
+empty %}
 <div class="slideshowContainer">
   {% for slide in slideShowPictures %}
   <img src="/img/bannerSlideshow/{{ slide }}" alt="Carrousel Bannière" />
   {% endfor %}
 </div>
+{% endif %}
 <section id="aboutUs">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "a propos de necro defense store" | upper }}</h1>
@@ -61,8 +63,7 @@
     </div>
   </div>
 </section>
-{% endif %}
-
+{% endif %} {% if newProductsDatas is not empty %}
 <section id="newItems">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "nos nouveaux produits" | upper }}</h1>
@@ -98,7 +99,7 @@
     <div class="paginator">{{ knp_pagination_render(newProductsDatas) }}</div>
   </div>
 </section>
-
+{% endif %} {% if reviews is not empty %}
 <section id="reviews">
   <div class="containerReviews">
     <h1 class="darkGreen">{{ "nos retours clients" | upper }}</h1>
@@ -151,6 +152,7 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
 <script type="module" src="{{ asset('/js/indexSlideshow.js') }}"></script>
 <script type="module" src="{{ asset('/js/carouselBestSale.js') }}"></script>
 {% endblock %}
