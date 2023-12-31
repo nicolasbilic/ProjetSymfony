@@ -1,11 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block nav %}
-    nav administration
+{% block header %}
+<a href="/admin/dashboard"
+  ><img
+    class="headerBanner"
+    src="/img/headerBanner.jpg"
+    alt="Bannière du header"
+/></a>
+    <nav>
+  <ul class="headerList">
+    <li><a href="/admin/dashboard">ACCUEIL</a></li>
+    <li><a href="/admin/products/list">PRODUITS</a></li>
+    <li><a href="/admin/categories/list">CATÉGORIES</a></li>
+    <li><a href="/admin/orders/list">COMMANDES</a></li>
+    <li><a href="/admin/reviews/list">AVIS</a></li>
+  </ul>
+</nav>
 {% endblock %}
 {% block main %}
-    {{ title }}
-            {{ form_start(form) }}
+    <style>
+        .form-update-review {
+            font-family: 'Creepster', cursive;
+            font-size: 25px;
+            color: white !important;
+            text-align: center;
+            vertical-align: middle;
+            width: fit-content;
+            margin: 0 auto;
+            padding-bottom: 10px;
+            
+            
+        }
+    </style>
+    <div style="
+        background-color: #679b33;
+    ">
+        <h1 style="
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+            font-family: 'Creepster', cursive;
+            text-shadow: 2px 2px 4px #000;
+            font-size: 35px;
+            background-color: #186f37 !important;
+        ">
+            {{ title }}
+        </h1>
+            {{ form_start(form, {'attr': {'class': 'form-update-review'}}) }}
             {{ form_widget(form) }}
             <input type='submit' name='modifier_statut'>
             {{ form_end(form) }}
