@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
 use App\Entity\Category;
 use App\Form\CategoryFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,20 +11,27 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\SecurityBundle\Security;
 
 #[Route('admin/categories/')]
 class CategoryController extends AbstractController
 {
     private $categoryRepo;
+    private $security;
 
-    public function __construct(CategoryRepository $categoryRepo)
+    public function __construct(CategoryRepository $categoryRepo, Security $security)
     {
         $this->categoryRepo = $categoryRepo;
+        $this->security = $security;
     }
 
     #[Route('list', name: 'app_list_categories')]
     public function list(): Response
     {
+        $user = $this->security->getUser();
+        if (!$user instanceof Admin) {
+            return $this->redirectToRoute('app_admin_login');
+        }
         $categories = $this->categoryRepo->findAll();
 
         return $this->render('categories/list.html.twig', [
@@ -35,6 +43,10 @@ class CategoryController extends AbstractController
     #[Route('new', name: 'app_new_category')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {
+        $user = $this->security->getUser();
+        if (!$user instanceof Admin) {
+            return $this->redirectToRoute('app_admin_login');
+        }
         $category = new Category();
         $form = $this->createForm(CategoryFormType::class, $category);
         $targetDirectory = 'img/categories/';
@@ -70,6 +82,10 @@ class CategoryController extends AbstractController
         EntityManagerInterface $em,
         ?Category $category,
     ) {
+        $user = $this->security->getUser();
+        if (!$user instanceof Admin) {
+            return $this->redirectToRoute('app_admin_login');
+        }
         if ($category === null) {
             return $this->redirectToRoute('app_list_categories');
         }
@@ -107,6 +123,10 @@ class CategoryController extends AbstractController
         EntityManagerInterface $em,
         ?Category $category,
     ) {
+        $user = $this->security->getUser();
+        if (!$user instanceof Admin) {
+            return $this->redirectToRoute('app_admin_login');
+        }
         if ($category === null) {
             return $this->redirectToRoute('app_list_categories');
         }
