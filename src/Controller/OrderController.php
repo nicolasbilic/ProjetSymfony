@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Admin;
+use App\Entity\Order;
 use App\Form\OrderFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,25 +32,33 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('app_admin_login');
         }
         $orders = $orderRepo->findAll();
-        $forms = [];
-
-        foreach ($orders as $order) {
-            $form = $this->createForm(OrderFormType::class, $order);
-            $forms[] = $form->createView();
-
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $order = $form->getData();
-                $em->persist($order);
-                $em->flush();
-
-                return $this->redirectToRoute('app_admin_list_orders');
-            }
-        }
 
         return $this->render('orders/listedit.html.twig', [
             'title' => 'Liste des commandes',
-            'forms' => $forms,
+            'orders' => $orders,
+        ]);
+    }
+
+    #[Route('update/{id}', name: 'app_update_order')]
+    public function update(
+        Request $request,
+        EntityManagerInterface $em,
+        ?Order $order,
+    ) {
+        if ($order === null) {
+            return $this->redirectToRoute('app_admin_list_orders');
+        }
+
+        $form = $this->createForm(OrderFormType::class, $order);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($order);
+            $em->flush();
+            return $this->redirectToRoute('app_admin_list_orders');
+        }
+        return $this->render('orders/update.html.twig', [
+            'title' => 'Mise à jour de la commande',
+            'form' => $form,
         ]);
     }
 }
