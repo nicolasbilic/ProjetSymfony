@@ -52,7 +52,8 @@ class HomeController extends AbstractController
             if ($userId) {
                 // Utilisez le gestionnaire de doctrine pour récupérer l'utilisateur
                 $user =  $doctrine->getRepository(Customer::class)->find($userId);
-                $pictureReviews[] = $user->getPicture();
+                $picture = $user->getPicture();
+                $pictureReviews[] = ($picture !== null) ? $picture : '';
             }
         }
         return $this->render('home.html.twig', [
