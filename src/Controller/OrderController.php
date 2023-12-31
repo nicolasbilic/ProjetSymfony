@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
 use App\Entity\Order;
 use App\Form\OrderFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

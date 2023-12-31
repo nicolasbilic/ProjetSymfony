@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
 use App\Entity\Review;
 use App\Form\ReviewFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +12,7 @@ use App\Form\ReviewsManagerFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReviewRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormView;
 
 #[Route('/admin/reviews/')]
