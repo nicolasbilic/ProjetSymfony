@@ -105,7 +105,7 @@
     {% for i in range(0, 1) %}
     <div class="review">
       <div class="reviewDetails">
-        {% if reviewsPic is not same as NULL %}
+        {% if reviewsPic[i] is not same as "" %}
         <img src="{{ asset(reviewsPic[i]) }}" class="avatar" alt="Avatar" />
         {% endif %}
         <div class="reviewDetailsText">
@@ -130,7 +130,7 @@
     {% for i in range(2, 3) %}
     <div class="review">
       <div class="reviewDetails">
-        {% if reviewsPic is not same as NULL %}
+        {% if reviewsPic[i] is not same as "" %}
         <img src="{{ asset(reviewsPic[i]) }}" class="avatar" alt="Avatar" />
         {% endif %}
         <div class="reviewDetailsText">
