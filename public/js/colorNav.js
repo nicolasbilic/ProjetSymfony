@@ -3,7 +3,6 @@ export default function colorNav() {
   const path = window.location.pathname;
   if (path === "/" || path === "/accueil") {
     navList.forEach((link) => {
-      console.log(link.textContent.toLowerCase());
       if (link.textContent.toLowerCase() === "accueil") {
         // Votre logique ici pour le lien correspondant
         link.style.color = "#186F37";
@@ -21,7 +20,6 @@ export default function colorNav() {
     });
   } else if (path === "/contact") {
     navList.forEach((link) => {
-      console.log(link.textContent.toLowerCase());
       if ("/" + link.textContent.toLowerCase() === path) {
         // Votre logique ici pour le lien correspondant
         link.style.color = "#186F37";
@@ -29,14 +27,12 @@ export default function colorNav() {
     });
   } else if (path === "/register") {
     navList.forEach((link) => {
-      console.log(link.textContent.toLowerCase());
       if ("/" + link.textContent.toLowerCase() === "/inscription") {
         link.style.color = "#186F37";
       }
     });
   } else if (path === "/login") {
     navList.forEach((link) => {
-      console.log(link.textContent.toLowerCase());
       if ("/" + link.textContent.toLowerCase() === "/connexion") {
         link.style.color = "#186F37";
       }
@@ -45,9 +41,15 @@ export default function colorNav() {
     const li = document
       .querySelector(".track-list")
       .children[2].querySelector("a");
-    console.log(li.textContent);
     navList.forEach((link) => {
       if (link.textContent.toLowerCase() === li.textContent) {
+        link.style.color = "#186F37";
+      }
+    });
+  } else if (path === "/updateProfil" || path === "/customer/orders/list") {
+    navList.forEach((link) => {
+      if (link.textContent.toLowerCase() === "profil") {
+        // Votre logique ici pour le lien correspondant
         link.style.color = "#186F37";
       }
     });
