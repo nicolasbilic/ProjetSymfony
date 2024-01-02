@@ -115,8 +115,9 @@
 
 .cardContainer {
     margin-top: 40px;
-    width:20%;
-    max-height: 310px;
+    width: 20%;
+    height: 0;
+    padding-bottom: 26%; 
     text-align: center;
     overflow: hidden;
     border: 1px solid #9E9E9E;
@@ -125,6 +126,7 @@
     cursor: pointer;
     transition: transform 0.5s;
 }
+
 
 .cardContainer a {
     text-decoration: none;

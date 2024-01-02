@@ -53,13 +53,17 @@ main {
 }
 
 .cardContainerBestSale {
-    width:10%;
-    max-height: 310px;
+    margin-top: 40px;
+    width: 10%;
+    height: 0;
+    padding-bottom: 13%; 
     text-align: center;
     overflow: hidden;
     border: 1px solid #9E9E9E;
     margin-left: 80px;
     margin-bottom: 40px;
+    cursor: pointer;
+    transition: transform 0.5s;
 }
 
 .arrowCarouselContainer {
@@ -89,13 +93,17 @@ main {
 }
 
 .cardContainer {
-    width:20%;
-    max-height: 310px;
+    margin-top: 40px;
+    width: 20%;
+    height: 0;
+    padding-bottom: 26%; 
     text-align: center;
     overflow: hidden;
     border: 1px solid #9E9E9E;
     margin-left: 80px;
     margin-bottom: 40px;
+    cursor: pointer;
+    transition: transform 0.5s;
 }
 
 .cardContainer img, .cardContainerBestSale img {
