@@ -16,7 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ProfilController extends AbstractController
 {
     private $errors;
-
+    private $invalidMessage;
     public function __construct()
     {
         $this->errors = [];
@@ -44,6 +44,7 @@ class ProfilController extends AbstractController
                 $user->setFirstName($formData->getFirstName());
                 $user->setEmail($formData->getEmail());
                 if ($password !== null) {
+
                     $hashedPassword = $hasher->hashPassword($user, $password);
                     $user->setPassword($hashedPassword);
                 }
@@ -67,7 +68,6 @@ class ProfilController extends AbstractController
         return $this->render('profil/profil.html.twig', [
             'userInfo' => $user,
             'form' => $form->createView(),
-            'errors' => $this->errors,
         ]);
     }
 }

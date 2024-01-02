@@ -37,15 +37,7 @@
     <div>
       <h1 class="darkGreen">{{ "Mon profil" | upper }}</h1>
     </div>
-    {% dump(errors) %} {% if errors is not empty %}
-    <div>
-      <ul>
-        {% for error in errors %}
-        <li>{{ error }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+
     {{ form_start(form) }}
     {{ form_row(form.firstName, {'value': userInfo.firstName is defined ? userInfo.firstName|capitalize : ''}) }}
     {{ form_row(form.name, {'value': userInfo.name is defined ? userInfo.name|capitalize : ''}) }}
