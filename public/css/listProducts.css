@@ -4,26 +4,29 @@
     display:flex;
     justify-content: center;
 }
+
 .errorMessage h1 {
     border: 1px solid red;
     width:50%;
     padding: 20px;
     text-align: center;
 }
+
 .track-list {
     display: flex;
     align-items: center;
     list-style: none;
     width: 600px;
 }
+
 .track-list li {
     font-size: 25px;
     margin-right: 10px;
     font-family: 'Creepster', cursive;
     text-shadow: 2px 2px 4px #000;
     color: white;
-
 }
+
 .track-list li a{
     text-decoration: none;
     color:white;
@@ -33,10 +36,12 @@
     color: #186F37 !important;
     text-decoration: none;
 }
+
 .track-list li a:hover{
     text-decoration: none;
     color: green !important;
 }
+
 .track-list span {
     margin-right: 8px;
     margin-left: 0px;
@@ -46,14 +51,10 @@
     color: white;
 }
 
-/* .track-list li.selected a {
-    color: #679B33;
-} */
 
 .track-list li:last-child {
     margin-right: 0;
 }
-
 
 .banner {
     width:100%;
@@ -64,8 +65,8 @@
 }
 
 .bannerPicture {
-    width: 70%; /* Assurez-vous que l'image occupe toute la largeur du conteneur */
-    height: auto; /* Ajustez la hauteur si nécessaire */
+    width: 70%; 
+    height: auto; 
     object-fit: cover;
     object-position: 0 -250px;
     border-radius:10px;

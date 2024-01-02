@@ -26,6 +26,8 @@
 .track-list li a{
     text-decoration: none;
     color: white;
+    white-space: nowrap; /* Empêche le texte de retourner à la ligne */
+    width:auto;
 }
 .track-list span {
     margin-right: 8px;
