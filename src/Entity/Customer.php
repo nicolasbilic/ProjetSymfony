@@ -24,7 +24,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: 'Veuillez rentrer un email.')]
     #[Assert\NotNull(message: 'Veuillez rentrer un email.')]
     #[Assert\Email(
-        message: 'The email {{ value }} is not a valid email.',
+        message: "{{ value }} n'est pas une adresse valide.",
     )]
     /* #[Assert\Unique(
         message: 'Cette adresse email est déjà utilisée'
