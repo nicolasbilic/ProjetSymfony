@@ -19,24 +19,28 @@ class CustomerType extends AbstractType
                 'label' => 'Adresse email',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'exemple@zombie.fr',
                 ],
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'Leon',
                 ],
             ])
             ->add('name', TextType::class, [
                 'label' => 'Nom',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'Kennedy',
                 ],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => '********',
                 ],
             ]);
     }
