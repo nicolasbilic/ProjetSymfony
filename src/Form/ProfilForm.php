@@ -30,9 +30,9 @@ class ProfilForm extends AbstractType
                 'options' => ['attr' => ['class' => 'password-field']],
                 'first_options'  => ['label' => 'Mot de passe :'],
                 'second_options' => ['label' => 'Vérification :'],
-                'mapped' => false, // Indique que le champ ne doit pas être mappé à une propriété d'entité
+                'mapped' => false,
                 'required' => false,
-                'invalid_message' => 'Les mots de passe ne correspondent pas.', // Message personnalisé en cas d'erreur
+                'invalid_message' => 'Les mots de passe ne correspondent pas.',
             ])
 
             ->add('picture', FileType::class, [

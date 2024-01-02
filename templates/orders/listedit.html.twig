@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %} {% block header %}
 <a href="/admin/dashboard"
-  ><img
-    class="headerBanner"
-    src="/img/headerBanner.jpg"
-    alt="Bannière du header"
+  ><img class="headerBanner" src="/img/header.gif" alt="Bannière du header"
 /></a>
 <nav>
   <ul class="headerList">
@@ -39,8 +36,8 @@
       <td>{{ order.total }}€</td>
       <td>{{ order.date.format("d-m-Y") }}</td>
       <td>
-      {{ order.orderState.label}}
-       <a
+        {{ order.orderState.label }}
+        <a
           href="{{ path('app_update_order', { id: order.id }) }}"
           class="btn btn-success"
           >Modifier l'état</a

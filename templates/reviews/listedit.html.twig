@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %} {% block header %}
 <a href="/admin/dashboard"
-  ><img
-    class="headerBanner"
-    src="/img/headerBanner.jpg"
-    alt="Bannière du header"
+  ><img class="headerBanner" src="/img/header.gif" alt="Bannière du header"
 /></a>
 <nav>
   <ul class="headerList">
@@ -35,7 +32,7 @@
       <td>{{ review.title }}</td>
       <td>{{ review.resume }}</td>
       <td>
-          {{ review.state}}
+        {{ review.state }}
         <a
           href="{{ path('app_update_review', { id: review.id }) }}"
           class="btn btn-success"
