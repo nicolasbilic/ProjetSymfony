@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %} {% block main %}
 <section id="profil">
   <div class="sectionContainer">
+    {% if errors|length > 0 %} {% for error in errors %}
+    <div class="passwordError">{{ error }}</div>
+    {% endfor %} {% endif %}
     <div>
       <h1 class="darkGreen">{{ "Mon profil" | upper }}</h1>
       <img class="update" src="/img/update.png" alt="Update button" />

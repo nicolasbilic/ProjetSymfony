@@ -16,7 +16,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ProfilController extends AbstractController
 {
     private $errors;
-    private $invalidMessage;
     public function __construct()
     {
         $this->errors = [];
@@ -44,9 +43,10 @@ class ProfilController extends AbstractController
                 $user->setFirstName($formData->getFirstName());
                 $user->setEmail($formData->getEmail());
                 if ($password !== null) {
-
-                    $hashedPassword = $hasher->hashPassword($user, $password);
-                    $user->setPassword($hashedPassword);
+                    if ($this->validatePassword($password) === true) {
+                        $hashedPassword = $hasher->hashPassword($user, $password);
+                        $user->setPassword($hashedPassword);
+                    }
                 }
                 $targetDirectory = 'img/profil/avatar/';
                 $file = $form['picture']->getData();
@@ -67,7 +67,33 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/profil.html.twig', [
             'userInfo' => $user,
+            'errors' => $this->errors,
             'form' => $form->createView(),
         ]);
+    }
+
+    private function validatePassword($password)
+    {
+        $passwordIsValid = false;
+        //Check the length of the password
+        if (strlen($password) < 8) {
+            $this->errors[] = "Le mot de passe doit contenir au moins 8 caractères.";
+        }
+        //Check a minimum of one upperCase in the password
+        if (!preg_match('/[A-Z]/', $password)) {
+            $this->errors[] = "Le mot de passe doit contenir au moins une majuscule.";
+        }
+        //Check a minimum of one special char in the password
+        if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
+            $this->errors[] = "Le mot de passe doit contenir au moins un symbole spécial.";
+        }
+        //Check a minimum of one lowercase in the password
+        if (!preg_match('/[a-z]/', $password)) {
+            $this->errors[] = "Le mot de passe doit contenir au moins une minuscule.";
+        }
+        if (empty($this->errors)) {
+            $passwordIsValid = true;
+        }
+        return $passwordIsValid;
     }
 }

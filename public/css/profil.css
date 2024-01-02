@@ -4,6 +4,9 @@ main {
     align-items: center;
 }
 
+.passwordError {
+    color: red;
+}
 
 
 #profil, #updateProfil {
@@ -47,7 +50,7 @@ main {
 
 .containerAvatar {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     right:20px;
     width:35%;
     height:auto;
@@ -57,6 +60,10 @@ main {
 .avatar {
     object-fit: contain;
     width: 100%;
+}
+
+#updateProfil .containerAvatar {
+    top : 65px;
 }
 
 .update {
