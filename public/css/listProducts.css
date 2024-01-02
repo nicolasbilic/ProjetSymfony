@@ -116,7 +116,6 @@
 .cardContainer {
     margin-top: 40px;
     width:20%;
-    min-width:235px;
     max-height: 310px;
     text-align: center;
     overflow: hidden;

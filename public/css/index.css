@@ -53,7 +53,7 @@ main {
 }
 
 .cardContainerBestSale {
-    width:235px;
+    width:10%;
     max-height: 310px;
     text-align: center;
     overflow: hidden;
@@ -89,7 +89,7 @@ main {
 }
 
 .cardContainer {
-    width:235px;
+    width:20%;
     max-height: 310px;
     text-align: center;
     overflow: hidden;
