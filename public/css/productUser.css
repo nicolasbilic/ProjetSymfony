@@ -10,6 +10,40 @@
     padding: 20px;
     text-align: center;
 }
+.track-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 600px;
+    /* background-color: rgb(224, 173, 173); */
+}
+.track-list li {
+    font-size: 25px;
+    margin-right: 10px;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+}
+.track-list li a{
+    text-decoration: none;
+    color: white;
+}
+.track-list span {
+    margin-right: 8px;
+    margin-left: 0px;
+    font-size: 30px;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    color: white !important;
+}
+
+.track-list li:last-child {
+    margin-right: 0;
+}
+
+.endArianeLink {
+    color: #186F37 !important;
+    text-decoration: none;
+}
 
 #product {
     width:100%;
@@ -34,8 +68,12 @@
     width:100%;
     display: flex;
     margin-top: 20px;
+    justify-content: space-between;
 }
 
+.productRight{
+    width:45%;
+}
 .priceContainer {
     display: flex;
     justify-content: space-between;
@@ -44,10 +82,13 @@
 
 .productDetails {
     width:100%;
+    height: 90%;
 }
 
 .productPicture {
     width:50%;
+    background-image: url('/img/card_background.jpg');
+    background-size: cover;
 }
 
 .productPrice {
@@ -55,8 +96,12 @@
     font-size: 48px!important;
 }
 
-.buyButton {
+.priceContainer form {
     width:50%;
+}
+
+.buyButton {
+    width:100%;
     height: 40px;
     margin-top: 10px;
     background-color: #0A2536;
@@ -68,4 +113,16 @@
 
 .hover:hover {
     transform: scale(1.05);
+}
+
+.paginator {
+    width:100%;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.first a, .previous a, .page a, .next a, .last  a {
+    color: #186F37 !important;
 }

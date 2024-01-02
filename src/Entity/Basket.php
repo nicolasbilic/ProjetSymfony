@@ -20,7 +20,7 @@ class Basket
     #[ORM\OneToOne(mappedBy: 'basket', cascade: ['persist', 'remove'])]
     private ?Order $order_customer = null;
 
-    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketLine::class)]
+    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketLine::class, fetch: 'EAGER')]
     private Collection $basket_line;
 
     #[ORM\ManyToOne(inversedBy: 'basket')]

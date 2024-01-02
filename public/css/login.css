@@ -34,11 +34,11 @@ form {
 .sectionContainer input{
     background-color: #0A2536;
     border: 1px solid #186F37;
-    color: grey;
+    color: white;
 }
 .sectionContainer input:focus {
     background-color: #0A2536;
-    color:grey;
+    color:white;
 }
 .sectionContainer input::placeholder {
     color: grey;
@@ -51,4 +51,8 @@ form {
     color:white;
     border:1px solid #0A2536;
     border-radius: 5px;
+}
+
+.loginButton:hover {
+    background-color: #679B33;
 }

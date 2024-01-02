@@ -33,34 +33,37 @@ nav {
     color: #186F37;
 }
 
-.profile-container {
+.profil-container {
     position: relative;
     display: inline-block;
 }
 
 
-.sous-categories {
+.subcategories {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
+    top:30px;
+    width:200px;
+    left: -40px;
     padding: 10px;
-    background-color: rgb(29, 28, 28);
+    background-color: rgba(29, 28, 28, 0.7);
+    font-size: 22px;
 }
 
-.sous-categories:hover {
+.subcategories:hover {
     display: block;
 }
 
-.profile-container:hover .sous-categories {
+.profil-container:hover .subcategories {
     display: block;
 }
 
-.sous-categories a {
+.subcategories a {
+    margin-top:10px;
     display: block;
 }
 
-.sous-categories a:hover {
+.subcategories a:hover {
     color: #186F37;
 }
 

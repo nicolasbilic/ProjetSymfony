@@ -40,9 +40,46 @@ main {
     box-sizing: border-box;
     border-radius: 10px;
     border: 1px solid #9E9E9E;
+    overflow: hidden;
 }
 
 .bestSaleGallery {
+    width: 200%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.cardContainerBestSale {
+    width:10%;
+    max-height: 310px;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #9E9E9E;
+    margin-left: 80px;
+    margin-bottom: 40px;
+}
+
+.arrowCarouselContainer {
+    width:100%;
+    position: relative;
+}
+
+.arrowCarouselContainer img {
+    width:4%;
+    position: absolute;
+    top:200px;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.nextArrow {
+    right:-80px; 
+}
+
+.gallery {
     width: 100%;
     margin-top: 40px;
     display: flex;
@@ -59,12 +96,12 @@ main {
     border: 1px solid #9E9E9E;
     margin-left: 80px;
     margin-bottom: 40px;
-
 }
-.cardContainer img{
+
+.cardContainer img, .cardContainerBestSale img {
     width:100%;
     object-fit: contain;
-    background-image: url('/images/card_background.jpg');
+    background-image: url('/img/card_background.jpg');
     background-size: contain; 
 }
 .cardText {
@@ -80,6 +117,15 @@ main {
     transform: translateY(-65px);
 }
 
+.cardName {
+    width:100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    white-space: nowrap;      
+    overflow: hidden;          
+    text-overflow: ellipsis; 
+}
+
 .buyButton {
     width:75%;
     height: 40px;
@@ -93,4 +139,86 @@ main {
 .newItemsAll {
     width:100%;
     text-align: right;
+}
+
+#reviews {
+    width:70%;
+    margin-top: 40px;
+    color:white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.containerReviews {
+    width:48%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #9E9E9E;
+    overflow: hidden;
+}
+
+.review {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.reviewDetails {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 26px;
+}
+
+.reviewDetailsText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+.reviewDetailsDateStars {
+    display: flex;
+    align-items: flex-end;
+}
+
+.reviewDetailsDateStars p {
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-left: 10px;
+    line-height: 16px;
+}
+
+.reviewDetailsDateStars img {
+    width:5%;
+}
+
+
+.avatar {
+    width:15%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.userMessage {
+    margin-top:10px;
+    width:100%;
+
+}
+
+.paginator {
+    width:100%;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.first a, .previous a, .page a, .next a, .last  a {
+    color: #186F37 !important;
 }

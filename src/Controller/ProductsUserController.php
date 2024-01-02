@@ -7,10 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
-use App\Services\CartService;
 use App\Form\CartType;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Product;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class ProductsUserController extends AbstractController
 {
@@ -24,27 +23,11 @@ class ProductsUserController extends AbstractController
     }
 
     #[Route('/products', name: 'app_products')]
-    public function displayListProducts(CartService $cartService, EntityManagerInterface $em, Request $request): Response
+    public function displayListProducts(PaginatorInterface $paginator, Request $request): Response
     {
         $form = $this->createForm(CartType::class);
         $form->handleRequest($request);
-        $user = $this->getUser();
-        dump($user);
-
-        if ($form->isSubmitted()) {
-            //Get user
-            $user = $this->getUser();
-            // Vérifiez si l'utilisateur est connecté
-            if ($user) {
-                $product = $em->getRepository(Product::class)->find(17);
-
-                dump($product);
-
-                $cartService->addProductToCart($user, $product, 1);
-            }
-        }
-
-
+        $pagination = [];
         //Get the subcategory id from the query
         $subcategoryId = $request->query->get('category');
         //If no query, set a default subcategory id
@@ -53,11 +36,21 @@ class ProductsUserController extends AbstractController
         }
         //Get subcategory and products data from the database
         $subcategory = $this->getSubcategory($subcategoryId);
-        $products = $this->getSubcategoryProducts($subcategoryId);
+        if ($subcategory) {
+            $pagination = $paginator->paginate(
+                $this->getSubcategoryProducts($subcategoryId),
+                $request->query->get('page', 1),
+                9
+            );
+        } else {
+            $pagination = [];
+        }
+        $categoryOfSubcategory = $subcategory->getParent(); // code que j'ai rajouté
 
         return $this->render('productUser/productsUser.html.twig', [
+            'categoryOfSubcategory' => $categoryOfSubcategory, // code que j'ai rajouté
             'subcategory' => $subcategory,
-            'products' => $products,
+            'products' => $pagination,
             'errors' => $this->errors,
             'form' => $form->createView(),
         ]);
@@ -71,7 +64,6 @@ class ProductsUserController extends AbstractController
         if (!$subcategory) {
             $this->errors = "No subcategory found.";
         }
-
         return $subcategory;
     }
 
@@ -79,7 +71,6 @@ class ProductsUserController extends AbstractController
     {
         $products = [];
         $subcategory = $this->getSubcategory($subcategoryId);
-
         //Proceed only if the subcategory is found
         if ($subcategory) {
             $categoryProducts = $subcategory->getProducts();
@@ -91,7 +82,6 @@ class ProductsUserController extends AbstractController
                 $this->errors = "No products found for subcategory '{$subcategory->getName()}'.";
             }
         }
-
         return $products;
     }
 }

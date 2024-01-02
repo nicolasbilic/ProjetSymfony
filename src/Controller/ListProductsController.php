@@ -2,15 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
-use App\Services\CartService;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Form\CartType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class ListProductsController extends AbstractController
 {
@@ -24,28 +21,8 @@ class ListProductsController extends AbstractController
     }
 
     #[Route('/list-products', name: 'app_list_products_user')]
-    public function listProduct(CartService $cartService, EntityManagerInterface $em, Request $request): Response
+    public function listProduct(PaginatorInterface $paginator, Request $request): Response
     {
-
-        $form = $this->createForm(CartType::class);
-        $form->handleRequest($request);
-        $user = $this->getUser();
-        dump($user);
-
-        if ($form->isSubmitted()) {
-            //Get user
-            $user = $this->getUser();
-            // Vérifiez si l'utilisateur est connecté
-            if ($user) {
-                $product = $em->getRepository(Product::class)->find(17);
-
-                dump($product);
-
-                $cartService->addProductToCart($user, $product, 1);
-            }
-        }
-
-
         //Get the main category (heal / weapon / close) from the query
         $categoryName = $request->query->get('category');
 
@@ -63,10 +40,9 @@ class ListProductsController extends AbstractController
         }
 
         //Get subcategories only if the main category is found
-        $subCategories = [];
+        $pagination = [];
         if ($category) {
             $subCategories = $this->getSubCategory($categoryName);
-
             //Check if subcategories are found
             if (empty($subCategories)) {
                 $this->errors = "There are no subcategories found for '{$categoryName}'.";
@@ -76,17 +52,21 @@ class ListProductsController extends AbstractController
         //Proceed only if the main category and subcategories are found
         if ($category && $subCategories) {
             //Get all products from subcategories
-            $allProducts = $this->getAllProducts($subCategories);
+            $pagination = $paginator->paginate(
+                $this->getAllProducts($subCategories),
+                $request->query->get('page', 1),
+                9
+            );
         } else {
-            $allProducts = [];
+            $pagination = [];
         }
 
         return $this->render('productUser/listProducts.html.twig', [
             'selectedCategory' => $category,
             'subCategories' => $subCategories,
-            'allProducts' => $allProducts,
+            'allProducts' => $pagination,
             'errors' => $this->errors,
-            'form' => $form->createView(),
+
         ]);
     }
 
@@ -104,7 +84,6 @@ class ListProductsController extends AbstractController
             $parentId = $category->getId();
             return $this->categoryRepo->findBy(['parent' => $parentId]);
         }
-
         return [];
     }
 
@@ -114,7 +93,6 @@ class ListProductsController extends AbstractController
         foreach ($subCategories as $subCategory) {
             $categoryId = $subCategory->getId();
             $categoryProducts = $this->categoryRepo->find($categoryId)->getProducts();
-
             // Check if category products are found before merging
             if ($categoryProducts) {
                 $products = array_merge($products, $categoryProducts->getValues());

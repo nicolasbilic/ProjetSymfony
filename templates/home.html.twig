@@ -1,62 +1,158 @@
-{% extends 'base.html.twig' %} {% block main %}
+{% extends 'base.html.twig' %} {% block main %} {% if slideShowPictures is not
+empty %}
 <div class="slideshowContainer">
   {% for slide in slideShowPictures %}
-  <img src="/images/bannerSlideshow/{{ slide }}" alt="Carrousel Bannière" />
+  <img src="/img/bannerSlideshow/{{ slide }}" alt="Carrousel Bannière" />
   {% endfor %}
 </div>
+{% endif %}
 <section id="aboutUs">
-  {% for aboutUsSection in data.aboutUs %}
   <div class="sectionContainer">
-    <h1 class="darkGreen">{{ aboutUsSection.title | upper }}</h1>
-    <p>{{ aboutUsSection.description | raw | nl2br }}</p>
+    <h1 class="darkGreen">{{ "a propos de necro defense store" | upper }}</h1>
+    <p>
+      {{
+        "Bienvenue à Necro Defense Store, l'ultime repaire pour les survivants intrépides dans un monde infesté de zombies ! Préparez-vous à affronter l'apocalypse avec notre arsenal de matériel de survie, d'armes dévastatrices, de vêtements résistants et de soins indispensables.\n\n💀 Équipez-vous comme un pro de l'apocalypse :\n\nPlongez dans notre collection de matériel de survie conçue pour les âmes audacieuses. Des trousses de premiers soins pour soigner les blessures aux équipements spécialisés pour repousser les morts-vivants, nous avons tout ce dont vous avez besoin pour rester en vie.\n\n🔫 Armement de Destruction Massive :\n\nExplorez notre arsenal impressionnant avec des armes de tous types, du corps à corps au longue portée. Des machettes dévastatrices aux fusils à pompe puissants, choisissez votre arme avec sagesse pour écraser les hordes de zombies qui se dressent sur votre chemin.\n\nRelevez le défi, écrasez les zombies, et survivez avec style. Necro Defense Store - où les survivants se procurent l'équipement pour rester les derniers debout !"
+          | raw
+          | nl2br
+      }}
+    </p>
   </div>
-  {% endfor %}
 </section>
+{% if bestSales is not empty %}
 <section id="bestSale">
   <div class="sectionContainer">
-    {% for bestSaleSection in data.bestSale %}
-    <h1 class="darkGreen">{{ bestSaleSection.title | upper }}</h1>
+    <div class="arrowCarouselContainer">
+      <img
+        src="/img/bestSale/arrow.png"
+        style="transform: scaleX(-1)"
+        alt="Précédent"
+        class="previousArrow"
+      />
+      <img src="/img/bestSale/arrow.png" alt="suivant" class="nextArrow" />
+    </div>
+    <h1 class="darkGreen">{{ "nos meilleurs ventes" | upper }}</h1>
     <div class="bestSaleGallery">
-      {% endfor %} {% for bestSaleItem in data.bestSaleItems %}
-      <div class="cardContainer">
-        <a href="/product/">
+      {% for bestSaleItem in bestSales %}
+      <div class="cardContainerBestSale">
+        <a href="/product?idProduct={{ bestSaleItem.product.id }}">
           <img
-            src="/images/products/{{ bestSaleItem.picture }}"
-            alt="{{ bestSaleItem.name }}"
+            src="/{{ bestSaleItem.product.picture }}"
+            alt="{{ bestSaleItem.product.name }}"
           />
         </a>
         <div class="cardText">
-          <p class="cardName lightGreen">{{ bestSaleItem.name }}</p>
-          <p class="lightGreen">{{ bestSaleItem.price }} €</p>
-          <button class="buyButton">Acheter</button>
+          <p class="cardName lightGreen">{{ bestSaleItem.product.name }}</p>
+          <p class="lightGreen">{{ bestSaleItem.product.price }} €</p>
+          <form
+            action="{{
+              path('basket_add_product', { idProduct: bestSaleItem.product.id })
+            }}"
+            method="post"
+            id="product-{{ bestSaleItem.product.id }}"
+          >
+            <input
+              type="hidden"
+              name="id_product"
+              value="{{ bestSaleItem.product.id }}"
+            />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
       {% endfor %}
     </div>
   </div>
 </section>
-
+{% endif %} {% if newProductsDatas is not empty %}
 <section id="newItems">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ "nos nouveaux produits" | upper }}</h1>
-    <div class="bestSaleGallery">
+    <div class="gallery">
       {% for newProductData in newProductsDatas %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ newProductData.id }}">
           <img
-            src="/images/{{ newProductData.picture }}"
+            src="/{{ newProductData.picture }}"
             alt="{{ newProductData.name }}"
         /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ newProductData.name }}</p>
           <p class="lightGreen">{{ newProductData.price }} €</p>
-          <button class="buyButton">Acheter</button>
+          <form
+            action="{{
+              path('basket_add_product', { idProduct: newProductData.id })
+            }}"
+            method="post"
+            id="product-{{ newProductData.id }}"
+          >
+            <input
+              type="hidden"
+              name="id_product"
+              value="{{ newProductData.id }}"
+            />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
       {% endfor %}
     </div>
-    <p class="newItemsAll darkGreen">Voir tous nos nouveaux produits</p>
+    <div class="paginator">{{ knp_pagination_render(newProductsDatas) }}</div>
   </div>
 </section>
+{% endif %} {% if reviews is not empty %}
+<section id="reviews">
+  <div class="containerReviews">
+    <h1 class="darkGreen">{{ "nos retours clients" | upper }}</h1>
+    {% for i in range(0, 1) %}
+    <div class="review">
+      <div class="reviewDetails">
+        {% if reviewsPic[i] is not same as "" %}
+        <img src="{{ asset(reviewsPic[i]) }}" class="avatar" alt="Avatar" />
+        {% endif %}
+        <div class="reviewDetailsText">
+          {{ reviews[i].UserFirstName }}
+          <div class="reviewDetailsDateStars">
+            {% for j in range(1, reviews[i].value) %}
+            <img src="{{ asset('/img/fullStar.png') }}" alt="Full Star" />
+            {% endfor %} {% if reviews[i].value < 5 %} {% for k in
+            range(reviews[i].value, 4) %}
+            <img src="{{ asset('/img/emptyStar.png') }}" alt="Empty Star" />
+            {% endfor %} {% endif %}
+            <p>{{ reviews[i].dateReview|date('d/m/y') }}</p>
+          </div>
+        </div>
+      </div>
+      <p class="userMessage">"{{ reviews[i].resume | raw }}"</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="containerReviews">
+    <h1 class="darkGreen">{{ "nos retours clients" | upper }}</h1>
+    {% for i in range(2, 3) %}
+    <div class="review">
+      <div class="reviewDetails">
+        {% if reviewsPic[i] is not same as "" %}
+        <img src="{{ asset(reviewsPic[i]) }}" class="avatar" alt="Avatar" />
+        {% endif %}
+        <div class="reviewDetailsText">
+          {{ reviews[i].UserFirstName }}
+          <div class="reviewDetailsDateStars">
+            {% for j in range(1, reviews[i].value) %}
+            <img src="{{ asset('/img/fullStar.png') }}" alt="Full Star" />
+            {% endfor %} {% if reviews[i].value < 5 %} {% for k in
+            range(reviews[i].value, 4) %}
+            <img src="{{ asset('/img/emptyStar.png') }}" alt="Empty Star" />
+            {% endfor %} {% endif %}
+            <p>{{ reviews[i].dateReview|date('d/m/y') }}</p>
+          </div>
+        </div>
+      </div>
+      <p class="userMessage">"{{ reviews[i].resume | raw }}"</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 <script type="module" src="{{ asset('/js/indexSlideshow.js') }}"></script>
+<script type="module" src="{{ asset('/js/carouselBestSale.js') }}"></script>
 {% endblock %}

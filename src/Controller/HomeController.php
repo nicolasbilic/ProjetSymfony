@@ -1,13 +1,20 @@
 <?php
-// src/Controller/IndexController.php
+
 namespace App\Controller;
 
+use App\Entity\Admin;
+use App\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OrderRepository;
+use App\Repository\ReviewRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -20,21 +27,41 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_index')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(PaginatorInterface $paginator, EntityManagerInterface $entityManager, OrderRepository  $orderRepository, ReviewRepository $reviewRepo, ManagerRegistry $doctrine, Request $request): Response
     {
+        $user = $this->getUser();
+        if ($user) {
+            if ($user instanceof Admin) {
+                return $this->redirectToRoute('app_admin_dashboard');
+            }
+        }
         //Get slides pictures
         $this->getSlides();
-        //Get index data from Json
-        $jsonData = $this->getJsonData('src/data/homeData.json');
-        $data = json_decode($jsonData, true);
+        $bestSales = $orderRepository->getBestSales();
         //Get new product to show
+        $pagination = $paginator->paginate(
+            $this->getNewProducts($entityManager),
+            $request->query->get('page', 1),
+            9
+        );
         $newProductDatas = $this->getNewProducts($entityManager);
-        dump($newProductDatas);
-
+        $reviews = $this->getReviews($reviewRepo);
+        $pictureReviews = [];
+        foreach ($reviews as $review) {
+            $userId = $review->getUserId();
+            if ($userId) {
+                // Utilisez le gestionnaire de doctrine pour récupérer l'utilisateur
+                $user =  $doctrine->getRepository(Customer::class)->find($userId);
+                $picture = $user->getPicture();
+                $pictureReviews[] = ($picture !== null) ? $picture : '';
+            }
+        }
         return $this->render('home.html.twig', [
             'slideShowPictures' => $this->slides,
-            'data' => $data,
-            'newProductsDatas' => $newProductDatas,
+            'bestSales' => $bestSales,
+            'newProductsDatas' => $pagination,
+            'reviews' => $reviews,
+            'reviewsPic' => $pictureReviews
         ]);
     }
 
@@ -45,22 +72,18 @@ class HomeController extends AbstractController
             ->createQueryBuilder('p')
             ->select(['p.id', 'p.name', 'p.price', 'p.dateAdd as createdAt', 'p.picture', 'p.description'])
             ->orderBy('p.dateAdd', 'DESC')
-            ->setMaxResults(6)
             ->getQuery()
             ->getArrayResult();
         return $newProductsData;
     }
 
-
     public function getSlides()
     {
         // Path of the slideshow directory
-        $directoryPath = $this->kernel->getProjectDir() . '/public/images/bannerSlideshow';
-
+        $directoryPath = $this->kernel->getProjectDir() . '/public/img/bannerSlideshow';
         // Get the files in the directory
         $files = scandir($directoryPath);
         $jpgFiles = [];
-
         foreach ($files as $file) {
             // Exclude "." and ".."
             if ($file !== "." && $file !== "..") {
@@ -71,16 +94,17 @@ class HomeController extends AbstractController
                 }
             }
         }
-
         $this->slides = $jpgFiles;
-
         return $jpgFiles;
     }
 
-    //Method to get the data's Json
-    private function getJsonData(string $path): string
+    public function getReviews(ReviewRepository $reviewRepo)
     {
-        $jsonFilePath = $this->kernel->getProjectDir() . '/' . $path;
-        return file_get_contents($jsonFilePath);
+        $reviews = $reviewRepo->findBy(
+            ['state' => 'approved'],
+            ['date_review' => 'DESC'],
+            4
+        );
+        return $reviews;
     }
 }

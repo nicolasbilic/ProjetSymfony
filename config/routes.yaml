@@ -10,3 +10,18 @@ homepage:
   path: /accueil
   controller: 'App\Controller\HomeController::index'
   methods: GET
+login:
+  path: /login
+  controller: App\Controller\LoginController::login
+contact:
+  path: /contact
+  controller: App\Controller\ContactController::contact
+basket_add_product:
+  path: "/basket/add/{idProduct}"
+  controller: 'App\Controller\BasketController::handleEventCartForm'
+basket_modify_quantity:
+  path: "/basket/modify/quantity"
+  controller: 'App\Controller\BasketController::handleEventCountForm'
+basket_clear_cart:
+  path: "/basket/clear/cart"
+  controller: 'App\Controller\BasketController::handleEventClearForm'

@@ -73,6 +73,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color:white;
 }
 
 #count .displayer {
@@ -114,6 +115,21 @@
     border-bottom:1px solid #9E9E9E;
     visibility: hidden;
 }
+
+#clearCart {
+    width: 100%;
+}
+
+.clearCart {
+    width:100%;
+    text-align: right;
+    background-color: transparent;
+    font-size: 18px;
+    border:none;
+    visibility: hidden;
+}
+
+
 
 .basketSubmit {
     margin-top: 10px;

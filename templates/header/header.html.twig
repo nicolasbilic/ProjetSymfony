@@ -1,8 +1,6 @@
 {% block header %}
-<a href="/"><img
-  class="headerBanner"
-  src="/images/headerBanner.jpg"
-  alt="Bannière du header"
+<a href="/"
+  ><img class="headerBanner" src="/img/header.gif" alt="Bannière du header"
 /></a>
 <nav>
   <ul class="headerList">
@@ -12,17 +10,18 @@
     <li><a href="/list-products?category=vêtements">VÊTEMENTS</a></li>
     <li><a href="/contact">CONTACT</a></li>
     {% if not isLoggedIn %}
+    <li><a href="/register">INSCRIPTION</a></li>
     <li><a href="/login">CONNEXION</a></li>
     {% else %}
     <li>
-        <div class="profile-container">
-            <a href="#" class="profile">PROFILE</a>
-            <div class ="sous-categories">
-              <a href = "#">Liste de mes commandes</a>
-              <a href = "#">Adresse de livraison</a>
-              <a href = "/logout">Se deconnecter</a>
-            </div>
+      <div class="profil-container">
+        <a href="/updateProfil" class="profil">PROFIL</a>
+        <div class="subcategories">
+          <a href="/updateProfil">Mon profil</a>
+          <a href="/customer/orders/list">Mes commandes</a>
+          <a href="/logout">Se deconnecter</a>
         </div>
+      </div>
     </li>
     {% endif %}
   </ul>
@@ -32,4 +31,5 @@
     {% endblock %}
   </section>
 </nav>
+<script type="module" src="{{ asset('/js/colorNav.js') }}"></script>
 {% endblock %}

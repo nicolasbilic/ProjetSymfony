@@ -10,11 +10,55 @@
     padding: 20px;
     text-align: center;
 }
+.track-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 600px;
+}
+.track-list li {
+    font-size: 25px;
+    margin-right: 10px;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    color: white;
+
+}
+.track-list li a{
+    text-decoration: none;
+    color:white;
+}
+
+.endArianeLink {
+    color: #186F37 !important;
+    text-decoration: none;
+}
+.track-list li a:hover{
+    text-decoration: none;
+    color: green !important;
+}
+.track-list span {
+    margin-right: 8px;
+    margin-left: 0px;
+    font-size: 30px;
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px #000;
+    color: white;
+}
+
+/* .track-list li.selected a {
+    color: #679B33;
+} */
+
+.track-list li:last-child {
+    margin-right: 0;
+}
+
 
 .banner {
     width:100%;
     height: 393px;
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 }
@@ -30,7 +74,7 @@
 #details, #categories, #allProducts {
     width:100%;
     margin-top: 40px;
-    color:white;
+    color:rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,19 +133,27 @@
 .cardContainer img{
     width:100%;
     object-fit: contain;
-    background-image: url('/images/card_background.jpg');
+    background-image: url('/img/card_background.jpg');
     background-size: contain; 
     transition: transform 0.5s;
 
 }
 .cardText {
     z-index: 2;
-
     padding-top: 10px;
     height:200px;
     background-color: black;
     border-top: 1px solid #9E9E9E;
     transition: transform 1s;
+}
+
+.cardName {
+    width:100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    white-space: nowrap;      
+    overflow: hidden;          
+    text-overflow: ellipsis; 
 }
 
 .cardTextCat {
@@ -131,4 +183,16 @@
 
 .hover:hover {
     transform: scale(1.1);
+}
+
+.paginator {
+    width:100%;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.first a, .previous a, .page a, .next a, .last  a {
+    color: #186F37 !important;
 }

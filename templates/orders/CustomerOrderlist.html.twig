@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %} {% block nav %} nav administration {% endblock %}
+{% block main %}
+<div
+  class="img-list"
+  style="background-image: url('/img/customer-order-list-zombie.png')"
+>
+  <div class="section-title">
+    <h3 id="title-order">{{ title }}</h3>
+  </div>
+  <div class="order-content-info">
+    {% if orders is not empty %} {% for order in orders %}
+    <table
+      class="table table-striped table-bordered table-hover table-responsive table-customer-order-list"
+    >
+      <thead>
+        <th>Identifiant commande</th>
+        <th>Total €</th>
+        <th>Date de commande</th>
+        <th>Détails</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.total }}€</td>
+          <td>{{ order.date.format("d-m-Y") }}</td>
+          <td>
+            <a
+              class="more-info-link"
+              href="{{ path('app_show_order', { id: order.id }) }}"
+              >Plus d'infos</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    {% endfor %} {% else %} Aucune commande existante {% endif %}
+    <p>
+      Notre équipe dévouée s'active dès maintenant pour préparer et expédier vos
+      articles avec le plus grand soin.
+      <br />
+      Votre satisfaction est notre priorité, et nous mettons tout en œuvre pour
+      vous offrir une expérience d'achat fluide et agréable.
+      <br />
+      N'hésitez pas à nous contacter si vous avez des questions. Merci de votre
+      confiance !
+    </p>
+  </div>
+</div>
+
+{% endblock %} {# faire fonctionner le lien "mes commandes" dans la barre de
+navigation #}

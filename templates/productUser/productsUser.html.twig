@@ -3,19 +3,33 @@
   <h1 class="darkGreen">{{ errors }}</h1>
 </div>
 {% endif %} {% if subcategory is not empty %}
+<ul class="track-list">
+  <li><a href="/">Accueil</a></li>
+  <span>/</span>
+  <li>
+    <a href="/list-products?category={{ categoryOfSubcategory.name }}">{{
+      categoryOfSubcategory.name
+    }}</a>
+  </li>
+  <span>/</span>
+  <li>
+    <a href="/products?category={{ subcategory.id }}" class="endArianeLink">
+      {{ subcategory.name }}</a
+    >
+  </li>
+</ul>
 <div class="banner">
   <img
     class="bannerPicture"
-    src="/images/{{ subcategory.bannerPicture }}"
+    src="/img/{{ subcategory.bannerPicture }}"
     alt=""
   />
 </div>
-
 <section id="details">
   <div class="sectionContainer">
     <h1 class="darkGreen">{{ subcategory.name | upper }}</h1>
     <p>{{ subcategory.description | raw | nl2br }}</p>
-    <img class="detailsPicture" src="/images/products/{{ subcategory.picture }}"
+    <img class="detailsPicture" src="/img/products/{{ subcategory.picture }}"
     "Image Détails">
   </div>
 </section>
@@ -29,18 +43,27 @@
       product in products %}
       <div class="cardContainer">
         <a href="/product/?idProduct={{ product.id }}">
-          <img src="/images/products/hache.png" alt="{{ product.name }}"
+          <img src="/{{ product.picture }}" alt="{{ product.name }}"
         /></a>
         <div class="cardText">
           <p class="cardName lightGreen">{{ product.name }}</p>
           <p class="cardName lightGreen">{{ product.price }} €</p>
-          {{ startForm | raw }}
-          {{ formRow | raw }}
-          {{ endForm | raw }}
+          <form
+            action="{{ path('basket_add_product', { idProduct: product.id }) }}"
+            method="post"
+            id="product-{{ product.id }}"
+          >
+            <input type="hidden" name="id_product" value="{{ product.id }}" />
+            <button type="submit" class="buyButton">Mettre au panier</button>
+          </form>
         </div>
       </div>
       {% endfor %} {% endif %}
     </div>
+    <div class="paginator">{{ knp_pagination_render(products) }}</div>
   </div>
 </section>
-{% endif %} {% endblock %}
+{% endif %}
+<script type="module" src="{{ asset('/js/productsListStyle.js') }}"></script>
+
+{% endblock %}

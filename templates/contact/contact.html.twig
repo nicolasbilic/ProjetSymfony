@@ -3,59 +3,38 @@
 <section id="contact">
   <div class="sectionContainer">
     <img
-      src="/images/pinup.jpg"
+      src="/img/pinup.jpg"
       class="contactPicture"
       alt="Image pin up zombie"
     />
     <div class="sectionRight">
       <div class="containerCoordinates">
-        <h1 class="darkGreen">{{ "Coordonnées :" | upper }}</h1>
+        <h1 class="darkGreen">{{ "Coordonnées" | upper }}</h1>
         <br />
         <p>Adresse: 44 Impasse des décapités, 721121 Zombiland</p>
-        <p>Télélphone : 06 22 93 23 13 54</p>
+        <p>Téléphone : 06 22 93 23 13 54</p>
         <p>E-mail : contact@necrostore.net</p>
       </div>
       <div class="formContactContainer">
-        <h1 class="darkGreen">{{ "formulaire de contact :" | upper }}</h1>
+        <h1 class="darkGreen">{{ "Formulaire de contact" | upper }}</h1>
         <div class="formContactBody">
+          {{ form_start(form) }}
           <div class="inputsFullName">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Ex: Henry"
-            />
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Ex: Henry"
-            />
+            {{ form_row(form.firstName, {'attr': {'class': 'form-control', 'id':'floatingInput', 'placeholder': 'Ex: Lord'
+            }}) }}
+            {{ form_row(form.lastName, {'attr': {'class': 'form-control', 'id':'floatingInput', 'placeholder': 'Ex: Défourailleur'
+            }}) }} {{ form_row(form.value, {'attr': {'class': 'form-control'}})
+            }}
           </div>
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
-          <select class="form-control" aria-label="Default select example">
-            <option selected>Motif de contact</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-            placeholder="Votre message"
-          ></textarea>
-          <button class="contactButton">Envoyer</button>
+          {{ form_row(form.email, {'attr': {'class': 'form-control', 'id':'floatingInput'
+          }}) }} {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+          {{ form_row(form.message, {'attr': {'class': 'form-control your-custom-class','id':"exampleFormControlTextarea1" ,'placeholder': 'Votre message'
+          }}) }}
+          <button type="submit" class="contactButton">Envoyer</button>
+          {{ form_end(form) }}
         </div>
       </div>
     </div>
   </div>
 </section>
-
 {% endblock %}
