@@ -18,9 +18,9 @@
       href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap"
       rel="stylesheet"
     />
-    {% if app.request.uri == 'https://127.0.0.1:8000/' or app.request.uri ==
-    'https://127.0.0.1:8000/accueil' or 'https://127.0.0.1:8000/?page' in
-    app.request.uri%}
+    {% if app.request.uri == 'https://127.0.0.1:8000/' or
+    'https://127.0.0.1:8000/accueil' in app.request.uri or
+    'https://127.0.0.1:8000/?page' in app.request.uri %}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
     {% endif %}
     <link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
