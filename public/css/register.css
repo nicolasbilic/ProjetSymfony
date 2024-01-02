@@ -4,7 +4,7 @@ body {
 }
 
 #register {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,36 +15,45 @@ body {
     margin-top: 50px;
     border-radius: 10px;
     border: 1px solid #9E9E9E;
-    padding:20px;
+    padding: 20px;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.register-container input{
+.register-container input {
     background-color: #0A2536;
     border: 1px solid #186F37;
     color: grey;
 }
+
 .register-container input:focus {
     background-color: #0A2536;
     border: 1px solid #186F37;
     color: white;
 }
+
+.register-container input::placeholder {
+    color: grey;
+}
+
 h1 {
     text-align: center;
     font-family: 'Creepster', cursive;
     text-shadow: 2px 2px 4px #000;
 }
+
 form {
     max-width: 400px;
     margin: 0 auto;
     color: white;
 }
+
 .btn-primary {
     background-color: #679B33 !important;
     border-color: #679B33 !important;
     width: 100%;
     margin-top: 5px;
 }
+
 .btn-primary:hover {
     background-color: #186F37 !important;
     border-color: #186F37 !important;
